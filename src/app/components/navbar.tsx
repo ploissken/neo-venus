@@ -33,7 +33,7 @@ export default function Navbar() {
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         {routes.map(({ text, icon, route }) => (
-          <Link href={route}>
+          <Link href={route} key={text}>
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{icon}</ListItemIcon>
