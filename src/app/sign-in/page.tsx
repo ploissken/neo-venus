@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -7,7 +8,7 @@ import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 
 export default function SignIn() {
   const todoFunction = (event: React.SyntheticEvent) => {
@@ -80,6 +81,7 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
+              color="primary"
               onClick={todoFunction}
             >
               Sign in
