@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "../theme";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
