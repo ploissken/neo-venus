@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Image from "next/image";
+import MapView from "./MapView";
 
 export default function UserProfileContainer() {
   return (
@@ -10,7 +10,9 @@ export default function UserProfileContainer() {
           <Box sx={{ backgroundColor: "#222" }}>profile head section</Box>
         </Grid>
         <Grid size={8}>
-          <Box sx={{ backgroundColor: "#222" }}>map view</Box>
+          <Box sx={{ backgroundColor: "#222" }}>
+            <MapView />
+          </Box>
         </Grid>
         <Grid size={4}>
           <Box sx={{ backgroundColor: "#222" }}>map data</Box>
