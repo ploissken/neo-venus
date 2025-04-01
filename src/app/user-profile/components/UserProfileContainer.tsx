@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import MapView from "./MapView";
+import ChartController from "./ChartController";
 
 export default function UserProfileContainer() {
   return (
@@ -11,7 +11,7 @@ export default function UserProfileContainer() {
         </Grid>
         <Grid size={8}>
           <Box sx={{ backgroundColor: "#222" }}>
-            <MapView />
+            <ChartController />
           </Box>
         </Grid>
         <Grid size={4}>
