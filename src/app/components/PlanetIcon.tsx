@@ -14,6 +14,8 @@ interface PlanetIconProps {
   planet: Planet;
   color?: string;
   size?: number;
+  x?: number;
+  y?: number;
 }
 
 function getPlanetIcon(planet: Planet) {
@@ -45,19 +47,21 @@ function getPlanetIcon(planet: Planet) {
 
 export default function PlanetIcon({
   planet,
-  color = "grey",
+  color = "lightgrey",
   size = 20,
+  x = 0,
+  y = 0,
 }: PlanetIconProps) {
   const planetIcon = getPlanetIcon(planet);
 
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
       viewBox="0 0 35 35"
-      role="presentation"
       fill={color}
+      x={x}
+      y={y}
     >
       {planetIcon}
     </svg>
