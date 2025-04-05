@@ -1,30 +1,30 @@
-export const bodyList = [
-  "Sun",
-  "Moon",
-  "Mercury",
-  "Venus",
-  "Mars",
-  "Jupiter",
-  "Saturn",
-  "Uranus",
-  "Neptune",
-  "Pluto",
-];
+export enum Planet {
+  Sun,
+  Moon,
+  Mercury,
+  Venus,
+  Mars,
+  Jupiter,
+  Saturn,
+  Uranus,
+  Neptune,
+  Pluto,
+}
 
-export const signName = [
-  "aries",
-  "taurus",
-  "gemini",
-  "cancer",
-  "leo",
-  "virgo",
-  "libra",
-  "scorpio",
-  "sagittarius",
-  "capricorn",
-  "aquarius",
-  "pisces",
-];
+export enum ZodiacSign {
+  Aries,
+  Taurus,
+  Gemini,
+  Cancer,
+  Leo,
+  Virgo,
+  Libra,
+  Scorpio,
+  Sagittarius,
+  Capricorn,
+  Aquarius,
+  Pisces,
+}
 
 export interface ChartGenerationData {
   latitude: number;
@@ -33,8 +33,8 @@ export interface ChartGenerationData {
 }
 
 export interface ChartPlanet {
-  name: string;
-  sign: string;
+  planetIndex: Planet;
+  signIndex: ZodiacSign;
   hour: number;
   min: number;
   sec: number;

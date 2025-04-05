@@ -9,13 +9,10 @@ export default function UserProfileContainer() {
         <Grid size={12}>
           <Box sx={{ backgroundColor: "#222" }}>profile head section</Box>
         </Grid>
-        <Grid size={8}>
+        <Grid size={12}>
           <Box sx={{ backgroundColor: "#222" }}>
             <ChartController />
           </Box>
-        </Grid>
-        <Grid size={4}>
-          <Box sx={{ backgroundColor: "#222" }}>map data</Box>
         </Grid>
       </Grid>
     </Grid>

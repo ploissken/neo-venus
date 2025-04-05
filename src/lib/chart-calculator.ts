@@ -1,10 +1,5 @@
 import Astronomy from "./astronomy.browser";
-import {
-  ChartGenerationData,
-  ChartPlanet,
-  bodyList,
-  signName,
-} from "./chart.types";
+import { ChartGenerationData, ChartPlanet, Planet } from "./chart.types";
 
 export const buildChartPlanets = ({
   referenceDate,
@@ -14,9 +9,13 @@ export const buildChartPlanets = ({
   const observer = new Astronomy.Observer(latitude, longitude, 0);
   const planets = Array<ChartPlanet>();
 
-  bodyList.forEach((body) => {
+  const planetNames: Array<keyof typeof Planet> = Object.keys(Planet).filter(
+    (key) => isNaN(Number(key))
+  ) as Array<keyof typeof Planet>;
+
+  planetNames.forEach((planet, planetIndex) => {
     const equatorOfDate = Astronomy.Equator(
-      body,
+      planet,
       referenceDate,
       observer,
       true,
@@ -40,8 +39,8 @@ export const buildChartPlanets = ({
     const sec = Math.floor((minFraction - min) * 60);
 
     planets.push({
-      name: body,
-      sign: signName[signIndex],
+      planetIndex,
+      signIndex,
       hour,
       min,
       sec,
