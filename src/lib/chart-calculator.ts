@@ -30,6 +30,8 @@ export const buildChartPlanets = ({
       "normal"
     );
 
+    console.log("horizonOfDate", horizonOfDate);
+
     const degree = horizonOfDate.ra * 15;
     const signIndex = Math.floor(degree / 30);
     const lang30 = degree - signIndex * 30;
@@ -41,6 +43,7 @@ export const buildChartPlanets = ({
     planets.push({
       planetIndex,
       signIndex,
+      ra: -1 * equatorOfDate.ra + 9.1,
       hour,
       min,
       sec,

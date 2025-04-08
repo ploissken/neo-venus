@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from "dayjs";
-import { DatePicker as MuiDatePicker } from "@mui/x-date-pickers";
+import { DateTimePicker as MuiDatePicker } from "@mui/x-date-pickers";
 
 interface MapDatePickerProps {
   onDateChange: (value: Date) => void;
