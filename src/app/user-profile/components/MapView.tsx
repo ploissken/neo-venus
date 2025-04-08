@@ -35,7 +35,7 @@ export default function MapView({
           left: 0,
         }}
       >
-        <BaseChart size={size} rotationDegrees={150 + (180 - ascendant)} />
+        <BaseChart size={size} rotationDegrees={-ascendant} />
       </div>
 
       {/* planets */}
@@ -44,7 +44,6 @@ export default function MapView({
           position: "absolute",
           top: 0,
           left: 0,
-          // transform: "rotate(150deg)",
         }}
       >
         <svg width={size} height={size} viewBox="0 0 500 500">
@@ -68,40 +67,21 @@ export default function MapView({
           y2={200 + 180 * Math.sin((angle * Math.PI) / 180)} 
           */}
           <PlanetIcon
-            planet={Planet.Pluto}
-            size={25}
-            color="yellow"
-            x={size / 2 - radius + radius + radius * Math.cos(0)}
-            y={size / 2 - radius + radius + radius * Math.sin(0)}
-            // x={size / 2 - radius}
-            // y={size / 2}
-          />
-          <PlanetIcon
             planet={Planet.Sun}
             size={25}
             color="yellow"
             x={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.cos(
-                  ((chartPlanets[0].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[0].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
             y={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.sin(
-                  ((chartPlanets[0].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[0].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
           />
@@ -111,27 +91,17 @@ export default function MapView({
             size={25}
             color="cyan"
             x={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.cos(
-                  ((chartPlanets[1].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[1].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
             y={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.sin(
-                  ((chartPlanets[1].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[1].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
           />
@@ -140,27 +110,17 @@ export default function MapView({
             size={25}
             color="cyan"
             x={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.cos(
-                  ((chartPlanets[2].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[2].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
             y={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.sin(
-                  ((chartPlanets[2].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[2].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
           />
@@ -169,27 +129,17 @@ export default function MapView({
             size={25}
             color="cyan"
             x={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.cos(
-                  ((chartPlanets[3].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[3].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
             y={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.sin(
-                  ((chartPlanets[3].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[3].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
           />
@@ -205,27 +155,17 @@ export default function MapView({
             size={25}
             color="red"
             x={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.cos(
-                  ((chartPlanets[4].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[4].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
             y={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.sin(
-                  ((chartPlanets[4].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[4].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
           />
@@ -234,27 +174,17 @@ export default function MapView({
             size={25}
             color="red"
             x={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.cos(
-                  ((chartPlanets[5].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[5].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
             y={
-              size / 2 -
-              radius +
-              radius +
+              size / 2 +
               radius *
                 Math.sin(
-                  ((chartPlanets[5].longitude + 180 + ascendant) *
-                    -1 *
-                    Math.PI) /
-                    180
+                  ((chartPlanets[5].longitude + ascendant) * -1 * Math.PI) / 180
                 )
             }
           />
