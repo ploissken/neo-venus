@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import ChartView from "@/components/chart/ChartView";
 import ChartDataTable from "@/components/chart/ChartDataTable";
-import ChartCreationMenu from "../chart/ChartCreationMenu";
+import ChartCreationMenu from "../../components/chart/ChartCreationMenu";
 
 export default function ChartController() {
   return (
