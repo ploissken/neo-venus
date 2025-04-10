@@ -1,7 +1,7 @@
 import { ChartHouse, ChartPlanet, Planet } from "@/lib/chart.types";
 import Grid from "@mui/material/Grid";
-import ZodiacSignIcon from "@/app/components/ZodiacSignIcon";
-import PlanetIcon from "@/app/components/PlanetIcon";
+import ZodiacSignIcon from "@/components/chart/ZodiacSignIcon";
+import PlanetIcon from "@/components/chart/PlanetIcon";
 import Box from "@mui/material/Box";
 
 interface PlanetSignDegreeItemProps {

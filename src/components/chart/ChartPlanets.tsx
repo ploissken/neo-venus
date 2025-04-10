@@ -1,5 +1,5 @@
 import { ChartPlanet } from "@/lib/chart.types";
-import PlanetIcon from "@/app/components/PlanetIcon";
+import PlanetIcon from "@/components/chart/PlanetIcon";
 
 interface ChartPlanetsProps {
   chartPlanets: Array<ChartPlanet>;

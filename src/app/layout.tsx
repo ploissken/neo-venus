@@ -6,7 +6,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import CssBaseline from "@mui/material/CssBaseline";
 import theme from "../theme";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],

@@ -1,16 +1,16 @@
 import Grid from "@mui/material/Grid";
-import BaseChart from "./BaseChart";
-import ChartPlanets from "./ChartPlanets";
 import Box from "@mui/material/Box";
-import { ChartContext } from "@/app/context/ChartContext";
+import { ChartContext } from "@/context/ChartContext";
 import { useContext } from "react";
 import { Typography } from "@mui/material";
+import BaseChart from "@/components/chart/BaseChart";
+import ChartPlanets from "./ChartPlanets";
 
-interface MapViewProps {
+interface ChartViewProps {
   size?: number;
 }
 
-export default function MapView({ size = 500 }: MapViewProps) {
+export default function ChartView({ size = 500 }: ChartViewProps) {
   const {
     chart: { planets: chartPlanets, asc: ascendant },
   } = useContext(ChartContext);
@@ -57,7 +57,7 @@ export default function MapView({ size = 500 }: MapViewProps) {
           </Box>
         </>
       ) : (
-        <Typography>select a date</Typography>
+        <Typography sx={{ textAlign: "center" }}>select a date</Typography>
       )}
     </Grid>
   );

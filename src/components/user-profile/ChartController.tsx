@@ -1,12 +1,13 @@
 "use client";
 import { useContext, useState } from "react";
-import MapView from "./MapView";
 import React from "react";
-import DatePicker from "../../components/DatePicker";
 import { Chart, ChartGenerationData } from "@/lib/chart.types";
 import { Grid, Box, Button } from "@mui/material";
-import { ChartContext } from "@/app/context/ChartContext";
-import ChartDataTable from "./ChartDataTable";
+import { ChartContext } from "@/context/ChartContext";
+import LocationPicker from "@/components/LocationPicker";
+import DatePicker from "@/components/DatePicker";
+import ChartView from "@/components/chart/ChartView";
+import ChartDataTable from "@/components/chart/ChartDataTable";
 
 export default function ChartController() {
   const [dateValue, setDateValue] = useState<Date>(
@@ -31,19 +32,22 @@ export default function ChartController() {
   };
 
   return (
-    <Grid container alignItems="flex-end" spacing={2}>
-      <Grid size={8}>
-        <Box sx={{ backgroundColor: "#222" }}>
+    <Grid container spacing={2}>
+      <Grid size={12} sx={{ backgroundColor: "purple" }}>
+        <Box>
           <DatePicker
             defaultValue={dateValue}
             onDateChange={setDateValue}
             defaultLabel="chart date"
           />
+          <LocationPicker />
           <Button variant="contained" onClick={handleCreateChart}>
-            Create
+            Create Chart
           </Button>
-          <MapView size={500} />
         </Box>
+      </Grid>
+      <Grid size={8}>
+        <ChartView size={500} />
       </Grid>
       <Grid size={4} sx={{ p: 2 }}>
         <ChartDataTable />

@@ -2,7 +2,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import ChartController from "./ChartController";
-import { ChartProvider } from "@/app/context/ChartContext";
+import { ChartProvider } from "@/context/ChartContext";
 
 export default function UserProfileContainer() {
   return (

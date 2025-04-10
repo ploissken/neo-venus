@@ -1,14 +1,14 @@
 import { Planet } from "@/lib/chart.types";
-import Sun from "./icons/planets/Sun";
-import Jupiter from "./icons/planets/Jupiter";
-import Mars from "./icons/planets/Mars";
-import Mercury from "./icons/planets/Mercury";
-import Moon from "./icons/planets/Moon";
-import Neptune from "./icons/planets/Neptune";
-import Pluto from "./icons/planets/Pluto";
-import Saturn from "./icons/planets/Saturn";
-import Uranus from "./icons/planets/Uranus";
-import Venus from "./icons/planets/Venus";
+import Sun from "../icons/planets/Sun";
+import Jupiter from "../icons/planets/Jupiter";
+import Mars from "../icons/planets/Mars";
+import Mercury from "../icons/planets/Mercury";
+import Moon from "../icons/planets/Moon";
+import Neptune from "../icons/planets/Neptune";
+import Pluto from "../icons/planets/Pluto";
+import Saturn from "../icons/planets/Saturn";
+import Uranus from "../icons/planets/Uranus";
+import Venus from "../icons/planets/Venus";
 
 interface PlanetIconProps {
   planet: Planet;

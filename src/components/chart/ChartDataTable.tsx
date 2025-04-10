@@ -2,8 +2,8 @@
 import { useContext } from "react";
 import React from "react";
 import { ChartPlanet } from "@/lib/chart.types";
+import { ChartContext } from "@/context/ChartContext";
 import PlanetSignDegreeItem from "./PlanetSignDegreeItem";
-import { ChartContext } from "@/app/context/ChartContext";
 
 export default function ChartDataTable() {
   const {
