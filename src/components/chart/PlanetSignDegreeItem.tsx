@@ -5,12 +5,16 @@ import PlanetIcon from "@/components/chart/PlanetIcon";
 import Box from "@mui/material/Box";
 
 interface PlanetSignDegreeItemProps {
-  chartPlanet: ChartPlanet | ChartHouse;
+  chartPlanet?: ChartPlanet | ChartHouse;
 }
 
 export default function PlanetSignDegreeItem({
   chartPlanet,
 }: PlanetSignDegreeItemProps) {
+  if (!chartPlanet) {
+    return <></>;
+  }
+
   const { signIndex, hour, min, sec } = chartPlanet;
   const icon =
     "planetIndex" in chartPlanet ? (

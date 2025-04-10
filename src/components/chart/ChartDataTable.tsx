@@ -6,19 +6,17 @@ import { ChartContext } from "@/context/ChartContext";
 import PlanetSignDegreeItem from "./PlanetSignDegreeItem";
 
 export default function ChartDataTable() {
-  const {
-    chart: { planets, asc },
-  } = useContext(ChartContext);
+  const { chart } = useContext(ChartContext);
 
-  const chartLoaded = asc?.longitude;
+  const chartLoaded = chart?.asc?.longitude;
 
   return chartLoaded ? (
     <>
       <h4>Planets, Signs and Degrees</h4>
-      {planets?.map((planet: ChartPlanet) => (
+      {chart?.planets?.map((planet: ChartPlanet) => (
         <PlanetSignDegreeItem key={planet.planetIndex} chartPlanet={planet} />
       ))}
-      <PlanetSignDegreeItem chartPlanet={asc} />
+      <PlanetSignDegreeItem chartPlanet={chart?.asc} />
     </>
   ) : undefined;
 }

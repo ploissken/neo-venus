@@ -11,11 +11,10 @@ interface ChartViewProps {
 }
 
 export default function ChartView({ size = 500 }: ChartViewProps) {
-  const {
-    chart: { planets: chartPlanets, asc: ascendant },
-  } = useContext(ChartContext);
+  const { chart } = useContext(ChartContext);
 
-  const hasChart = chartPlanets.length > 0 && ascendant?.longitude;
+  const hasChart = chart && chart.planets?.length > 0;
+  const ascendantLongitude = chart?.asc?.longitude || 0;
 
   return (
     <Grid
@@ -39,7 +38,7 @@ export default function ChartView({ size = 500 }: ChartViewProps) {
               left: 0,
             }}
           >
-            <BaseChart size={size} rotationDegrees={-ascendant.longitude} />
+            <BaseChart size={size} rotationDegrees={-ascendantLongitude} />
           </Box>
 
           <Box
@@ -50,8 +49,8 @@ export default function ChartView({ size = 500 }: ChartViewProps) {
             }}
           >
             <ChartPlanets
-              chartPlanets={chartPlanets}
-              ascendant={ascendant.longitude}
+              chartPlanets={chart.planets}
+              ascendantLongitude={ascendantLongitude}
               size={size}
             />
           </Box>

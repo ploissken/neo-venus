@@ -3,13 +3,13 @@ import PlanetIcon from "@/components/chart/PlanetIcon";
 
 interface ChartPlanetsProps {
   chartPlanets: Array<ChartPlanet>;
-  ascendant: number;
+  ascendantLongitude: number;
   size: number;
 }
 
 export default function ChartPlanets({
   chartPlanets = [],
-  ascendant,
+  ascendantLongitude,
   size,
 }: ChartPlanetsProps) {
   const radius = 0.34 * size;
@@ -24,11 +24,13 @@ export default function ChartPlanets({
           color="yellow"
           x={
             size / 2 +
-            radius * Math.cos(((longitude + ascendant) * -1 * Math.PI) / 180)
+            radius *
+              Math.cos(((longitude + ascendantLongitude) * -1 * Math.PI) / 180)
           }
           y={
             size / 2 +
-            radius * Math.sin(((longitude + ascendant) * -1 * Math.PI) / 180)
+            radius *
+              Math.sin(((longitude + ascendantLongitude) * -1 * Math.PI) / 180)
           }
         />
       ))}

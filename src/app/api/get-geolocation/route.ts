@@ -1,4 +1,4 @@
-import { ChartHouse, ChartPlanet } from "@/lib/chart.types";
+import { ChartLocation } from "@/lib/location.types";
 import { NextRequest, NextResponse } from "next/server";
 
 const SERVICE_URL =
@@ -23,14 +23,12 @@ export async function GET(req: NextRequest) {
   if (!response.ok) {
     throw new Error("Failed to fetch location data");
   }
-  console.log("so far so good");
   const responseJson = await response.json();
-  console.log("responseJson", responseJson);
 
-  const locations = responseJson.map(
+  const locations: ChartLocation[] = responseJson.map(
     ({ lat, lon, name, display_name }: { [key: string]: string }) => ({
-      latitude: lat,
-      longitude: lon,
+      latitude: parseInt(lat),
+      longitude: parseInt(lon),
       name: name,
       displayName:
         display_name.length > 50
