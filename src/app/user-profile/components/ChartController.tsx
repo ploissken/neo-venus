@@ -1,18 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MapView from "./MapView";
 import React from "react";
 import DatePicker from "../../components/DatePicker";
-import { ChartGenerationData, ChartPlanet } from "@/lib/chart.types";
+import { Chart, ChartGenerationData } from "@/lib/chart.types";
 import { Grid, Box, Button } from "@mui/material";
-import PlanetSignDegree from "./PlanetSignDegree";
+import { ChartContext } from "@/app/context/ChartContext";
+import ChartDataTable from "./ChartDataTable";
 
 export default function ChartController() {
   const [dateValue, setDateValue] = useState<Date>(
     new Date("1986-12-27T09:35:00")
   );
-  const [chartPlanets, setChartPlanets] = useState<ChartPlanet[]>([]);
-  const [ascendant, setAscendant] = useState(0);
+  const { setChart } = useContext(ChartContext);
 
   const chartData: ChartGenerationData = {
     // TODO: implement geolocation
@@ -22,15 +22,12 @@ export default function ChartController() {
   };
 
   const handleCreateChart = async () => {
-    const resp = await fetch("/api/create-chart", {
+    const response = await fetch("/api/create-chart", {
       method: "POST",
       body: JSON.stringify(chartData),
     });
-    const data = await resp.json();
-    console.log("got planets data", data);
-
-    setChartPlanets(data.planets);
-    setAscendant(data.asc);
+    const calculatedChart: Chart = await response.json();
+    setChart(calculatedChart);
   };
 
   return (
@@ -45,16 +42,11 @@ export default function ChartController() {
           <Button variant="contained" onClick={handleCreateChart}>
             Create
           </Button>
-          {chartPlanets.length > 0 && (
-            <MapView chartPlanets={chartPlanets} ascendant={ascendant} />
-          )}
+          <MapView size={500} />
         </Box>
       </Grid>
       <Grid size={4} sx={{ p: 2 }}>
-        <h4>Planets, Signs and Degrees</h4>
-        {chartPlanets.map((planet) => (
-          <PlanetSignDegree key={planet.planetIndex} chartPlanet={planet} />
-        ))}
+        <ChartDataTable />
       </Grid>
     </Grid>
   );

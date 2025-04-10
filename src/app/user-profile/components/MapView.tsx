@@ -1,24 +1,26 @@
 import Grid from "@mui/material/Grid";
-import { ChartPlanet, Planet } from "@/lib/chart.types";
-import PlanetIcon from "@/app/components/PlanetIcon";
 import BaseChart from "./BaseChart";
+import ChartPlanets from "./ChartPlanets";
+import Box from "@mui/material/Box";
+import { ChartContext } from "@/app/context/ChartContext";
+import { useContext } from "react";
+import { Typography } from "@mui/material";
 
 interface MapViewProps {
-  chartPlanets: Array<ChartPlanet>;
-  ascendant: number;
+  size?: number;
 }
 
-export default function MapView({
-  chartPlanets = [],
-  ascendant = 0,
-}: MapViewProps) {
-  const size = 500;
-  const radius = 170;
-  console.log("chartPlanets", chartPlanets);
-  console.log("ascendant", ascendant);
+export default function MapView({ size = 500 }: MapViewProps) {
+  const {
+    chart: { planets: chartPlanets, asc: ascendant },
+  } = useContext(ChartContext);
+
+  const hasChart = chartPlanets.length > 0 && ascendant?.longitude;
+
   return (
     <Grid
       size={12}
+      alignContent="center"
       sx={{
         m: 4,
         position: "relative",
@@ -28,168 +30,35 @@ export default function MapView({
         height: size,
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-        }}
-      >
-        <BaseChart size={size} rotationDegrees={-ascendant} />
-      </div>
+      {hasChart ? (
+        <>
+          <Box
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          >
+            <BaseChart size={size} rotationDegrees={-ascendant.longitude} />
+          </Box>
 
-      {/* planets */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-        }}
-      >
-        <svg width={size} height={size} viewBox="0 0 500 500">
-          <circle cx={size / 2} cy={size / 2} r={radius} fill="#aa00aa50" />
-          {/* <circle
-            cx={size / 2 - radius}
-            cy={size / 2}
-            r="18"
-            stroke="#111"
-            fill="#a0a"
-          />
-          <circle
-            cx={size / 2 - radius}
-            cy={size / 2 - radius}
-            r="18"
-            stroke="#111"
-            fill="#a0a"
-          /> */}
-          {/* 
-          x2={200 + 180 * Math.cos((angle * Math.PI) / 180)}
-          y2={200 + 180 * Math.sin((angle * Math.PI) / 180)} 
-          */}
-          <PlanetIcon
-            planet={Planet.Sun}
-            size={25}
-            color="yellow"
-            x={
-              size / 2 +
-              radius *
-                Math.cos(
-                  ((chartPlanets[0].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-            y={
-              size / 2 +
-              radius *
-                Math.sin(
-                  ((chartPlanets[0].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-          />
-          {/* <circle cx={160 + 12} cy={80 + 12} r="18" stroke="#111" fill="#333" /> */}
-          <PlanetIcon
-            planet={Planet.Moon}
-            size={25}
-            color="cyan"
-            x={
-              size / 2 +
-              radius *
-                Math.cos(
-                  ((chartPlanets[1].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-            y={
-              size / 2 +
-              radius *
-                Math.sin(
-                  ((chartPlanets[1].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-          />
-          <PlanetIcon
-            planet={Planet.Mercury}
-            size={25}
-            color="cyan"
-            x={
-              size / 2 +
-              radius *
-                Math.cos(
-                  ((chartPlanets[2].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-            y={
-              size / 2 +
-              radius *
-                Math.sin(
-                  ((chartPlanets[2].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-          />
-          <PlanetIcon
-            planet={Planet.Venus}
-            size={25}
-            color="cyan"
-            x={
-              size / 2 +
-              radius *
-                Math.cos(
-                  ((chartPlanets[3].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-            y={
-              size / 2 +
-              radius *
-                Math.sin(
-                  ((chartPlanets[3].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-          />
-          {/* <circle
-            cx={160 + 12}
-            cy={300 + 12}
-            r="18"
-            stroke="#111"
-            fill="#333"
-          /> */}
-          <PlanetIcon
-            planet={Planet.Mars}
-            size={25}
-            color="red"
-            x={
-              size / 2 +
-              radius *
-                Math.cos(
-                  ((chartPlanets[4].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-            y={
-              size / 2 +
-              radius *
-                Math.sin(
-                  ((chartPlanets[4].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-          />
-          <PlanetIcon
-            planet={Planet.Jupiter}
-            size={25}
-            color="red"
-            x={
-              size / 2 +
-              radius *
-                Math.cos(
-                  ((chartPlanets[5].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-            y={
-              size / 2 +
-              radius *
-                Math.sin(
-                  ((chartPlanets[5].longitude + ascendant) * -1 * Math.PI) / 180
-                )
-            }
-          />
-        </svg>
-      </div>
+          <Box
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          >
+            <ChartPlanets
+              chartPlanets={chartPlanets}
+              ascendant={ascendant.longitude}
+              size={size}
+            />
+          </Box>
+        </>
+      ) : (
+        <Typography>select a date</Typography>
+      )}
     </Grid>
   );
 }

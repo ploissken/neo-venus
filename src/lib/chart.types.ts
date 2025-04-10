@@ -32,11 +32,24 @@ export interface ChartGenerationData {
   referenceDate: Date;
 }
 
-export interface ChartPlanet {
-  planetIndex: Planet;
+export interface BaseChartObject {
   signIndex: ZodiacSign;
   longitude: number;
   hour: number;
   min: number;
   sec: number;
+}
+
+export interface ChartPlanet extends BaseChartObject {
+  planetIndex: Planet;
+}
+
+export interface ChartHouse extends BaseChartObject {
+  houseIndex: number;
+}
+
+export interface Chart {
+  planets: ChartPlanet[];
+  houses: ChartHouse[];
+  asc?: ChartHouse;
 }
