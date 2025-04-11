@@ -1,5 +1,6 @@
 import { ChartPlanet } from "@/lib/chart.types";
 import PlanetIcon from "@/components/chart/PlanetIcon";
+import { CHART_PLANET_SIZE } from "@/lib/chart.consts";
 
 interface ChartPlanetsProps {
   chartPlanets: Array<ChartPlanet>;
@@ -20,7 +21,7 @@ export default function ChartPlanets({
         <PlanetIcon
           key={index}
           planet={planetIndex}
-          size={20}
+          size={CHART_PLANET_SIZE}
           color="yellow"
           x={
             size / 2 +

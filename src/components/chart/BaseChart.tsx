@@ -1,4 +1,4 @@
-const DEFAULT_SIZE = 800;
+const CHART_DEFAULT_VIEWBOX_SIZE = 800;
 const DEFAULT_ROTATION = 0;
 
 interface DividerColors {
@@ -35,7 +35,7 @@ const defaultSignColors: SignColors = {
 const defaultProps = {
   dividerColors: defaultDividerColor,
   signColors: defaultSignColors,
-  size: DEFAULT_SIZE,
+  size: CHART_DEFAULT_VIEWBOX_SIZE,
   rotationDegrees: DEFAULT_ROTATION,
 };
 
@@ -56,7 +56,7 @@ export default function BaseChart(props: BaseChartProps) {
   const { dividerColors, signColors, size, rotationDegrees } = propsWithDefault;
 
   const center = size / 2;
-  const scaleFactor = size / DEFAULT_SIZE;
+  const scaleFactor = size / CHART_DEFAULT_VIEWBOX_SIZE;
 
   return (
     <svg

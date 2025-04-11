@@ -9,6 +9,7 @@ import Pluto from "../icons/planets/Pluto";
 import Saturn from "../icons/planets/Saturn";
 import Uranus from "../icons/planets/Uranus";
 import Venus from "../icons/planets/Venus";
+import { CHART_PLANET_SIZE } from "@/lib/chart.consts";
 
 interface PlanetIconProps {
   planet: Planet;
@@ -48,7 +49,7 @@ function getPlanetIcon(planet: Planet) {
 export default function PlanetIcon({
   planet,
   color = "lightgrey",
-  size = 20,
+  size = CHART_PLANET_SIZE,
   x = 0,
   y = 0,
 }: PlanetIconProps) {

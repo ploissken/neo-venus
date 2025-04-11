@@ -1,7 +1,16 @@
 import { ChartContext } from "@/context/ChartContext";
 import { ChartLocation } from "@/lib/location.types";
 import { Cancel, Search } from "@mui/icons-material";
-import { Select, MenuItem, IconButton, Typography, Grid } from "@mui/material";
+import {
+  Select,
+  MenuItem,
+  IconButton,
+  Typography,
+  Grid,
+  FormControl,
+  InputLabel,
+  InputAdornment,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useContext, useEffect, useState } from "react";
 
@@ -61,54 +70,69 @@ export default function LocationPicker() {
         justifyContent: "space-between",
       }}
     >
-      <Grid size="grow">
-        {hasLocationsLoaded ? (
-          <Select
-            value={selectedLocationIndex}
-            label="city"
-            onChange={(e) => setSelectedLocationIndex(e.target.value as number)}
-            sx={{ height: "100%", width: "100%" }}
-          >
-            {locations.map((location: ChartLocation, index: number) => (
-              <MenuItem key={index} value={index}>
-                <>
-                  <Typography variant="caption">
-                    {`${location.name} (${location.displayName})`}
-                  </Typography>
-                </>
-              </MenuItem>
-            ))}
-          </Select>
-        ) : (
-          <TextField
-            label="city"
-            variant="outlined"
-            value={inputValue}
-            disabled={loading}
-            onChange={(e) => setInputValue(e.target.value)}
-            sx={{ height: "100%", width: "100%" }}
-          />
-        )}
+      <Grid container size="grow">
+        <FormControl fullWidth>
+          {hasLocationsLoaded ? (
+            <>
+              <InputLabel id="city-label">City</InputLabel>
+              <Select
+                value={selectedLocationIndex}
+                label="City"
+                labelId="city-label"
+                onChange={(e) =>
+                  setSelectedLocationIndex(e.target.value as number)
+                }
+                sx={{ height: "100%", width: "100%" }}
+              >
+                {locations.map((location: ChartLocation, index: number) => (
+                  <MenuItem key={index} value={index}>
+                    <>
+                      <Typography variant="caption">
+                        {`${location.name} (${location.displayName})`}
+                      </Typography>
+                    </>
+                  </MenuItem>
+                ))}
+              </Select>
+            </>
+          ) : (
+            <TextField
+              label="City"
+              variant="outlined"
+              value={inputValue}
+              disabled={loading}
+              onChange={(e) => setInputValue(e.target.value)}
+              sx={{ height: "100%", width: "100%" }}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="search city"
+                        onClick={handleSearchLocation}
+                      >
+                        <Search />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
+            />
+          )}
+        </FormControl>
       </Grid>
-      <Grid size={2} container justifyContent="center" alignItems="stretch">
-        {hasLocationsLoaded ? (
+
+      {hasLocationsLoaded && (
+        <Grid size={2} container justifyContent="center">
           <IconButton
-            aria-label="cancel"
+            size="large"
+            aria-label="clear city"
             onClick={handleClearLocation}
-            sx={{ height: "100%", width: "100%" }}
           >
             <Cancel />
           </IconButton>
-        ) : (
-          <IconButton
-            aria-label="search"
-            onClick={handleSearchLocation}
-            sx={{ height: "100%", width: "100%" }}
-          >
-            <Search />
-          </IconButton>
-        )}
-      </Grid>
+        </Grid>
+      )}
     </Grid>
   );
 }

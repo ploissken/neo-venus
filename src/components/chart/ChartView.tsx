@@ -5,12 +5,15 @@ import { useContext } from "react";
 import { Typography } from "@mui/material";
 import BaseChart from "@/components/chart/BaseChart";
 import ChartPlanets from "./ChartPlanets";
+import { CHART_DEFAULT_SIZE } from "@/lib/chart.consts";
 
 interface ChartViewProps {
   size?: number;
 }
 
-export default function ChartView({ size = 500 }: ChartViewProps) {
+export default function ChartView({
+  size = CHART_DEFAULT_SIZE,
+}: ChartViewProps) {
   const { chart } = useContext(ChartContext);
 
   const hasChart = chart && chart.planets?.length > 0;

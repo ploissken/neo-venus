@@ -39,20 +39,20 @@ export default function ChartCreationMenu() {
         alignItems: "stretch",
       }}
     >
-      <Grid size={4}>
+      <Grid size={{ xs: 12, lg: 4 }}>
         <DatePicker />
       </Grid>
 
-      <Grid size="grow">
+      <Grid size={{ xs: 12, lg: "grow" }}>
         <LocationPicker />
       </Grid>
-      <Grid size={2}>
+      <Grid size={{ xs: 12, lg: 2 }}>
         <Button
           variant="contained"
           onClick={handleCreateChart}
           disabled={!canFetchChart}
           size="small"
-          sx={{ height: "100%", width: "100%" }}
+          sx={{ width: "100%", height: (theme) => theme.spacing(7) }}
         >
           Create Chart
         </Button>
