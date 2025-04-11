@@ -4,8 +4,8 @@ import React from "react";
 import { Chart, ChartGenerationData } from "@/lib/chart.types";
 import { Button, Grid } from "@mui/material";
 import { ChartContext } from "@/context/ChartContext";
-import LocationPicker from "@/components/LocationPicker";
-import DatePicker from "@/components/DatePicker";
+import DatePicker from "./DatePicker";
+import LocationPicker from "./LocationPicker";
 
 export default function ChartCreationMenu() {
   const { dateValue, location, setChart } = useContext(ChartContext);
