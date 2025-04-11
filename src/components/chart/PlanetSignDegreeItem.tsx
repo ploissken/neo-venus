@@ -15,7 +15,7 @@ export default function PlanetSignDegreeItem({
     return <></>;
   }
 
-  const { signIndex, hour, min, sec } = chartPlanet;
+  const { signIndex, degrees, minutes, seconds } = chartPlanet;
   const icon =
     "planetIndex" in chartPlanet ? (
       <PlanetIcon planet={chartPlanet.planetIndex} />
@@ -38,7 +38,7 @@ export default function PlanetSignDegreeItem({
         <ZodiacSignIcon sign={signIndex} />
       </Grid>
       <Grid container size="grow" justifyContent="flex-end">
-        {`${hour}°${min}'${sec}"`}
+        {`${degrees}°${minutes}'${seconds}"`}
       </Grid>
     </Grid>
   );

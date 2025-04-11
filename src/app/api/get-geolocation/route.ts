@@ -27,8 +27,8 @@ export async function GET(req: NextRequest) {
 
   const locations: ChartLocation[] = responseJson.map(
     ({ lat, lon, name, display_name }: { [key: string]: string }) => ({
-      latitude: parseInt(lat),
-      longitude: parseInt(lon),
+      latitude: parseFloat(lat),
+      longitude: parseFloat(lon),
       name: name,
       displayName:
         display_name.length > 50
