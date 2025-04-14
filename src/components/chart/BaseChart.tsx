@@ -1,17 +1,8 @@
+import { defaultDividerColor, defaultSignColors } from "@/lib/chart.consts";
+import { DividerColors, SignColors } from "@/lib/chart.types";
+
 const CHART_DEFAULT_VIEWBOX_SIZE = 800;
 const DEFAULT_ROTATION = 0;
-
-interface DividerColors {
-  degree: string;
-  house: string;
-}
-
-interface SignColors {
-  air?: string;
-  earth?: string;
-  fire?: string;
-  water?: string;
-}
 
 interface BaseChartProps {
   dividerColors?: DividerColors;
@@ -19,18 +10,6 @@ interface BaseChartProps {
   size?: number;
   rotationDegrees?: number;
 }
-
-const defaultDividerColor: DividerColors = {
-  degree: "lightgray",
-  house: "gray",
-};
-
-const defaultSignColors: SignColors = {
-  air: "gray",
-  earth: "green",
-  fire: "brown",
-  water: "cyan",
-};
 
 const defaultProps = {
   dividerColors: defaultDividerColor,

@@ -46,10 +46,23 @@ export interface ChartPlanet extends BaseChartObject {
 
 export interface ChartHouse extends BaseChartObject {
   houseIndex: number;
+  renderLongitude: number;
 }
 
 export interface Chart {
   planets: ChartPlanet[];
   houses: ChartHouse[];
   asc?: ChartHouse;
+}
+
+export interface DividerColors {
+  degree: string;
+  house: string;
+}
+
+export interface SignColors {
+  air?: string;
+  earth?: string;
+  fire?: string;
+  water?: string;
 }

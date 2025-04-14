@@ -25,7 +25,7 @@ export const mapPlanets = (planets: BackendResponse[]): ChartPlanet[] => {
 };
 
 export const mapHouses = (houses: BackendResponse[]): ChartHouse[] => {
-  return houses.map(
+  const mappedHouses: ChartHouse[] = houses.map(
     ({
       house,
       start_degree,
@@ -36,10 +36,12 @@ export const mapHouses = (houses: BackendResponse[]): ChartHouse[] => {
     }: BackendResponse) => ({
       houseIndex: house,
       longitude: start_degree,
+      renderLongitude: -(start_degree - houses[0].start_degree + 180),
       signIndex: sign_id as ZodiacSign,
       degrees,
       minutes,
       seconds,
     })
   );
+  return mappedHouses;
 };

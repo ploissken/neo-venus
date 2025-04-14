@@ -24,6 +24,7 @@ export async function GET(req: NextRequest) {
     throw new Error("Failed to fetch location data");
   }
   const responseJson = await response.json();
+  console.log("responseJson", responseJson);
 
   const locations: ChartLocation[] = responseJson.map(
     ({ lat, lon, name, display_name }: { [key: string]: string }) => ({

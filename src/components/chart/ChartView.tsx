@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 import BaseChart from "@/components/chart/BaseChart";
 import ChartPlanets from "./ChartPlanets";
 import { CHART_DEFAULT_SIZE } from "@/lib/chart.consts";
+import ChartHouses from "./ChartHouses";
 
 interface ChartViewProps {
   size?: number;
@@ -43,7 +44,15 @@ export default function ChartView({
           >
             <BaseChart size={size} rotationDegrees={-ascendantLongitude} />
           </Box>
-
+          <Box
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          >
+            <ChartHouses size={size} houses={chart.houses} />
+          </Box>
           <Box
             style={{
               position: "absolute",

@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
+// TODO: copy other covers from https://star-name-registry.com/constellations/aquarius
 import capriconCover from "@/assets/images/covers/capricorn.jpg";
 import defaultAvatar from "@/assets/images/avatar/default-1.png";
 import Avatar from "@mui/material/Avatar";
