@@ -1,7 +1,10 @@
 import dayjs, { Dayjs } from "dayjs";
 import { DateTimePicker as MuiDatePicker } from "@mui/x-date-pickers";
 import { ChartContext } from "@/context/ChartContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 interface MapDatePickerProps {
   defaultLabel?: string;
@@ -10,15 +13,17 @@ interface MapDatePickerProps {
 export default function DatePicker({
   defaultLabel = "Chart Date",
 }: MapDatePickerProps) {
-  const { dateValue, setDateValue } = useContext(ChartContext);
+  const [componentDate, setComponentDate] = useState<Dayjs | null>();
+  const { setDateValue } = useContext(ChartContext);
 
   const handleDateChange = (value: Dayjs | null) => {
-    setDateValue(new Date(value?.format() ?? ""));
+    setComponentDate(value);
+    setDateValue(new Date(dayjs(value).utc(true).format()));
   };
 
   return (
     <MuiDatePicker
-      value={dayjs(dateValue)}
+      value={dayjs(componentDate)}
       onChange={handleDateChange}
       label={defaultLabel}
       sx={{ height: "100%", width: "100%" }}
