@@ -50,8 +50,8 @@ export async function POST(req: NextRequest) {
   const data = await response.json();
   const { planets, houses, metadata, aspects } = data;
 
-  const mappedPlanets = mapPlanets(planets);
   const mappedHouses = mapHouses(houses);
+  const mappedPlanets = mapPlanets(planets, mappedHouses[0].longitude);
 
   return NextResponse.json({
     aspects,

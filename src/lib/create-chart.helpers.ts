@@ -4,7 +4,10 @@ type BackendResponse = {
   [key: string]: number;
 };
 
-export const mapPlanets = (planets: BackendResponse[]): ChartPlanet[] => {
+export const mapPlanets = (
+  planets: BackendResponse[],
+  ascendantLongitude: number = 0
+): ChartPlanet[] => {
   return planets.map(
     ({
       planet_id,
@@ -17,6 +20,7 @@ export const mapPlanets = (planets: BackendResponse[]): ChartPlanet[] => {
       planetIndex: planet_id as Planet,
       signIndex: sign_id as ZodiacSign,
       longitude: longitude,
+      renderLongitude: -(longitude + ascendantLongitude),
       degrees,
       minutes,
       seconds,
@@ -36,7 +40,7 @@ export const mapHouses = (houses: BackendResponse[]): ChartHouse[] => {
     }: BackendResponse) => ({
       houseIndex: house,
       longitude: start_degree,
-      renderLongitude: -(start_degree - houses[0].start_degree + 180),
+      renderLongitude: start_degree - houses[0].start_degree + 180,
       signIndex: sign_id as ZodiacSign,
       degrees,
       minutes,

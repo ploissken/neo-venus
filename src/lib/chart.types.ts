@@ -35,6 +35,7 @@ export interface ChartGenerationData {
 export interface BaseChartObject {
   signIndex: ZodiacSign;
   longitude: number;
+  renderLongitude: number;
   degrees: number;
   minutes: number;
   seconds: number;
@@ -46,7 +47,6 @@ export interface ChartPlanet extends BaseChartObject {
 
 export interface ChartHouse extends BaseChartObject {
   houseIndex: number;
-  renderLongitude: number;
 }
 
 export interface Chart {

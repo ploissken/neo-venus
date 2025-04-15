@@ -19,13 +19,9 @@ export default function ChartHouses({ size, houses }: ChartHousesProps) {
         <line
           key={houseIndex}
           x1={size / 2}
-          x2={
-            size / 2 + radius * Math.cos((renderLongitude * -1 * Math.PI) / 180)
-          }
+          x2={size / 2 + radius * Math.cos((renderLongitude * Math.PI) / 180)}
           y1={size / 2}
-          y2={
-            size / 2 + radius * Math.sin((renderLongitude * -1 * Math.PI) / 180)
-          }
+          y2={size / 2 + radius * Math.sin((renderLongitude * Math.PI) / 180)}
           stroke={defaultDividerColor.house}
           strokeWidth={
             importantHouseMarkers.includes(houseIndex)
