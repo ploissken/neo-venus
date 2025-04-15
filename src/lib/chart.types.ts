@@ -43,6 +43,7 @@ export interface BaseChartObject {
 
 export interface ChartPlanet extends BaseChartObject {
   planetIndex: Planet;
+  renderMarker: number;
 }
 
 export interface ChartHouse extends BaseChartObject {

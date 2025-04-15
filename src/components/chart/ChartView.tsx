@@ -60,11 +60,7 @@ export default function ChartView({
               left: 0,
             }}
           >
-            <ChartPlanets
-              chartPlanets={chart.planets}
-              ascendantLongitude={ascendantLongitude}
-              size={size}
-            />
+            <ChartPlanets chartPlanets={chart.planets} size={size} />
           </Box>
         </>
       ) : (
