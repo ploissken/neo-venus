@@ -15,21 +15,26 @@ export type ChartContextType = {
   chart?: Chart;
   dateValue?: Date;
   location?: ChartLocation;
+  loading: boolean;
   setChart: OptionalSetter<Chart>;
   setDateValue: OptionalSetter<Date>;
   setLocation: OptionalSetter<ChartLocation>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 };
 
 export const ChartContext = createContext<ChartContextType>({
   chart: undefined,
   dateValue: undefined,
+  loading: false,
   setChart: () => {},
   setDateValue: () => {},
   setLocation: () => {},
+  setLoading: () => {},
 });
 
 export const ChartProvider = ({ children }: { children: ReactNode }) => {
   const [chart, setChart] = useState<Optional<Chart>>();
+  const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState<Optional<ChartLocation>>();
   const [dateValue, setDateValue] = useState<Optional<Date>>(new Date());
 
@@ -42,6 +47,8 @@ export const ChartProvider = ({ children }: { children: ReactNode }) => {
         setDateValue,
         location,
         setLocation,
+        loading,
+        setLoading,
       }}
     >
       {children}

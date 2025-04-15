@@ -14,7 +14,7 @@ export default function DatePicker({
   defaultLabel = "Chart Date",
 }: MapDatePickerProps) {
   const [componentDate, setComponentDate] = useState<Dayjs | null>();
-  const { setDateValue } = useContext(ChartContext);
+  const { loading, setDateValue } = useContext(ChartContext);
 
   const handleDateChange = (value: Dayjs | null) => {
     setComponentDate(value);
@@ -26,6 +26,7 @@ export default function DatePicker({
       value={dayjs(componentDate)}
       onChange={handleDateChange}
       label={defaultLabel}
+      disabled={loading}
       sx={{ height: "100%", width: "100%" }}
     />
   );

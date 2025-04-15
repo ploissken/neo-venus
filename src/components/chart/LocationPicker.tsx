@@ -15,10 +15,9 @@ import TextField from "@mui/material/TextField";
 import { useContext, useEffect, useState } from "react";
 
 export default function LocationPicker() {
-  const { setLocation } = useContext(ChartContext);
+  const { loading, setLoading, setLocation } = useContext(ChartContext);
 
   const [inputValue, setInputValue] = useState("");
-  const [loading, setLoading] = useState(false);
   const [selectedLocationIndex, setSelectedLocationIndex] = useState(0);
   const [locations, setLocations] = useState<ChartLocation[]>([]);
 
@@ -79,6 +78,7 @@ export default function LocationPicker() {
                 value={selectedLocationIndex}
                 label="City"
                 labelId="city-label"
+                disabled={loading}
                 onChange={(e) =>
                   setSelectedLocationIndex(e.target.value as number)
                 }

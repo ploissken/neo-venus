@@ -8,11 +8,14 @@ import DatePicker from "./DatePicker";
 import LocationPicker from "./LocationPicker";
 
 export default function ChartCreationMenu() {
-  const { dateValue, location, setChart } = useContext(ChartContext);
+  const { dateValue, location, loading, setChart, setLoading } =
+    useContext(ChartContext);
   const canFetchChart = dateValue && location;
 
   const handleCreateChart = async () => {
     if (!canFetchChart) return;
+
+    setLoading(true);
 
     const chartData: ChartGenerationData = {
       latitude: location.latitude,
@@ -27,6 +30,7 @@ export default function ChartCreationMenu() {
 
     const calculatedChart: Chart = await response.json();
     setChart(calculatedChart);
+    setLoading(false);
   };
 
   return (
@@ -50,7 +54,8 @@ export default function ChartCreationMenu() {
         <Button
           variant="contained"
           onClick={handleCreateChart}
-          disabled={!canFetchChart}
+          disabled={!canFetchChart || loading}
+          loading={loading}
           size="small"
           sx={{ width: "100%", height: (theme) => theme.spacing(7) }}
         >
