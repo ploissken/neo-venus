@@ -8,6 +8,7 @@ import {
   CHART_DEFAULT_SIZE,
   CHART_LARGE_SIZE,
 } from "@/lib/chart.consts";
+import ChartAspectsTable from "@/components/chart/ChartAspectsTable";
 
 export default function ChartController() {
   const theme = useTheme();
@@ -28,6 +29,7 @@ export default function ChartController() {
       </Grid>
       <Grid size={{ xs: 12, lg: 4 }} sx={{ p: 2 }}>
         <ChartDataTable />
+        <ChartAspectsTable />
       </Grid>
     </Grid>
   );

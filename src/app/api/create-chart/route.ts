@@ -1,4 +1,4 @@
-import { mapHouses, mapPlanets } from "@/lib/create-chart.helpers";
+import { mapAspects, mapHouses, mapPlanets } from "@/lib/create-chart.helpers";
 import { NextRequest, NextResponse } from "next/server";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -52,9 +52,10 @@ export async function POST(req: NextRequest) {
 
   const mappedHouses = mapHouses(houses);
   const mappedPlanets = mapPlanets(planets, mappedHouses[0].longitude);
+  const mappedAspects = mapAspects(aspects);
 
   return NextResponse.json({
-    aspects,
+    aspects: mappedAspects,
     metadata,
     planets: mappedPlanets,
     houses: mappedHouses,

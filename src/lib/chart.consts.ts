@@ -9,6 +9,8 @@ export const PLANET_WHEEL_PROPORTION = 0.34;
 export const PLANET_MARKER_START = 1.08;
 export const PLANET_MARKER_END = 1.15;
 
+export const ASPECT_SIZE = 15;
+
 export const defaultDividerColor: DividerColors = {
   degree: "lightgray",
   house: "gray",

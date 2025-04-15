@@ -1,7 +1,22 @@
-import { ChartHouse, ChartPlanet, Planet, ZodiacSign } from "./chart.types";
+import {
+  ChartHouse,
+  ChartPlanet,
+  Planet,
+  PlanetAspect,
+  ZodiacSign,
+} from "./chart.types";
 
-type BackendResponse = {
+type BackendNumberResponse = {
   [key: string]: number;
+};
+
+type AspectResponse = {
+  aspect_id: number;
+  direction: string;
+  dms: string;
+  planet_a_id: number;
+  planet_b_id: number;
+  value: number;
 };
 
 const treatPlanetaryCollision = (planets: ChartPlanet[]): ChartPlanet[] => {
@@ -56,7 +71,7 @@ const treatPlanetaryCollision = (planets: ChartPlanet[]): ChartPlanet[] => {
 };
 
 export const mapPlanets = (
-  planets: BackendResponse[],
+  planets: BackendNumberResponse[],
   ascendantLongitude: number = 0
 ): ChartPlanet[] => {
   const mappedPlanets: ChartPlanet[] = planets.map(
@@ -67,7 +82,7 @@ export const mapPlanets = (
       degrees,
       minutes,
       seconds,
-    }: BackendResponse) => ({
+    }: BackendNumberResponse) => ({
       planetIndex: planet_id as Planet,
       signIndex: sign_id as ZodiacSign,
       longitude,
@@ -81,7 +96,7 @@ export const mapPlanets = (
   return treatPlanetaryCollision(mappedPlanets);
 };
 
-export const mapHouses = (houses: BackendResponse[]): ChartHouse[] => {
+export const mapHouses = (houses: BackendNumberResponse[]): ChartHouse[] => {
   const mappedHouses: ChartHouse[] = houses.map(
     ({
       house,
@@ -90,7 +105,7 @@ export const mapHouses = (houses: BackendResponse[]): ChartHouse[] => {
       degrees,
       minutes,
       seconds,
-    }: BackendResponse) => ({
+    }: BackendNumberResponse) => ({
       houseIndex: house,
       longitude: start_degree,
       renderLongitude: start_degree - houses[0].start_degree + 180,
@@ -101,4 +116,24 @@ export const mapHouses = (houses: BackendResponse[]): ChartHouse[] => {
     })
   );
   return mappedHouses;
+};
+
+export const mapAspects = (aspects: AspectResponse[]): PlanetAspect[] => {
+  return aspects.map(
+    ({
+      aspect_id,
+      direction,
+      dms,
+      planet_a_id,
+      planet_b_id,
+      value,
+    }: AspectResponse) => ({
+      direction,
+      dms,
+      planetA: planet_a_id,
+      planetB: planet_b_id,
+      value: value,
+      aspectIndex: aspect_id,
+    })
+  );
 };

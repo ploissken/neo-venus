@@ -26,6 +26,20 @@ export enum ZodiacSign {
   Pisces,
 }
 
+export enum Aspect {
+  Conjunction,
+  SemiSextile,
+  SemiSquare,
+  Sextile,
+  Quintile,
+  Square,
+  Trine,
+  SesquiQuadrate,
+  BiQuintile,
+  Quincux,
+  Opposition,
+}
+
 export interface ChartGenerationData {
   latitude: number;
   longitude: number;
@@ -50,9 +64,19 @@ export interface ChartHouse extends BaseChartObject {
   houseIndex: number;
 }
 
+export interface PlanetAspect {
+  aspectIndex: Aspect;
+  direction: string;
+  dms: string;
+  planetA: number;
+  planetB: number;
+  value: number;
+}
+
 export interface Chart {
   planets: ChartPlanet[];
   houses: ChartHouse[];
+  aspects: PlanetAspect[];
   asc?: ChartHouse;
 }
 
