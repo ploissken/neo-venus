@@ -34,13 +34,23 @@ export default function ChartAspectsTable() {
           <Grid key={rowIndex} container>
             {planets.map((__, columnIndex) => (
               <Grid key={columnIndex} container>
-                {rowIndex === columnIndex ? (
-                  <PlanetIcon planet={columnIndex} />
-                ) : (
-                  <Box sx={{ width: 30 }}>
-                    {getAspect(rowIndex, columnIndex, aspects)}
-                  </Box>
-                )}
+                <Grid
+                  container
+                  justifyContent="center"
+                  alignItems="center"
+                  sx={{
+                    width: 30,
+                    height: 30,
+                    border:
+                      columnIndex < rowIndex ? "1px solid gray" : undefined,
+                  }}
+                >
+                  {rowIndex === columnIndex ? (
+                    <PlanetIcon planet={columnIndex} />
+                  ) : (
+                    getAspect(rowIndex, columnIndex, aspects)
+                  )}
+                </Grid>
               </Grid>
             ))}
           </Grid>
