@@ -68,8 +68,8 @@ export interface PlanetAspect {
   aspectIndex: Aspect;
   direction: string;
   dms: string;
-  planetA: number;
-  planetB: number;
+  planetA: Planet;
+  planetB: Planet;
   value: number;
 }
 

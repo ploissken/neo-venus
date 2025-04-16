@@ -1,21 +1,19 @@
-import { Aspect, Planet, PlanetAspect } from "@/lib/chart.types";
+import { Planet, PlanetAspect } from "@/lib/chart.types";
 import Grid from "@mui/material/Grid";
-import PlanetIcon from "./PlanetIcon";
-import Box from "@mui/material/Box";
+import PlanetIcon from "../icons/PlanetIcon";
 import { useContext } from "react";
 import { ChartContext } from "@/context/ChartContext";
-import AspectIcon from "./AspectIcon";
+import AspectIcon from "../icons/AspectIcon";
 
 const getAspect = (
-  planetAIndex: number,
-  planetBIndex: number,
+  planetAIndex: Planet,
+  planetBIndex: Planet,
   aspects: PlanetAspect[]
 ) => {
   const aspect = aspects.find(
     (aspect) =>
       aspect.planetA === planetAIndex && aspect.planetB === planetBIndex
   );
-  if (aspect) console.log("aspect.aspectIndex", aspect.aspectIndex);
   return aspect ? <AspectIcon aspect={aspect.aspectIndex} /> : <></>;
 };
 

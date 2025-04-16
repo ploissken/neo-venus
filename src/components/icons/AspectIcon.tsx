@@ -1,17 +1,17 @@
 import { Aspect } from "@/lib/chart.types";
 
 import { ASPECT_SIZE } from "@/lib/chart.consts";
-import Conjunction from "../icons/aspects/Conjunction";
-import SemiSextile from "../icons/aspects/SemiSextile";
-import SemiSquare from "../icons/aspects/SemiSquare";
-import Sextile from "../icons/aspects/Sextile";
-import Quintile from "../icons/aspects/Quintuile";
-import Square from "../icons/aspects/Square";
-import Trine from "../icons/aspects/Trine";
-import SesquiQuadrate from "../icons/aspects/SesquiQuadrate";
-import BiQuintile from "../icons/aspects/BiQuintile";
-import Quincux from "../icons/aspects/Quincux";
-import Opposition from "../icons/aspects/Opposition";
+import Conjunction from "./aspects/Conjunction";
+import SemiSextile from "./aspects/SemiSextile";
+import SemiSquare from "./aspects/SemiSquare";
+import Sextile from "./aspects/Sextile";
+import Quintile from "./aspects/Quintuile";
+import Square from "./aspects/Square";
+import Trine from "./aspects/Trine";
+import SesquiQuadrate from "./aspects/SesquiQuadrate";
+import BiQuintile from "./aspects/BiQuintile";
+import Quincux from "./aspects/Quincux";
+import Opposition from "./aspects/Opposition";
 
 interface AspectIconProps {
   aspect: Aspect;
@@ -22,7 +22,6 @@ interface AspectIconProps {
 }
 
 function getAspectIcon(aspect: Aspect) {
-  console.log("aspect", aspect);
   switch (aspect) {
     case Aspect.Conjunction:
       return <Conjunction />;
@@ -47,7 +46,6 @@ function getAspectIcon(aspect: Aspect) {
     case Aspect.Opposition:
       return <Opposition />;
     default:
-      console.log(Aspect.BiQuintile, aspect);
       throw new Error("Unknown aspect identifier");
   }
 }

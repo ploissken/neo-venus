@@ -7,6 +7,7 @@ import BaseChart from "@/components/chart/BaseChart";
 import ChartPlanets from "./ChartPlanets";
 import { CHART_DEFAULT_SIZE } from "@/lib/chart.consts";
 import ChartHouses from "./ChartHouses";
+import AspectsWheel from "./AspectsWheel";
 
 interface ChartViewProps {
   size?: number;
@@ -61,6 +62,19 @@ export default function ChartView({
             }}
           >
             <ChartPlanets chartPlanets={chart.planets} size={size} />
+          </Box>
+          <Box
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+            }}
+          >
+            <AspectsWheel
+              planets={chart.planets}
+              aspects={chart.aspects}
+              size={size}
+            />
           </Box>
         </>
       ) : (

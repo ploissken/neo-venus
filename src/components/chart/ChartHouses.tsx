@@ -1,4 +1,7 @@
-import { defaultDividerColor } from "@/lib/chart.consts";
+import {
+  HOUSE_WHEEL_PROPORTION,
+  defaultDividerColor,
+} from "@/lib/chart.consts";
 import { ChartHouse } from "@/lib/chart.types";
 
 interface ChartHousesProps {
@@ -10,7 +13,7 @@ const DEFAULT_HOUSE_STROKE = 1;
 const HIGHLIGHED_HOUSE_STROKE = 3;
 
 export default function ChartHouses({ size, houses }: ChartHousesProps) {
-  const radius = 0.35 * size;
+  const radius = HOUSE_WHEEL_PROPORTION * size;
   const importantHouseMarkers = [0, 3, 6, 9]; // ac, ic, dc, mc
 
   return (

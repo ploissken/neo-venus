@@ -1,16 +1,16 @@
 import { ZodiacSign } from "@/lib/chart.types";
-import Aries from "../icons/signs/Aries";
-import Aquarius from "../icons/signs/Aquarius";
-import Cancer from "../icons/signs/Cancer";
-import Capricorn from "../icons/signs/Capricorn";
-import Gemini from "../icons/signs/Gemini";
-import Leo from "../icons/signs/Leo";
-import Libra from "../icons/signs/Libra";
-import Pisces from "../icons/signs/Pisces";
-import Sagittarius from "../icons/signs/Sagittarius";
-import Scorpio from "../icons/signs/Scorpio";
-import Taurus from "../icons/signs/Taurus";
-import Virgo from "../icons/signs/Virgo";
+import Aries from "./signs/Aries";
+import Aquarius from "./signs/Aquarius";
+import Cancer from "./signs/Cancer";
+import Capricorn from "./signs/Capricorn";
+import Gemini from "./signs/Gemini";
+import Leo from "./signs/Leo";
+import Libra from "./signs/Libra";
+import Pisces from "./signs/Pisces";
+import Sagittarius from "./signs/Sagittarius";
+import Scorpio from "./signs/Scorpio";
+import Taurus from "./signs/Taurus";
+import Virgo from "./signs/Virgo";
 
 interface ZodiacSignIconProps {
   sign: ZodiacSign;
