@@ -1,5 +1,6 @@
 import { Box, AppBar, Toolbar, Typography, Button } from "@mui/material";
 import DrawerMenu from "./DrawerMenu";
+import { LogoWithTitle } from "../logo";
 
 export default function Navbar() {
   return (
@@ -7,9 +8,7 @@ export default function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <DrawerMenu />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            neo-vuenus
-          </Typography>
+          <LogoWithTitle size={40} color="white" />
           <Button color="inherit" disabled>
             Login
           </Button>

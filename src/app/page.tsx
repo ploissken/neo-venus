@@ -1,3 +1,5 @@
+import HomeContainer from "@/features/home/HomeContainer";
+
 export default function Index() {
-  return <h1>home</h1>;
+  return <HomeContainer />;
 }

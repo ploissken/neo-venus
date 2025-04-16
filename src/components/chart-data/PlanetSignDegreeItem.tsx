@@ -1,6 +1,7 @@
 import { Grid, Box } from "@mui/material";
 import { ChartHouse, ChartPlanet, Planet } from "@/lib/chart.types";
 import { ZodiacSignIcon, PlanetIcon } from "@/components/icons";
+import { PLANET_SIZE } from "@/lib/chart.consts";
 
 interface PlanetSignDegreeItemProps {
   chartPlanet?: ChartPlanet | ChartHouse;
@@ -18,7 +19,7 @@ export function PlanetSignDegreeItem({
     "planetIndex" in chartPlanet ? (
       <PlanetIcon planet={chartPlanet.planetIndex} />
     ) : (
-      <Box sx={{ width: "20px" }}>AC</Box>
+      <Box sx={{ width: PLANET_SIZE }}>AC</Box>
     );
 
   const label =

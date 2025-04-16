@@ -33,52 +33,46 @@ export default function ChartView({
         height: size,
       }}
     >
-      {hasChart ? (
-        <>
-          <Box
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-            }}
-          >
-            <BaseChart size={size} rotationDegrees={-ascendantLongitude} />
-          </Box>
-          <Box
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-            }}
-          >
-            <ChartHouses size={size} houses={chart.houses} />
-          </Box>
-          <Box
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-            }}
-          >
-            <ChartPlanets chartPlanets={chart.planets} size={size} />
-          </Box>
-          <Box
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-            }}
-          >
-            <AspectsWheel
-              planets={chart.planets}
-              aspects={chart.aspects}
-              size={size}
-            />
-          </Box>
-        </>
-      ) : (
-        <Typography sx={{ textAlign: "center" }}>select a date</Typography>
-      )}
+      <Box
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <BaseChart size={size} rotationDegrees={-ascendantLongitude} />
+      </Box>
+      <Box
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <ChartHouses size={size} houses={chart.houses} />
+      </Box>
+      <Box
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <ChartPlanets chartPlanets={chart.planets} size={size} />
+      </Box>
+      <Box
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <AspectsWheel
+          planets={chart.planets}
+          aspects={chart.aspects}
+          size={size}
+        />
+      </Box>
     </Grid>
   );
 }

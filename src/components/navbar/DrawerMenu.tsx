@@ -1,6 +1,6 @@
 "use client";
 import MenuIcon from "@mui/icons-material/Menu";
-import { AccountCircle, Home, Info, Login } from "@mui/icons-material";
+import { Home, Info } from "@mui/icons-material";
 import { useState } from "react";
 import {
   Box,
@@ -13,6 +13,7 @@ import {
   IconButton,
   Link,
 } from "@mui/material";
+import { LogoWithTitle } from "../logo";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -23,17 +24,13 @@ export default function Navbar() {
 
   const routes = [
     { text: "Home", icon: <Home />, route: "/" },
-    { text: "Profile", icon: <AccountCircle />, route: "/user-profile" },
     { text: "About", icon: <Info />, route: "/about" },
-    { text: "Sign In", icon: <Login />, route: "/sign-in" },
   ];
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation">
-      <Typography variant="h5" sx={{ m: 2 }}>
-        mercuryou
-      </Typography>
-      <List>
+    <Box sx={{ width: 250, m: 2 }} role="presentation">
+      <LogoWithTitle size={40} color="white" />
+      <List sx={{ mt: 4 }}>
         {routes.map(({ text, icon, route }) => (
           <Link href={route} key={text} sx={{ textDecoration: "none" }}>
             <ListItem key={text} disablePadding>
