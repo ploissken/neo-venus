@@ -50,7 +50,7 @@ function getAspectIcon(aspect: Aspect) {
   }
 }
 
-export default function AspectIcon({
+export function AspectIcon({
   aspect,
   color = "lightgrey",
   size = ASPECT_SIZE,

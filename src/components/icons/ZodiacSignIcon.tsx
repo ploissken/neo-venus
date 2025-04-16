@@ -49,7 +49,7 @@ function getSignIcon(sign: ZodiacSign) {
   }
 }
 
-export default function ZodiacSignIcon({
+export function ZodiacSignIcon({
   sign,
   color = "grey",
   size = 20,

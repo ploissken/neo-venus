@@ -4,10 +4,10 @@ import React from "react";
 import { Chart, ChartGenerationData } from "@/lib/chart.types";
 import { Button, Grid } from "@mui/material";
 import { ChartContext } from "@/context/ChartContext";
-import DatePicker from "./DatePicker";
-import LocationPicker from "./LocationPicker";
+import { LocationPicker } from "./LocationPicker";
+import { DateTimePicker } from "./DateTimePicker";
 
-export default function ChartCreationMenu() {
+export function ChartCreationMenu() {
   const { dateValue, location, loading, setChart, setLoading } =
     useContext(ChartContext);
   const canFetchChart = dateValue && location;
@@ -44,7 +44,7 @@ export default function ChartCreationMenu() {
       }}
     >
       <Grid size={{ xs: 12, lg: 4 }}>
-        <DatePicker />
+        <DateTimePicker />
       </Grid>
 
       <Grid size={{ xs: 12, lg: "grow" }}>

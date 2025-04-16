@@ -1,5 +1,4 @@
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import { Grid, Box } from "@mui/material";
 import { ChartContext } from "@/context/ChartContext";
 import { useContext } from "react";
 import { Typography } from "@mui/material";

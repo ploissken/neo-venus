@@ -1,14 +1,12 @@
+import { Grid, Box } from "@mui/material";
 import { ChartHouse, ChartPlanet, Planet } from "@/lib/chart.types";
-import Grid from "@mui/material/Grid";
-import ZodiacSignIcon from "@/components/icons/ZodiacSignIcon";
-import PlanetIcon from "@/components/icons/PlanetIcon";
-import Box from "@mui/material/Box";
+import { ZodiacSignIcon, PlanetIcon } from "@/components/icons";
 
 interface PlanetSignDegreeItemProps {
   chartPlanet?: ChartPlanet | ChartHouse;
 }
 
-export default function PlanetSignDegreeItem({
+export function PlanetSignDegreeItem({
   chartPlanet,
 }: PlanetSignDegreeItemProps) {
   if (!chartPlanet) {

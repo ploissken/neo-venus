@@ -6,13 +6,13 @@ import utc from "dayjs/plugin/utc";
 
 dayjs.extend(utc);
 
-interface MapDatePickerProps {
+interface MapDateTimePickerProps {
   defaultLabel?: string;
 }
 
-export default function DatePicker({
+export function DateTimePicker({
   defaultLabel = "Chart Date",
-}: MapDatePickerProps) {
+}: MapDateTimePickerProps) {
   const [componentDate, setComponentDate] = useState<Dayjs | null>();
   const { loading, setDateValue } = useContext(ChartContext);
 

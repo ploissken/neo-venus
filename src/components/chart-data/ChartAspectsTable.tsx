@@ -1,9 +1,8 @@
 import { Planet, PlanetAspect } from "@/lib/chart.types";
-import Grid from "@mui/material/Grid";
-import PlanetIcon from "../icons/PlanetIcon";
 import { useContext } from "react";
 import { ChartContext } from "@/context/ChartContext";
-import AspectIcon from "../icons/AspectIcon";
+import { Grid } from "@mui/material";
+import { AspectIcon, PlanetIcon } from "../icons";
 
 const getAspect = (
   planetAIndex: Planet,
@@ -17,7 +16,7 @@ const getAspect = (
   return aspect ? <AspectIcon aspect={aspect.aspectIndex} /> : <></>;
 };
 
-export default function ChartAspectsTable() {
+export function ChartAspectsTable() {
   const { chart } = useContext(ChartContext);
   if (!chart) return;
 

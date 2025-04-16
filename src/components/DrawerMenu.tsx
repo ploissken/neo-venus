@@ -1,16 +1,18 @@
 "use client";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import { AccountCircle, Home, Info, Login } from "@mui/icons-material";
-import Link from "@mui/material/Link";
 import { useState } from "react";
+import {
+  Box,
+  Typography,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  Drawer,
+  IconButton,
+  Link,
+} from "@mui/material";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

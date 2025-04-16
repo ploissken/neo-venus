@@ -46,7 +46,7 @@ function getPlanetIcon(planet: Planet) {
   }
 }
 
-export default function PlanetIcon({
+export function PlanetIcon({
   planet,
   color = "lightgrey",
   size = PLANET_SIZE,

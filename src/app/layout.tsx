@@ -1,12 +1,12 @@
 "use client";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Roboto } from "next/font/google";
-import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import CssBaseline from "@mui/material/CssBaseline";
 import theme from "../theme";
 import Navbar from "../components/Navbar";
+import { ThemeProvider } from "@emotion/react";
+import { CssBaseline } from "@mui/material";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],

@@ -1,14 +1,15 @@
 "use client";
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
+import {
+  Grid,
+  Card,
+  Typography,
+  Box,
+  FormControl,
+  FormLabel,
+  TextField,
+  Button,
+} from "@mui/material";
+import Link from "next/link";
 
 export default function SigninContainer() {
   const todoFunction = (event: React.SyntheticEvent) => {
@@ -89,12 +90,8 @@ export default function SigninContainer() {
           </Box>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2, m: 2 }}>
             <Typography sx={{ textAlign: "center" }}>
-              Don't have an account?{" "}
-              <Link
-                href="/sign-up/"
-                variant="body2"
-                sx={{ alignSelf: "center" }}
-              >
+              Dont have an account?{" "}
+              <Link href="/sign-up/" sx={{ alignSelf: "center" }}>
                 Sign up
               </Link>
             </Typography>

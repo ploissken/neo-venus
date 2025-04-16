@@ -1,5 +1,5 @@
 import { ChartPlanet } from "@/lib/chart.types";
-import PlanetIcon from "@/components/icons/PlanetIcon";
+import { PlanetIcon } from "@/components/icons";
 import {
   PLANET_MARKER_END,
   PLANET_MARKER_START,

@@ -1,14 +1,13 @@
 import React from "react";
 import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import ChartView from "@/components/chart/ChartView";
-import ChartDataTable from "@/components/chart/ChartDataTable";
-import ChartCreationMenu from "../../components/chart/ChartCreationMenu";
 import {
   CHART_SMALL_SIZE,
   CHART_DEFAULT_SIZE,
   CHART_LARGE_SIZE,
 } from "@/lib/chart.consts";
-import ChartAspectsTable from "@/components/chart/ChartAspectsTable";
+import { ChartCreationMenu } from "@/components/chart-creation";
+import { ChartDataTable, ChartAspectsTable } from "@/components/chart-data";
 
 export default function ChartController() {
   const theme = useTheme();

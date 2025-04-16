@@ -10,11 +10,11 @@ import {
   FormControl,
   InputLabel,
   InputAdornment,
+  TextField,
 } from "@mui/material";
-import TextField from "@mui/material/TextField";
 import { useContext, useEffect, useState } from "react";
 
-export default function LocationPicker() {
+export function LocationPicker() {
   const { loading, setLoading, setLocation } = useContext(ChartContext);
 
   const [inputValue, setInputValue] = useState("");
