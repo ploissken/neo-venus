@@ -12,6 +12,7 @@ import {
   Drawer,
   IconButton,
   Link,
+  Grid,
 } from "@mui/material";
 import { LogoWithTitle } from "../logo";
 
@@ -28,9 +29,9 @@ export default function Navbar() {
   ];
 
   const DrawerList = (
-    <Box sx={{ width: 250, m: 2 }} role="presentation">
+    <Grid container sx={{ width: 250, m: 2 }}>
       <LogoWithTitle size={40} color="white" />
-      <List sx={{ mt: 4 }}>
+      <List sx={{ mt: 4, width: "100%" }}>
         {routes.map(({ text, icon, route }) => (
           <Link href={route} key={text} sx={{ textDecoration: "none" }}>
             <ListItem key={text} disablePadding>
@@ -42,7 +43,7 @@ export default function Navbar() {
           </Link>
         ))}
       </List>
-    </Box>
+    </Grid>
   );
 
   return (
