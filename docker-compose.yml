@@ -1,0 +1,22 @@
+version: "3"
+
+networks:
+  traefik:
+    external: true
+
+services:
+  mercuryou:
+    image: node:23-slim
+    working_dir: "/home/node/"
+    volumes:
+      - "./:/home/node/:cached"
+    networks:
+      - traefik
+    labels:
+      - "traefik.backend=mercuryou"
+      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
+      - "traefik.port=3000"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
