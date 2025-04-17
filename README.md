@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ☿ mercurYou: Modern Astrology Chart Generator
 
-## Getting Started
+> **Milenar Astrology - updated!**
 
-First, run the development server:
+---
+
+## 📜 Overview
+
+MercurYou is a side-project for generating astral charts in a prettier, nicer, and more modern way. It's also a showcase of my skills as a seasoned frontend developer 😉
+
+---
+
+## 🔑 Key Features
+
+- 🚀 **Fast & Flexible:** Built using the latest techs available for blazing fast astral chart and sinastries (coming up!) generation
+- 📦 **Extensible:** Several features to be included, roadmap TBD soon
+- 🧑‍💻 **Developer Showoff:** Felt like poetry, right? You can hire me
+
+---
+
+## 🛠 Technologies Used
+
+- **Frontend:** React, TypeScript, Material-UI, Next.js
+- **State Management:** React Context
+- **Testing:** Jest, React Testing Library (coming soon!)
+- **CI/CD:** GitHub Actions
+- **Deployment:** TBD (likely on DigitalOCean)
+
+---
+
+## 🗂️ Table of Contents
+
+### 🧠 Core
+
+- [`/app`](./app/README.md) — App router structure, pages, and layouts
+- [`/components`](./components/README.md) — Reusable UI blocks
+- [`/features`](./features/README.md) — Domain-driven feature modules
+- [`/context`](./context/README.md) — Global state via React Context
+
+### 🔧 Logic
+
+- [`/lib`](./lib/README.md) — Core logic, types, constants, helpers
+- [`/hooks`](./hooks/README.md) — Custom React hooks
+
+### 🧪 Testing
+
+- Coming soon!
+
+---
+
+## 🔧 Getting Started
+
+A quick guide to get this thing up and running on your machine:
 
 ```bash
+# 1. Clone the repo
+git clone https://github.com/ploissken/neo-venus.git
+
+# 2. Install dependencies
+cd project-name
+npm install
+
+# 3. Run the app
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📸 Visuals
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Here’s a sneak peek of the app in action:
 
-## Learn More
+![screenshot](./public/screenshot.png)
 
-To learn more about Next.js, take a look at the following resources:
+Live demo coming soon [here](https://google.com)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📨 Contact
+You can reach me at ploissken at gmail or connect with me on [LinkedIn](https://www.linkedin.com/in/rodrigo-souza-97302724/).
