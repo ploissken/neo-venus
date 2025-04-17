@@ -3,8 +3,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Home, Info } from "@mui/icons-material";
 import { useState } from "react";
 import {
-  Box,
-  Typography,
   List,
   ListItem,
   ListItemButton,
@@ -16,7 +14,7 @@ import {
 } from "@mui/material";
 import { LogoWithTitle } from "../logo";
 
-export default function Navbar() {
+export default function DrawerMenu() {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {

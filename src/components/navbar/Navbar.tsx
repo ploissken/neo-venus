@@ -1,4 +1,4 @@
-import { Box, AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { Box, AppBar, Toolbar, Button } from "@mui/material";
 import DrawerMenu from "./DrawerMenu";
 import { LogoWithTitle } from "../logo";
 

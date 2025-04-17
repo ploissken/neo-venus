@@ -4,9 +4,10 @@ import { Roboto } from "next/font/google";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import theme from "../theme";
-import Navbar from "../components/navbar/Navbar";
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
+import { PropsWithChildren } from "react";
+import Navbar from "@/components/navbar/Navbar";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -15,8 +16,7 @@ const roboto = Roboto({
   variable: "--font-roboto",
 });
 
-export default function RootLayout(props: any) {
-  const { children } = props;
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={roboto.variable}>
       <body>

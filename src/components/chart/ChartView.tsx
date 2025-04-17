@@ -1,7 +1,6 @@
 import { Grid, Box } from "@mui/material";
 import { ChartContext } from "@/context/ChartContext";
 import { useContext } from "react";
-import { Typography } from "@mui/material";
 import BaseChart from "@/components/chart/BaseChart";
 import ChartPlanets from "./ChartPlanets";
 import { CHART_DEFAULT_SIZE } from "@/lib/chart.consts";
@@ -19,6 +18,10 @@ export default function ChartView({
 
   const hasChart = chart && chart.planets?.length > 0;
   const ascendantLongitude = chart?.asc?.longitude || 0;
+
+  if (!hasChart) {
+    return;
+  }
 
   return (
     <Grid
