@@ -1,8 +1,5 @@
-version: "3"
-
-networks:
-  traefik:
-    external: true
+#to deploy in prod env:
+#docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 
 services:
   mercuryou:
@@ -10,13 +7,19 @@ services:
     working_dir: "/home/node/"
     volumes:
       - "./:/home/node/:cached"
+    command: bash -c "npm install && npm run build && npm run start"
     networks:
       - traefik
     labels:
+      - "traefik.frontend.rule=Host:mercuryou.txto.com.br"
       - "traefik.backend=mercuryou"
       - "traefik.docker.network=traefik"
       - "traefik.enable=true"
       - "traefik.port=3000"
     environment:
-      HOST: 0.0.0.0
-      PORT: 3000
+      - HOST=0.0.0.0
+      - PORT=3000
+
+networks:
+  traefik:
+    external: true
