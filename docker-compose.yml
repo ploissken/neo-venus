@@ -5,7 +5,7 @@ version: "2"
 
 services:
   mercuryou:
-    image: node:23-slim
+    image: node:18-slim
     working_dir: "/home/node/"
     volumes:
       - "./:/home/node/:cached"
