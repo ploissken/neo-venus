@@ -1,26 +1,23 @@
-version: "2"
-
-#to deploy in prod env:
-#docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
-
 services:
   mercuryou:
-    image: node:18-bullseye
-    working_dir: "/home/node/"
+    image: node:23-slim
+    container_name: mercuryou
+    restart: unless-stopped
+    working_dir: /home/node
     volumes:
-      - "./:/home/node/:cached"
-    command: bash -c "npm install && npm run build && npm run start"
-    networks:
-      - traefik
-    labels:
-      - "traefik.frontend.rule=Host:mercuryou.txto.com.br"
-      - "traefik.backend=mercuryou"
-      - "traefik.docker.network=traefik"
-      - "traefik.enable=true"
-      - "traefik.port=3000"
+      - ./:/home/node/:cached
+    command: bash -c bash -c "npm install && npm run build && npm run start"
     environment:
       - HOST=0.0.0.0
       - PORT=3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mercuryou.rule=Host(`mercuryou.txto.com.br`)"
+      - "traefik.http.routers.mercuryou.entrypoints=websecure"
+      - "traefik.http.routers.mercuryou.tls.certresolver=myresolver"
+      - "traefik.http.services.mercuryou.loadbalancer.server.port=3000"
+    networks:
+      - traefik
 
 networks:
   traefik:
