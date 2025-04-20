@@ -6,7 +6,7 @@ services:
     working_dir: /home/node
     volumes:
       - ./:/home/node/:cached
-    command: bash -c bash -c "npm install && npm run build && npm run start"
+    command: bash -c "npm install && npm run build && npm run start"
     environment:
       - HOST=0.0.0.0
       - PORT=3000
