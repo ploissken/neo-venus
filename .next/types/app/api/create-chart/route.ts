@@ -1,4 +1,4 @@
-// File: /Users/rodurico/Documents/neo-venus/src/app/api/create-chart/route.ts
+// File: /home/node/src/app/api/create-chart/route.ts
 import * as entry from '../../../../../src/app/api/create-chart/route.js'
 import type { NextRequest } from 'next/server.js'
 

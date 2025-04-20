@@ -96,7 +96,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/Users/rodurico/Documents/neo-venus",
+    "outputFileTracingRoot": "/home/node",
     "experimental": {
       "allowedDevOrigins": [],
       "nodeMiddleware": false,
@@ -175,7 +175,7 @@
       "forceSwcTransforms": false,
       "largePageDataBytes": 128000,
       "turbo": {
-        "root": "/Users/rodurico/Documents/neo-venus"
+        "root": "/home/node"
       },
       "typedRoutes": false,
       "typedEnv": false,
@@ -281,7 +281,7 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts"
   },
-  "appDir": "/Users/rodurico/Documents/neo-venus",
+  "appDir": "/home/node",
   "relativeAppDir": "",
   "files": [
     ".next/routes-manifest.json",

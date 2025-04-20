@@ -54,30 +54,6 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/",
-      "dataRoute": "/index.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
     "/user-profile": {
       "experimentalBypassFor": [
         {
@@ -101,13 +77,37 @@
         "x-next-revalidated-tags",
         "x-next-revalidate-tag-token"
       ]
+    },
+    "/": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/",
+      "dataRoute": "/index.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
     }
   },
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "d92f8f80d4bea964ac159f79d61e26ec",
-    "previewModeSigningKey": "057dd5bf46f63174e578581eca787bb8c465514225e5d4bc8a0fb1ba8253809d",
-    "previewModeEncryptionKey": "7ac0fd290c7aa9f91b1c1f9641828c2dfc413b4c7b682ea7ca24d028c487dace"
+    "previewModeId": "4ecd09f1213b9691643232805d780ecd",
+    "previewModeSigningKey": "177cb0d7881d588ccda4d8d2d4f28db548ffa90f32ef9cba415316a43edab553",
+    "previewModeEncryptionKey": "e0993c433fde5c8b6010902082e1d2081bc349369260aae3738e28b644fe497f"
   }
 }

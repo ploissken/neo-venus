@@ -1,4 +1,4 @@
-// File: /Users/rodurico/Documents/neo-venus/src/app/api/get-geolocation/route.ts
+// File: /home/node/src/app/api/get-geolocation/route.ts
 import * as entry from '../../../../../src/app/api/get-geolocation/route.js'
 import type { NextRequest } from 'next/server.js'
 
