@@ -1,0 +1,9 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/create-chart/route": "app/api/create-chart/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/get-geolocation/route": "app/api/get-geolocation/route.js",
+  "/about/page": "app/about/page.js",
+  "/page": "app/page.js",
+  "/user-profile/page": "app/user-profile/page.js"
+}
