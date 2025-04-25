@@ -1,9 +1,0 @@
-{
-  "/_not-found/page": "/_not-found",
-  "/favicon.ico/route": "/favicon.ico",
-  "/api/create-chart/route": "/api/create-chart",
-  "/api/get-geolocation/route": "/api/get-geolocation",
-  "/about/page": "/about",
-  "/page": "/",
-  "/user-profile/page": "/user-profile"
-}
