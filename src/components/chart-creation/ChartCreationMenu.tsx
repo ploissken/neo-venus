@@ -33,6 +33,7 @@ export function ChartCreationMenu() {
       setChart(calculatedChart);
     } catch (err) {
       // TODO: proper handle fetch errors sitewide
+      // eslint-disable-next-line no-console
       console.info(err);
     } finally {
       setLoading(false);
