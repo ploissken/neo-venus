@@ -23,14 +23,20 @@ export function ChartCreationMenu() {
       referenceDate: dateValue,
     };
 
-    const response = await fetch("/api/create-chart", {
-      method: "POST",
-      body: JSON.stringify(chartData),
-    });
+    try {
+      const response = await fetch("/api/create-chart", {
+        method: "POST",
+        body: JSON.stringify(chartData),
+      });
 
-    const calculatedChart: Chart = await response.json();
-    setChart(calculatedChart);
-    setLoading(false);
+      const calculatedChart: Chart = await response.json();
+      setChart(calculatedChart);
+    } catch (err) {
+      // TODO: proper handle fetch errors sitewide
+      console.info(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

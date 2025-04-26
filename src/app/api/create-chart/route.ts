@@ -8,7 +8,8 @@ import { ChartGenerationData } from "@/lib/chart.types";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const SERVICE_URL = "http://localhost:8000/chart";
+const SERVICE_URL = "https://be-merc.txto.com.br/chart/create";
+// const SERVICE_URL = "http://localhost:8888/chart/create";
 const TZDB_URL =
   "http://api.timezonedb.com/v2.1/get-time-zone?key=API_KEY&format=json&by=position&lat=LATITUDE&lng=LONGITUDE";
 
