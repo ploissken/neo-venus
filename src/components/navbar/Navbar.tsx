@@ -1,5 +1,5 @@
 import { Box, AppBar, Toolbar, Button } from "@mui/material";
-import DrawerMenu from "./DrawerMenu";
+import { DrawerMenu } from "./DrawerMenu";
 import { LogoWithTitle } from "../logo";
 
 export default function Navbar() {

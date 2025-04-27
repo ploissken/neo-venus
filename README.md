@@ -22,7 +22,7 @@ MercurYou is a side-project for generating astral charts in a prettier, nicer, a
 
 - **Frontend:** React, TypeScript, Material-UI, Next.js
 - **State Management:** React Context
-- **Testing:** Jest, React Testing Library (coming soon!)
+- **Testing:** Jest, React Testing Library
 - **CI/CD:** GitHub Actions
 - **Deployment:** TBD (likely on DigitalOCean)
 
@@ -44,7 +44,10 @@ MercurYou is a side-project for generating astral charts in a prettier, nicer, a
 
 ### 🧪 Testing
 
-- Coming soon!
+```
+npm run test
+
+```
 
 ---
 

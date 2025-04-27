@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { LogoWithTitle } from "../logo";
 
-export default function DrawerMenu() {
+export function DrawerMenu() {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
