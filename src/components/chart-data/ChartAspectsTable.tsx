@@ -27,10 +27,10 @@ export function ChartAspectsTable() {
     <>
       <h4>Aspects</h4>
       <Grid>
-        {planets.map((_, rowIndex) => (
-          <Grid key={rowIndex} container>
-            {planets.map((__, columnIndex) => (
-              <Grid key={columnIndex} container>
+        {planets.map((_, planetRowIndex) => (
+          <Grid key={planetRowIndex} container>
+            {planets.map((__, planetColumnIndex) => (
+              <Grid key={planetColumnIndex} container>
                 <Grid
                   container
                   justifyContent="center"
@@ -39,13 +39,15 @@ export function ChartAspectsTable() {
                     width: 30,
                     height: 30,
                     border:
-                      columnIndex < rowIndex ? "1px solid gray" : undefined,
+                      planetColumnIndex < planetRowIndex
+                        ? "1px solid gray"
+                        : undefined,
                   }}
                 >
-                  {rowIndex === columnIndex ? (
-                    <PlanetIcon planet={columnIndex} />
+                  {planetRowIndex === planetColumnIndex ? (
+                    <PlanetIcon planet={planetColumnIndex} />
                   ) : (
-                    getAspect(rowIndex, columnIndex, aspects)
+                    getAspect(planetRowIndex, planetColumnIndex, aspects)
                   )}
                 </Grid>
               </Grid>
