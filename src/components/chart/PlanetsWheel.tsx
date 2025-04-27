@@ -7,15 +7,12 @@ import {
   PLANET_WHEEL_PROPORTION,
 } from "@/lib/chart.consts";
 
-interface ChartPlanetsProps {
+interface PlanetsWheelProps {
   chartPlanets: Array<ChartPlanet>;
   size: number;
 }
 
-export default function ChartPlanets({
-  chartPlanets = [],
-  size,
-}: ChartPlanetsProps) {
+export function PlanetsWheel({ chartPlanets = [], size }: PlanetsWheelProps) {
   const radius = PLANET_WHEEL_PROPORTION * size - PLANET_SIZE / 2;
   const center = size / 2;
   const markerStart = PLANET_MARKER_START * radius;

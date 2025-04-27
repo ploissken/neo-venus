@@ -4,7 +4,7 @@ import {
 } from "@/lib/chart.consts";
 import { ChartHouse } from "@/lib/chart.types";
 
-interface ChartHousesProps {
+interface HousesWheelProps {
   size: number;
   houses: ChartHouse[];
 }
@@ -12,7 +12,7 @@ interface ChartHousesProps {
 const DEFAULT_HOUSE_STROKE = 1;
 const HIGHLIGHED_HOUSE_STROKE = 3;
 
-export default function ChartHouses({ size, houses }: ChartHousesProps) {
+export function HousesWheel({ size, houses }: HousesWheelProps) {
   const radius = HOUSE_WHEEL_PROPORTION * size;
   const importantHouseMarkers = [0, 3, 6, 9]; // ac, ic, dc, mc
 

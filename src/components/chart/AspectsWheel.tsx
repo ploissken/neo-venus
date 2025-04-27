@@ -1,3 +1,4 @@
+import { ASPECT_WHEEL_PROPORTION } from "@/lib/chart.consts";
 import { Aspect, ChartPlanet, PlanetAspect } from "@/lib/chart.types";
 
 interface AspectsWheelProps {
@@ -40,12 +41,8 @@ const getAspectStyle = (aspectIndex: Aspect) => {
   }
 };
 
-export default function AspectsWheel({
-  aspects,
-  planets,
-  size,
-}: AspectsWheelProps) {
-  const radius = 0.25 * size;
+export function AspectsWheel({ aspects, planets, size }: AspectsWheelProps) {
+  const radius = ASPECT_WHEEL_PROPORTION * size;
 
   const renderingAspects = aspects.map(({ aspectIndex, planetA, planetB }) => ({
     aspectIndex,

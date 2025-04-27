@@ -4,7 +4,7 @@ import { DividerColors, SignColors } from "@/lib/chart.types";
 const CHART_DEFAULT_VIEWBOX_SIZE = 800;
 const DEFAULT_ROTATION = 0;
 
-interface BaseChartProps {
+interface ZodiacWheelProps {
   dividerColors?: DividerColors;
   signColors?: SignColors;
   size?: number;
@@ -18,7 +18,7 @@ const defaultProps = {
   rotationDegrees: DEFAULT_ROTATION,
 };
 
-export default function BaseChart(props: BaseChartProps) {
+export function ZodiacWheel(props: ZodiacWheelProps) {
   const propsWithDefault = {
     ...defaultProps,
     ...props,
