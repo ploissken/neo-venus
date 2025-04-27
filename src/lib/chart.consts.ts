@@ -13,6 +13,8 @@ export const HOUSE_WHEEL_PROPORTION = 0.35;
 
 export const ASPECT_SIZE = 15;
 
+export const ZODIAC_SIGN_SIZE = 20;
+
 export const defaultDividerColor: DividerColors = {
   degree: "lightgray",
   house: "gray",

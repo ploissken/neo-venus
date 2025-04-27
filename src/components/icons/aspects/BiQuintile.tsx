@@ -1,6 +1,6 @@
-export default function BiQuintile() {
+export function BiQuintile() {
   return (
-    <g>
+    <g data-testid="biquintile-aspect">
       <path
         d="M24.7,3C18.9,3,13.1,3,7.3,3c0,5.8,0,11.7,0,17.5c2.2,0,4.3,0,6.5,0c0,1.7,0,3.4,0,4.6c3.4,0,6.9,0,10.3,0v-2.7
 c-2.7,0-5.5,0-7.6,0c0-0.5,0-1.2,0-1.9c2.7,0,5.4,0,8.1,0C24.7,14.7,24.7,8.8,24.7,3z M22.5,17.8c-1.6,0-3.7,0-5.9,0

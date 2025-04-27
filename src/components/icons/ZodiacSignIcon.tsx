@@ -1,16 +1,19 @@
 import { ZodiacSign } from "@/lib/chart.types";
-import Aries from "./signs/Aries";
-import Aquarius from "./signs/Aquarius";
-import Cancer from "./signs/Cancer";
-import Capricorn from "./signs/Capricorn";
-import Gemini from "./signs/Gemini";
-import Leo from "./signs/Leo";
-import Libra from "./signs/Libra";
-import Pisces from "./signs/Pisces";
-import Sagittarius from "./signs/Sagittarius";
-import Scorpio from "./signs/Scorpio";
-import Taurus from "./signs/Taurus";
-import Virgo from "./signs/Virgo";
+import { ZODIAC_SIGN_SIZE } from "@/lib/chart.consts";
+import {
+  Aries,
+  Taurus,
+  Gemini,
+  Cancer,
+  Leo,
+  Virgo,
+  Libra,
+  Scorpio,
+  Sagittarius,
+  Capricorn,
+  Aquarius,
+  Pisces,
+} from "./signs";
 
 interface ZodiacSignIconProps {
   sign: ZodiacSign;
@@ -45,14 +48,14 @@ function getSignIcon(sign: ZodiacSign) {
     case ZodiacSign.Pisces:
       return <Pisces />;
     default:
-      throw new Error("Unknown zodiac sign");
+      throw new Error("Unknown zodiac sign identifier");
   }
 }
 
 export function ZodiacSignIcon({
   sign,
   color = "grey",
-  size = 20,
+  size = ZODIAC_SIGN_SIZE,
 }: ZodiacSignIconProps) {
   const signIcon = getSignIcon(sign);
 

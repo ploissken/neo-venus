@@ -1,6 +1,6 @@
-export default function SesquiQuadrate() {
+export function SesquiQuadrate() {
   return (
-    <g>
+    <g data-testid="sesquiquadrate-aspect">
       <path
         d="M25.4,27.4c-0.2-0.3-0.3-0.6-0.4-0.9h-1.1h-1c-3.1,0-6.9,0-9.9,0c0,0,0,0-0.1,0c1-2,2-4,3-6c2.9,0,5.9,0,8.8,0
 c0-5.8,0-11.7,0-17.5C18.9,3,13.1,3,7.3,3c0,5.8,0,11.7,0,17.5c2.1,0,4.3,0,6.4,0c-1,2.1-2.1,4.1-3.1,6.2c-0.3,0.5-0.5,1-0.8,1.6

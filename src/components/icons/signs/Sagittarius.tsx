@@ -1,6 +1,6 @@
-export default function Sagittarius() {
+export function Sagittarius() {
   return (
-    <g>
+    <g data-testid="sagittarius-icon">
       <path
         d="M31.983,2.058c-0.01-0.243-0.051-0.489-0.146-0.718c-0.104-0.251-0.253-0.474-0.439-0.664
 c-0.004-0.006-0.006-0.012-0.01-0.017l0,0c-0.193-0.194-0.425-0.347-0.68-0.453C30.453,0.1,30.184,0.043,29.91,0.043

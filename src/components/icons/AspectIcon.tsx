@@ -1,17 +1,19 @@
 import { Aspect } from "@/lib/chart.types";
 
 import { ASPECT_SIZE } from "@/lib/chart.consts";
-import Conjunction from "./aspects/Conjunction";
-import SemiSextile from "./aspects/SemiSextile";
-import SemiSquare from "./aspects/SemiSquare";
-import Sextile from "./aspects/Sextile";
-import Quintile from "./aspects/Quintuile";
-import Square from "./aspects/Square";
-import Trine from "./aspects/Trine";
-import SesquiQuadrate from "./aspects/SesquiQuadrate";
-import BiQuintile from "./aspects/BiQuintile";
-import Quincux from "./aspects/Quincux";
-import Opposition from "./aspects/Opposition";
+import {
+  Conjunction,
+  SemiSextile,
+  Square,
+  SemiSquare,
+  Sextile,
+  Quintile,
+  Trine,
+  SesquiQuadrate,
+  BiQuintile,
+  Quincux,
+  Opposition,
+} from "./aspects";
 
 interface AspectIconProps {
   aspect: Aspect;

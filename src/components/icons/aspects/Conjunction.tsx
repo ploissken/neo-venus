@@ -1,6 +1,6 @@
-export default function Conjunction() {
+export function Conjunction() {
   return (
-    <g>
+    <g data-testid="conjunction-aspect">
       <path
         d="M3.3,20.7c0,0,0-0.1,0-0.2c0-0.9,0.2-1.7,0.6-2.6c0.4-0.9,0.9-1.7,1.6-2.4c1-1,2.2-1.7,3.6-2.1c0.3-0.1,0.6-0.1,1-0.2
 c0.4-0.1,0.9-0.1,1.3-0.1c1.1,0,2.1,0.3,3,0.8c0.3,0.1,0.5,0.3,0.8,0.4c0,0,0,0,0.1,0c0,0,0,0,0,0c0,0,0,0,0.1-0.1

@@ -1,6 +1,6 @@
-export default function SemiSquare() {
+export function SemiSquare() {
   return (
-    <g>
+    <g data-testid="semisquare-aspect">
       <path
         d="M29.8,29c-0.3-0.6-0.6-1.1-0.8-1.7l0,0h-3.8l0,0H27c-6.1,0-14,0-20.1,0c0,0,0,0-0.1,0l0,0l0,0C9.9,21.1,12.9,15,16,8.9
 L17.9,5c-0.3-0.7-1.5-3.1-1.8-3.5c0,0,0-0.1-0.1-0.1c0,0.1,0,0.1-0.1,0.1C11.5,10.2,7.2,19,2.8,27.7c-0.5,1-1,1.9-1.4,2.9

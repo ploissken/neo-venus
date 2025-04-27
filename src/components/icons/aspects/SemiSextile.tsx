@@ -1,6 +1,6 @@
-export default function SemiSextile() {
+export function SemiSextile() {
   return (
-    <g>
+    <g data-testid="semisextile-aspect">
       <path
         d="M29.5,2.2h-3.8c-3.1,6.2-6.1,12.3-9.2,18.4c-3.1-6.1-6.2-12.2-9.2-18.4H3.3c4,8.1,8.1,16.1,12.2,24.2c-4.7,0-9.4,0-14.2,0
 v0.1c0.3,0.6,0.5,1.1,0.8,1.6c0.3,0.6,0.6,1.1,0.9,1.7h3.9c6.1,0,12.2,0,18.3,0c0.1,0,0.1,0,0.1,0h3.8c0.1-0.1,0.1-0.2,0.2-0.3
