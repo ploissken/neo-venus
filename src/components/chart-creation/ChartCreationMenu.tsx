@@ -13,7 +13,9 @@ export function ChartCreationMenu() {
   const canFetchChart = dateValue && location;
 
   const handleCreateChart = async () => {
-    if (!canFetchChart) return;
+    if (!canFetchChart) {
+      return;
+    }
 
     setLoading(true);
 

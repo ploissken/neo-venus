@@ -7,6 +7,7 @@
 ## 📜 Overview
 
 MercurYou is a side-project for generating astral charts in a prettier, nicer, and more modern way. It's also a showcase of my skills as a seasoned frontend developer 😉
+This project relies on a backend I've deployed on the clouds. Code there is not very polished yet, but you can check it [here](https://github.com/ploissken/neo-mercuryou).
 
 ---
 
@@ -44,9 +45,8 @@ MercurYou is a side-project for generating astral charts in a prettier, nicer, a
 
 ### 🧪 Testing
 
-```
+```bash
 npm run test
-
 ```
 
 ---
@@ -75,7 +75,7 @@ Here’s a sneak peek of the app in action:
 
 ![screenshot](./public/screenshot.png)
 
-Live demo coming soon [here](https://google.com)
+Live demo [here](https://mercuryou.txto.com.br)
 
 ---
 
