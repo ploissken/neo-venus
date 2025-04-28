@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { ChartCreationMenu } from "./ChartCreationMenu";
-import { ChartContext, ChartContextType } from "@/context/ChartContext";
+import { ChartContext } from "@/context/ChartContext";
 import { mockChartContext } from "@/__mocks__";
 import React from "react";
 

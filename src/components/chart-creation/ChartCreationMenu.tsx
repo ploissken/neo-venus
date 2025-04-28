@@ -1,15 +1,19 @@
 "use client";
-import { useContext } from "react";
-import React from "react";
 import { Chart, ChartGenerationData } from "@/lib/chart.types";
 import { Button, Grid } from "@mui/material";
-import { ChartContext } from "@/context/ChartContext";
 import { LocationPicker } from "./LocationPicker";
 import { DateTimePicker } from "./DateTimePicker";
+import { useChartContext, useSnackbar } from "@/hooks";
+
+type CreateChartResponse =
+  | { ok: true; data: { chart: Chart } }
+  | { ok: false; error: string };
 
 export function ChartCreationMenu() {
   const { dateValue, location, loading, setChart, setLoading } =
-    useContext(ChartContext);
+    useChartContext();
+  const { showMessage } = useSnackbar();
+
   const canFetchChart = dateValue && location;
 
   const handleCreateChart = async () => {
@@ -25,21 +29,20 @@ export function ChartCreationMenu() {
       referenceDate: dateValue,
     };
 
-    try {
-      const response = await fetch("/api/create-chart", {
-        method: "POST",
-        body: JSON.stringify(chartData),
-      });
+    const fetchResponse = await fetch("/api/create-chart", {
+      method: "POST",
+      body: JSON.stringify(chartData),
+    });
 
-      const calculatedChart: Chart = await response.json();
-      setChart(calculatedChart);
-    } catch (err) {
-      // TODO: proper handle fetch errors sitewide
-      // eslint-disable-next-line no-console
-      console.info(err);
-    } finally {
-      setLoading(false);
+    const response: CreateChartResponse = await fetchResponse.json();
+
+    if (!response.ok) {
+      showMessage(response.error, "error");
+    } else {
+      setChart(response.data.chart);
     }
+
+    setLoading(false);
   };
 
   return (

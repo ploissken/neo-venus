@@ -1,4 +1,4 @@
-import { ChartContext } from "@/context/ChartContext";
+import { useChartContext, useSnackbar } from "@/hooks";
 import { ChartLocation } from "@/lib/location.types";
 import { Cancel, Search } from "@mui/icons-material";
 import {
@@ -12,11 +12,11 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function LocationPicker() {
-  const { loading, setLoading, setLocation } = useContext(ChartContext);
-
+  const { loading, setLoading, setLocation } = useChartContext();
+  const { showMessage } = useSnackbar();
   const [inputValue, setInputValue] = useState("");
   const [selectedLocationIndex, setSelectedLocationIndex] = useState(0);
   const [locations, setLocations] = useState<ChartLocation[]>([]);
@@ -25,6 +25,7 @@ export function LocationPicker() {
 
   const handleSearchLocation = async () => {
     if (!inputValue) {
+      showMessage("You must yype a city name in order to search", "warning");
       return;
     }
 
@@ -37,7 +38,10 @@ export function LocationPicker() {
       setLocations(data.locations);
       setSelectedLocationIndex(0);
     } else {
-      // TODO: display "no cities found" warning
+      showMessage(
+        `No locations found for "${inputValue}". Please try again.`,
+        "warning"
+      );
     }
 
     setLoading(false);
