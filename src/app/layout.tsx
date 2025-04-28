@@ -8,6 +8,7 @@ import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { PropsWithChildren } from "react";
 import Navbar from "@/components/navbar/Navbar";
+import { SnackbarProvider } from "@/context/SnackbarContext";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -24,10 +25,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <main>
-                <Navbar />
-                {children}
-              </main>
+              <SnackbarProvider>
+                <main>
+                  <Navbar />
+                  {children}
+                </main>
+              </SnackbarProvider>
             </ThemeProvider>
           </AppRouterCacheProvider>
         </LocalizationProvider>
