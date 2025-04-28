@@ -1,65 +1,55 @@
 import { mapAspects, mapHouses, mapPlanets } from "@/lib/create-chart.helpers";
 import { NextRequest, NextResponse } from "next/server";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-import { ChartGenerationData } from "@/lib/chart.types";
+import { Chart, ChartGenerationData } from "@/lib/chart.types";
+import { getISODateWithTimezone } from "@/lib/timezone.helper";
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
-const SERVICE_URL = "https://be-merc.txto.com.br/chart/create";
-// const SERVICE_URL = "http://localhost:8888/chart/create";
-const TZDB_URL =
-  "http://api.timezonedb.com/v2.1/get-time-zone?key=API_KEY&format=json&by=position&lat=LATITUDE&lng=LONGITUDE";
-
-const fetchTimezone = async (
-  latitude: string,
-  longitude: string
-): Promise<{ zoneName: string }> => {
-  const tzdbGetUrl = TZDB_URL.replace("API_KEY", process.env.TZDB_API_KEY || "")
-    .replace("LATITUDE", latitude)
-    .replace("LONGITUDE", longitude);
-
-  const tzResponse = await fetch(tzdbGetUrl);
-  const tzData = await tzResponse.json();
-
-  return tzData;
-};
+const SERVICE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://be-merc.txto.com.br/chart/create"
+    : "http://localhost:8888/chart/create";
 
 export async function POST(req: NextRequest) {
   const requestBody: ChartGenerationData = await req.json();
-  const { latitude, longitude, referenceDate } = requestBody;
+  const isoDateWithTZ = await getISODateWithTimezone(requestBody);
 
-  const tzData = await fetchTimezone(`${latitude}`, `${longitude}`);
-  const { zoneName } = tzData;
-
-  const isoDateWithTZ = dayjs.tz(referenceDate, zoneName).toISOString();
-
-  const response = await fetch(SERVICE_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ ...requestBody, referenceDate: isoDateWithTZ }),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch chart data");
+  if (!isoDateWithTZ.ok) {
+    return NextResponse.json(isoDateWithTZ);
   }
 
-  const data = await response.json();
-  const { planets, houses, metadata, aspects } = data;
+  try {
+    const response = await fetch(SERVICE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...requestBody,
+        referenceDate: isoDateWithTZ.data,
+      }),
+    });
 
-  const mappedHouses = mapHouses(houses);
-  const mappedPlanets = mapPlanets(planets, mappedHouses[0].longitude);
-  const mappedAspects = mapAspects(aspects);
+    const data = await response.json();
+    const { planets, houses, metadata, aspects } = data;
 
-  return NextResponse.json({
-    aspects: mappedAspects,
-    metadata,
-    planets: mappedPlanets,
-    houses: mappedHouses,
-    asc: mappedHouses[0],
-  });
+    const mappedHouses = mapHouses(houses);
+    const mappedPlanets = mapPlanets(planets, mappedHouses[0].longitude);
+    const mappedAspects = mapAspects(aspects);
+
+    const chart: Chart = {
+      aspects: mappedAspects,
+      planets: mappedPlanets,
+      houses: mappedHouses,
+      asc: mappedHouses[0],
+    };
+
+    return NextResponse.json({
+      ok: true,
+      data: { chart, metadata },
+    });
+  } catch (err) {
+    return NextResponse.json({
+      ok: false,
+      error: `Failed to fetch chart data. (${(err as Error).message})`,
+    });
+  }
 }
