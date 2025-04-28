@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { ChartDataTable } from ".";
 import { ChartContext } from "@/context/ChartContext";
-import { mockChart, mockContext } from "@/__mocks__";
+import { mockChart, mockChartContext } from "@/__mocks__";
 
 jest.mock("./PlanetSignDegreeItem", () => ({
   PlanetSignDegreeItem: jest.fn(() => <div>PlanetSignDegreeItem</div>),
@@ -15,7 +15,7 @@ describe("ChartDataTable component", () => {
 
   it("renders planet info properly", () => {
     render(
-      <ChartContext.Provider value={mockContext}>
+      <ChartContext.Provider value={mockChartContext}>
         <ChartDataTable />
       </ChartContext.Provider>
     );

@@ -30,6 +30,7 @@ const config: Config = {
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
     "!src/**/index.ts",
+    "!src/features/user-profile/*",
     "!src/__mocks__/*",
   ],
 

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { ChartAspectsTable } from ".";
 import { ChartContext } from "@/context/ChartContext";
-import { mockChart, mockContext } from "@/__mocks__";
+import { mockChart, mockChartContext } from "@/__mocks__";
 import { Planet } from "@/lib/chart.types";
 
 jest.mock("../icons", () => ({
@@ -18,7 +18,7 @@ describe("ChartAspectsTable component", () => {
     const planets = Object.keys(Planet).filter((key) => isNaN(Number(key)));
 
     render(
-      <ChartContext.Provider value={mockContext}>
+      <ChartContext.Provider value={mockChartContext}>
         <ChartAspectsTable />
       </ChartContext.Provider>
     );

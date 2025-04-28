@@ -51,7 +51,7 @@ export const mockChart: Chart = {
   ],
 };
 
-export const mockContext: ChartContextType = {
+export const mockChartContext: ChartContextType = {
   loading: false,
   setChart: () => {},
   setDateValue: () => {},

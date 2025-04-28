@@ -10,7 +10,7 @@ import { ChartCreationMenu } from "@/components/chart-creation";
 import { ChartDataTable, ChartAspectsTable } from "@/components/chart-data";
 import { ChartContext } from "@/context/ChartContext";
 
-export default function ChartController() {
+export function ChartController() {
   const [isHydrated, setIsHydrated] = useState(false);
 
   const { chart } = useContext(ChartContext);
