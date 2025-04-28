@@ -1,29 +1,31 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { LocationPicker } from "./LocationPicker";
-import { ChartContext } from "@/context/ChartContext";
 import { mockChartContext } from "@/__mocks__";
 import React from "react";
+import { SnackbarContext, ChartContext } from "@/context";
 
-// Mock fetch
 global.fetch = jest.fn();
 
 const mockSetLoading = jest.fn();
 const mockSetLocation = jest.fn();
+const mockedShowMessage = jest.fn();
 
 const renderWithContext = () =>
   render(
-    <ChartContext.Provider
-      value={{
-        ...mockChartContext,
-        setLoading: mockSetLoading,
-        setLocation: mockSetLocation,
-      }}
-    >
-      <LocationPicker />
-    </ChartContext.Provider>
+    <SnackbarContext.Provider value={{ showMessage: mockedShowMessage }}>
+      <ChartContext.Provider
+        value={{
+          ...mockChartContext,
+          setLoading: mockSetLoading,
+          setLocation: mockSetLocation,
+        }}
+      >
+        <LocationPicker />
+      </ChartContext.Provider>
+    </SnackbarContext.Provider>
   );
 
-describe("LocationPicker", () => {
+describe("LocationPicker component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -38,6 +40,17 @@ describe("LocationPicker", () => {
     expect(input).toBeInTheDocument();
     expect(cityLabel).toBeInTheDocument();
     expect(searchButton).toBeInTheDocument();
+  });
+
+  it("display a warning toast if user tries to search without typing a city name", () => {
+    renderWithContext();
+
+    const searchButton = screen.getByRole("button", { name: /search city/i });
+    fireEvent.click(searchButton);
+    expect(mockedShowMessage).toHaveBeenCalledWith(
+      "You must yype a city name in order to search",
+      "warning"
+    );
   });
 
   it("calls API and sets locations on search", async () => {
@@ -67,8 +80,28 @@ describe("LocationPicker", () => {
     await waitFor(() =>
       expect(fetch).toHaveBeenCalledWith("/api/get-geolocation?city=Paris")
     );
-    screen.debug();
+
     expect(mockSetLoading).toHaveBeenCalledWith(false);
+  });
+
+  it("displays a toast when no locations were found", async () => {
+    (fetch as jest.Mock).mockResolvedValueOnce({
+      json: async () => ({
+        locations: [],
+      }),
+    });
+
+    renderWithContext();
+    const input = screen.getByLabelText(/City/);
+    fireEvent.change(input, { target: { value: "PariXxX" } });
+    const searchButton = screen.getByRole("button", { name: /search city/i });
+    fireEvent.click(searchButton);
+    await waitFor(() =>
+      expect(mockedShowMessage).toHaveBeenCalledWith(
+        `No locations found for "PariXxX". Please try again.`,
+        "warning"
+      )
+    );
   });
 
   it("clears location when clear button is clicked", async () => {

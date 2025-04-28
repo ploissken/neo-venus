@@ -3,9 +3,10 @@ import { ChartCreationMenu } from "./ChartCreationMenu";
 import { ChartContext } from "@/context/ChartContext";
 import { mockChartContext } from "@/__mocks__";
 import React from "react";
+import { SnackbarContext } from "@/context";
 
-// Mock fetch
 global.fetch = jest.fn();
+
 jest.mock("./LocationPicker", () => ({
   LocationPicker: jest.fn(() => <div>LocationPicker</div>),
 }));
@@ -19,15 +20,20 @@ const mockChart = { title: "Test Chart" };
 const latitude = 40.7128;
 const longitude = -74.006;
 const mockedDate = "2024-01-01T00:00:000Z";
+const mockedShowMessage = jest.fn();
 
 const renderWithContext = (contextOverrides = {}) =>
   render(
-    <ChartContext.Provider value={{ ...mockChartContext, ...contextOverrides }}>
-      <ChartCreationMenu />
-    </ChartContext.Provider>
+    <SnackbarContext.Provider value={{ showMessage: mockedShowMessage }}>
+      <ChartContext.Provider
+        value={{ ...mockChartContext, ...contextOverrides }}
+      >
+        <ChartCreationMenu />
+      </ChartContext.Provider>
+    </SnackbarContext.Provider>
   );
 
-describe("ChartCreationMenu", () => {
+describe("ChartCreationMenu component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -55,7 +61,7 @@ describe("ChartCreationMenu", () => {
 
   it("calls API and updates chart on create", async () => {
     (fetch as jest.Mock).mockResolvedValueOnce({
-      json: async () => mockChart,
+      json: async () => ({ ok: true, data: { chart: mockChart } }),
     });
 
     renderWithContext({
@@ -85,12 +91,14 @@ describe("ChartCreationMenu", () => {
     );
 
     expect(mockSetChart).toHaveBeenCalledWith(mockChart);
+
     expect(mockSetLoading).toHaveBeenCalledWith(false);
   });
 
   it("handles fetch error gracefully", async () => {
-    (fetch as jest.Mock).mockRejectedValueOnce(new Error("Fetch failed"));
-    jest.spyOn(console, "info").mockImplementation(() => {});
+    (fetch as jest.Mock).mockResolvedValueOnce({
+      json: async () => ({ ok: false, error: "some error" }),
+    });
 
     renderWithContext({
       dateValue: new Date(mockedDate),
@@ -105,6 +113,7 @@ describe("ChartCreationMenu", () => {
 
     await waitFor(() => {
       expect(mockSetChart).not.toHaveBeenCalled();
+      expect(mockedShowMessage).toHaveBeenCalledWith("some error", "error");
       expect(mockSetLoading).toHaveBeenCalledWith(false);
     });
   });
