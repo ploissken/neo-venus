@@ -2,22 +2,16 @@
 
 > **Milenar Astrology - updated!**
 
----
-
 ## 📜 Overview
 
 MercurYou is a side-project for generating astral charts in a prettier, nicer, and more modern way. It's also a showcase of my skills as a seasoned frontend developer 😉
 This project relies on a backend I've deployed on the clouds. Code there is not very polished yet, but you can check it [here](https://github.com/ploissken/neo-mercuryou).
-
----
 
 ## 🔑 Key Features
 
 - 🚀 **Fast & Flexible:** Built using the latest techs available for blazing fast astral chart and sinastries (coming up!) generation
 - 📦 **Extensible:** Several features to be included, roadmap TBD soon
 - 🧑‍💻 **Developer Showoff:** Felt like poetry, right? You can hire me
-
----
 
 ## 🛠 Technologies Used
 
@@ -26,8 +20,6 @@ This project relies on a backend I've deployed on the clouds. Code there is not 
 - **Testing:** Jest, React Testing Library
 - **CI/CD:** GitHub Actions
 - **Deployment:** TBD (likely on DigitalOCean)
-
----
 
 ## 🗂️ Table of Contents
 
@@ -49,8 +41,6 @@ This project relies on a backend I've deployed on the clouds. Code there is not 
 npm run test
 ```
 
----
-
 ## 🔧 Getting Started
 
 A quick guide to get this thing up and running on your machine:
@@ -67,8 +57,6 @@ npm install
 npm run dev
 ```
 
----
-
 ## 📸 Visuals
 
 Here’s a sneak peek of the app in action:
@@ -77,7 +65,6 @@ Here’s a sneak peek of the app in action:
 
 Live demo [here](https://mercuryou.txto.com.br)
 
----
+## 📨 Contact
 
-📨 Contact
-You can reach me at ploissken at gmail or connect with me on [LinkedIn](https://www.linkedin.com/in/rodrigo-souza-97302724/).
+You can reach me at [ploissken at gmail] or connect with me on [LinkedIn](https://www.linkedin.com/in/rodrigo-souza-97302724/).
