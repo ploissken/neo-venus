@@ -36,7 +36,7 @@ export const ChartProvider = ({ children }: { children: ReactNode }) => {
   const [chart, setChart] = useState<Optional<Chart>>();
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState<Optional<ChartLocation>>();
-  const [dateValue, setDateValue] = useState<Optional<Date>>(new Date());
+  const [dateValue, setDateValue] = useState<Optional<Date>>();
 
   return (
     <ChartContext.Provider
