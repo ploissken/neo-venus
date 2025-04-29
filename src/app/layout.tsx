@@ -1,14 +1,7 @@
-"use client";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Roboto } from "next/font/google";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import theme from "../theme";
-import { ThemeProvider } from "@emotion/react";
-import { CssBaseline } from "@mui/material";
 import { PropsWithChildren } from "react";
 import Navbar from "@/components/navbar/Navbar";
-import { SnackbarProvider } from "@/context/SnackbarContext";
+import Providers from "./providers";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -17,23 +10,45 @@ const roboto = Roboto({
   variable: "--font-roboto",
 });
 
+export const metadata = {
+  title: "☿ Mercuryou",
+  description: "A modern astrology chart generator",
+  keywords: ["astrology", "chart", "birth chart", "astral chart"],
+  authors: [
+    { name: "Rodrigo Souza", url: "https://github.com/ploissken/neo-venus" },
+  ],
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
+
+  openGraph: {
+    title: "Mercuryou",
+    description: "Astrology modernized",
+    url: "https://mercuryou.txto.com.br",
+    siteName: "Mercuryou",
+    images: [
+      {
+        url: "/screenshot.png",
+        width: 1888,
+        height: 912,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
+
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" className={roboto.variable}>
       <body>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <AppRouterCacheProvider>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <SnackbarProvider>
-                <main>
-                  <Navbar />
-                  {children}
-                </main>
-              </SnackbarProvider>
-            </ThemeProvider>
-          </AppRouterCacheProvider>
-        </LocalizationProvider>
+        <Providers>
+          <main>
+            <Navbar />
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );
