@@ -1,6 +1,7 @@
 import { Box, AppBar, Toolbar, Button } from "@mui/material";
 import { DrawerMenu } from "./DrawerMenu";
 import { LogoWithTitle } from "../logo";
+import { LocaleSwitcher } from "./LocaleSwitcher";
 
 export default function Navbar() {
   return (
@@ -9,6 +10,7 @@ export default function Navbar() {
         <Toolbar>
           <DrawerMenu />
           <LogoWithTitle size={40} color="white" />
+          <LocaleSwitcher />
           <Button color="inherit" disabled>
             Login
           </Button>

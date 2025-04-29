@@ -2,6 +2,8 @@ import { Roboto } from "next/font/google";
 import { PropsWithChildren } from "react";
 import Navbar from "@/components/navbar/Navbar";
 import Providers from "./providers";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -39,14 +41,15 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const locale = await getLocale();
   return (
-    <html lang="en" className={roboto.variable}>
+    <html lang={locale} className={roboto.variable}>
       <body>
         <Providers>
           <main>
             <Navbar />
-            {children}
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
           </main>
         </Providers>
       </body>
