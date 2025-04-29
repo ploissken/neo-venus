@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
       ok: true,
       data: { chart, metadata },
     });
-  } catch (err) {
+  } catch {
     return NextResponse.json({
       ok: false,
       error: `chart_fetch_error`,
