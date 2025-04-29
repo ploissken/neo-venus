@@ -12,9 +12,11 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 export function LocationPicker() {
+  const t = useTranslations();
   const { loading, setLoading, setLocation } = useChartContext();
   const { showMessage } = useSnackbar();
   const [inputValue, setInputValue] = useState("");
@@ -25,7 +27,7 @@ export function LocationPicker() {
 
   const handleSearchLocation = async () => {
     if (!inputValue) {
-      showMessage("You must yype a city name in order to search", "warning");
+      showMessage(t("chart.create.error.missing_city"), "warning");
       return;
     }
 
@@ -39,7 +41,9 @@ export function LocationPicker() {
       setSelectedLocationIndex(0);
     } else {
       showMessage(
-        `No locations found for "${inputValue}". Please try again.`,
+        t("chart.craete.error.no_results", {
+          inputValue,
+        }),
         "warning"
       );
     }
@@ -77,10 +81,10 @@ export function LocationPicker() {
         <FormControl fullWidth>
           {hasLocationsLoaded ? (
             <>
-              <InputLabel id="city-label">City</InputLabel>
+              <InputLabel id="city-label">{t("chart.create.city")}</InputLabel>
               <Select
                 value={selectedLocationIndex}
-                label="City"
+                label={t("chart.create.city")}
                 labelId="city-label"
                 disabled={loading}
                 onChange={(e) =>
@@ -101,7 +105,7 @@ export function LocationPicker() {
             </>
           ) : (
             <TextField
-              label="City"
+              label={t("chart.create.city")}
               variant="outlined"
               value={inputValue}
               disabled={loading}
@@ -112,7 +116,7 @@ export function LocationPicker() {
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
-                        aria-label="search city"
+                        aria-label={t("chart.create.search_city")}
                         onClick={handleSearchLocation}
                       >
                         <Search />
@@ -130,7 +134,7 @@ export function LocationPicker() {
         <Grid size={2} container justifyContent="center">
           <IconButton
             size="large"
-            aria-label="clear city"
+            aria-label={t("chart.create.clear_city")}
             onClick={handleClearLocation}
           >
             <Cancel />

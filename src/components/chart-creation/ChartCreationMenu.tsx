@@ -3,6 +3,7 @@ import { Chart, ChartGenerationData } from "@/lib/chart.types";
 import { Button, Grid } from "@mui/material";
 import { LocationPicker } from "./LocationPicker";
 import { DateTimePicker } from "./DateTimePicker";
+import { useTranslations } from "next-intl";
 import { useChartContext, useSnackbar } from "@/hooks";
 
 type CreateChartResponse =
@@ -10,6 +11,7 @@ type CreateChartResponse =
   | { ok: false; error: string };
 
 export function ChartCreationMenu() {
+  const t = useTranslations();
   const { dateValue, location, loading, setChart, setLoading } =
     useChartContext();
   const { showMessage } = useSnackbar();
@@ -37,7 +39,7 @@ export function ChartCreationMenu() {
     const response: CreateChartResponse = await fetchResponse.json();
 
     if (!response.ok) {
-      showMessage(response.error, "error");
+      showMessage(`chart.create.error.${response.error}`, "error");
     } else {
       setChart(response.data.chart);
     }
@@ -71,7 +73,7 @@ export function ChartCreationMenu() {
           size="small"
           sx={{ width: "100%", height: (theme) => theme.spacing(7) }}
         >
-          Create Chart
+          {t("chart.create.title")}
         </Button>
       </Grid>
     </Grid>

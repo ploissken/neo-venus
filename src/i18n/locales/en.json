@@ -1,3 +1,25 @@
 {
-  "title": "Welcome to Mercuryou"
+  "about": {
+    "title": "todo: about"
+  },
+  "chart": {
+    "create": {
+      "city": "City",
+      "clear_city": "Clear City",
+      "date": "Date",
+      "helper": "Select a date and city to draw a chart",
+      "search_city": "Search City",
+      "title": "Create Astral Chart",
+      "error": {
+        "chart_fetch_error": "Failed to fetch astral chart. Please try again later.",
+        "missing_city": "You must type a city name in order to search",
+        "no_results": "No locations found for {inputValue}.",
+        "timezone_fetch_failed": "Failed to fetch timezone. Please try again later."
+      }
+    }
+  },
+  "menu": {
+    "home": "Home",
+    "about": "About"
+  }
 }

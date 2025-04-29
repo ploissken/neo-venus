@@ -19,7 +19,7 @@ describe("DateTimePicker", () => {
   it("renders with default label", () => {
     renderComponent(mockChartContext);
 
-    const input = screen.getByLabelText("Chart Date");
+    const input = screen.getByLabelText("chart.create.date");
     expect(input).toBeInTheDocument();
   });
 
@@ -46,7 +46,7 @@ describe("DateTimePicker", () => {
       loading: true,
     });
 
-    const input = screen.getByLabelText("Chart Date");
+    const input = screen.getByLabelText("chart.create.date");
     expect(input).toBeDisabled();
   });
 });

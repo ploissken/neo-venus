@@ -9,8 +9,10 @@ import {
 import { ChartCreationMenu } from "@/components/chart-creation";
 import { ChartDataTable, ChartAspectsTable } from "@/components/chart-data";
 import { ChartContext } from "@/context/ChartContext";
+import { useTranslations } from "next-intl";
 
 export function ChartController() {
+  const t = useTranslations();
   const [isHydrated, setIsHydrated] = useState(false);
 
   const { chart } = useContext(ChartContext);
@@ -52,9 +54,7 @@ export function ChartController() {
         {hasChart ? (
           <ChartView size={chartSize} />
         ) : (
-          <Typography variant="h5">
-            Select a date and city to draw a chart
-          </Typography>
+          <Typography variant="h5">{t("chart.create.helper")}</Typography>
         )}
       </Grid>
     </Grid>

@@ -15,14 +15,14 @@ describe("DrawerMenu component", () => {
   it("opens the drawer when menu button is clicked", () => {
     render(<DrawerMenu />);
     const menuButton = screen.getByRole("button", { name: /menu/i });
-    expect(screen.queryByText("Home")).not.toBeInTheDocument();
-    expect(screen.queryByText("About")).not.toBeInTheDocument();
+    expect(screen.queryByText("menu.home")).not.toBeInTheDocument();
+    expect(screen.queryByText("menu.about")).not.toBeInTheDocument();
     expect(screen.queryByTestId("mock-logo")).not.toBeInTheDocument();
 
     fireEvent.click(menuButton);
 
-    expect(screen.getByText("Home")).toBeInTheDocument();
-    expect(screen.getByText("About")).toBeInTheDocument();
+    expect(screen.getByText("menu.home")).toBeInTheDocument();
+    expect(screen.getByText("menu.about")).toBeInTheDocument();
     expect(screen.getByTestId("mock-logo")).toBeInTheDocument();
   });
 });

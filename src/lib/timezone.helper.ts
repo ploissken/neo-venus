@@ -27,7 +27,7 @@ export const getISODateWithTimezone = async ({
     if (!tzResponse.ok) {
       return {
         ok: false,
-        error: `Failed to fetch timezone. Status: ${tzResponse.status}`,
+        error: `timezone_fetch_failed`,
       };
     }
     const tzData = await tzResponse.json();
@@ -35,10 +35,10 @@ export const getISODateWithTimezone = async ({
 
     const isoDateWithTZ = dayjs.tz(referenceDate, zoneName).toISOString();
     return { ok: true, data: isoDateWithTZ };
-  } catch (error) {
+  } catch {
     return {
       ok: false,
-      error: `Failed to fetch timezone. (${(error as Error).message})`,
+      error: `timezone_fetch_failed`,
     };
   }
 };

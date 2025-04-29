@@ -1,6 +1,7 @@
 "use client";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Home, Info } from "@mui/icons-material";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
   List,
@@ -15,6 +16,8 @@ import {
 import { LogoWithTitle } from "../logo";
 
 export function DrawerMenu() {
+  const t = useTranslations();
+
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -22,8 +25,8 @@ export function DrawerMenu() {
   };
 
   const routes = [
-    { text: "Home", icon: <Home />, route: "/" },
-    { text: "About", icon: <Info />, route: "/about" },
+    { text: t("menu.home"), icon: <Home />, route: "/" },
+    { text: t("menu.about"), icon: <Info />, route: "/about" },
   ];
 
   const DrawerList = (

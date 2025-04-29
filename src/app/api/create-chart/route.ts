@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     return NextResponse.json({
       ok: false,
-      error: `Failed to fetch chart data. (${(err as Error).message})`,
+      error: `chart_fetch_error`,
     });
   }
 }

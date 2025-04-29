@@ -43,7 +43,9 @@ describe("ChartCreationMenu component", () => {
 
     const mockedDateTime = screen.getByText("DateTimePicker");
     const mockedLocation = screen.getByText("LocationPicker");
-    const createButton = screen.getByRole("button", { name: "Create Chart" });
+    const createButton = screen.getByRole("button", {
+      name: "chart.create.title",
+    });
 
     expect(mockedDateTime).toBeInTheDocument();
     expect(mockedLocation).toBeInTheDocument();
@@ -56,7 +58,9 @@ describe("ChartCreationMenu component", () => {
       dateValue: new Date(mockedDate),
       location: { latitude, longitude },
     });
-    expect(screen.getByRole("button", { name: /create chart/i })).toBeEnabled();
+    expect(
+      screen.getByRole("button", { name: "chart.create.title" })
+    ).toBeEnabled();
   });
 
   it("calls API and updates chart on create", async () => {
@@ -71,7 +75,7 @@ describe("ChartCreationMenu component", () => {
       setChart: mockSetChart,
     });
 
-    const button = screen.getByRole("button", { name: /create chart/i });
+    const button = screen.getByRole("button", { name: "chart.create.title" });
     fireEvent.click(button);
 
     expect(mockSetLoading).toHaveBeenCalledWith(true);
@@ -97,7 +101,7 @@ describe("ChartCreationMenu component", () => {
 
   it("handles fetch error gracefully", async () => {
     (fetch as jest.Mock).mockResolvedValueOnce({
-      json: async () => ({ ok: false, error: "some error" }),
+      json: async () => ({ ok: false, error: "error_cause" }),
     });
 
     renderWithContext({
@@ -107,13 +111,16 @@ describe("ChartCreationMenu component", () => {
       setChart: mockSetChart,
     });
 
-    fireEvent.click(screen.getByRole("button", { name: /create chart/i }));
+    fireEvent.click(screen.getByRole("button", { name: "chart.create.title" }));
 
     expect(mockSetLoading).toHaveBeenCalledWith(true);
 
     await waitFor(() => {
       expect(mockSetChart).not.toHaveBeenCalled();
-      expect(mockedShowMessage).toHaveBeenCalledWith("some error", "error");
+      expect(mockedShowMessage).toHaveBeenCalledWith(
+        "chart.create.error.error_cause",
+        "error"
+      );
       expect(mockSetLoading).toHaveBeenCalledWith(false);
     });
   });

@@ -34,8 +34,10 @@ describe("LocationPicker component", () => {
     renderWithContext();
 
     const input = screen.getByRole("textbox");
-    const searchButton = screen.getByRole("button", { name: "search city" });
-    const cityLabel = screen.getByLabelText(/City/);
+    const searchButton = screen.getByRole("button", {
+      name: "chart.create.search_city",
+    });
+    const cityLabel = screen.getByLabelText("chart.create.city");
 
     expect(input).toBeInTheDocument();
     expect(cityLabel).toBeInTheDocument();
@@ -45,10 +47,12 @@ describe("LocationPicker component", () => {
   it("display a warning toast if user tries to search without typing a city name", () => {
     renderWithContext();
 
-    const searchButton = screen.getByRole("button", { name: /search city/i });
+    const searchButton = screen.getByRole("button", {
+      name: "chart.create.search_city",
+    });
     fireEvent.click(searchButton);
     expect(mockedShowMessage).toHaveBeenCalledWith(
-      "You must yype a city name in order to search",
+      "chart.create.error.missing_city",
       "warning"
     );
   });
@@ -69,10 +73,12 @@ describe("LocationPicker component", () => {
 
     renderWithContext();
 
-    const input = screen.getByLabelText(/City/);
+    const input = screen.getByLabelText("chart.create.city");
     fireEvent.change(input, { target: { value: "Paris" } });
 
-    const searchButton = screen.getByRole("button", { name: /search city/i });
+    const searchButton = screen.getByRole("button", {
+      name: "chart.create.search_city",
+    });
     fireEvent.click(searchButton);
 
     expect(mockSetLoading).toHaveBeenCalledWith(true);
@@ -92,13 +98,15 @@ describe("LocationPicker component", () => {
     });
 
     renderWithContext();
-    const input = screen.getByLabelText(/City/);
+    const input = screen.getByLabelText("chart.create.city");
     fireEvent.change(input, { target: { value: "PariXxX" } });
-    const searchButton = screen.getByRole("button", { name: /search city/i });
+    const searchButton = screen.getByRole("button", {
+      name: "chart.create.search_city",
+    });
     fireEvent.click(searchButton);
     await waitFor(() =>
       expect(mockedShowMessage).toHaveBeenCalledWith(
-        `No locations found for "PariXxX". Please try again.`,
+        "chart.craete.error.no_results",
         "warning"
       )
     );
@@ -120,14 +128,16 @@ describe("LocationPicker component", () => {
 
     renderWithContext();
 
-    const input = screen.getByLabelText(/City/);
+    const input = screen.getByLabelText("chart.create.city");
     fireEvent.change(input, { target: { value: "Paris" } });
 
-    const searchButton = screen.getByRole("button", { name: /search city/i });
+    const searchButton = screen.getByRole("button", {
+      name: "chart.create.search_city",
+    });
     fireEvent.click(searchButton);
 
-    await waitFor(() => screen.getByLabelText(/clear city/i));
-    fireEvent.click(screen.getByLabelText(/clear city/i));
+    await waitFor(() => screen.getByLabelText("chart.create.clear_city"));
+    fireEvent.click(screen.getByLabelText("chart.create.clear_city"));
 
     expect(mockSetLocation).toHaveBeenCalledWith(undefined);
   });
