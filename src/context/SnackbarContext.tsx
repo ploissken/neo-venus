@@ -1,5 +1,5 @@
 import { Snackbar, Alert, AlertColor, Slide } from "@mui/material";
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
 
 export type SnackbarContextType = {
   showMessage: (message: string, severity?: AlertColor) => void;
