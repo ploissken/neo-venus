@@ -12,9 +12,6 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-  ),
   title: "☿ Mercuryou",
   description: "A modern astrology chart generator",
   keywords: ["astrology", "chart", "birth chart", "astral chart"],
