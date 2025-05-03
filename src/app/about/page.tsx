@@ -1,6 +1,5 @@
-import { useTranslations } from "next-intl";
+import AboutContainer from "@/features/about/AboutContainer";
 
 export default function About() {
-  const t = useTranslations();
-  return <h1>{t("about.title")}</h1>;
+  return <AboutContainer />;
 }

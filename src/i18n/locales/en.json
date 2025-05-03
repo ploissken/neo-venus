@@ -1,6 +1,10 @@
 {
   "about": {
-    "title": "todo: about"
+    "title": "Welcome to Mercuryou",
+    "purpose": "Modernizing astrology with style.",
+    "mission": "Current astrology sites are outdated and just ugly. Mercuryou aims to fill this gap by providing high-quality content, intuitive navigation, and a stylish design.",
+    "roadmap": "Our roadmap includes accessible astrology information, user profile creation, and synastry capabilities in version 1.",
+    "whoami": "This is a work-in-progress <github>side project</github> of mine. If you like it, feel free to reach out on <linkedin>LinkedIn</linkedin>."
   },
   "chart": {
     "create": {

@@ -3,18 +3,6 @@
 import { createTheme } from "@mui/material";
 
 const theme = createTheme({
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          margin: 0,
-        },
-        a: {
-          textDecoration: "none",
-        },
-      },
-    },
-  },
   palette: {
     mode: "dark",
     primary: {
@@ -34,6 +22,30 @@ const theme = createTheme({
     },
     success: {
       main: "#bf52f3",
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          margin: 0,
+        },
+        a: {
+          textDecoration: "none",
+        },
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: "#e1abff",
+          textDecoration: "none",
+          "&:hover": {
+            color: "#8ff378",
+          },
+          transition: "all 0.3s ease",
+        },
+      },
     },
   },
 });

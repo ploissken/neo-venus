@@ -30,7 +30,7 @@ export const metadata = {
     siteName: "Mercuryou",
     images: [
       {
-        url: "/screenshot.png",
+        url: "https://mercuryou.txto.com.br/screenshot.png",
         width: 1888,
         height: 912,
       },
