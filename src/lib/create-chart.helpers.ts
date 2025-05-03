@@ -1,4 +1,5 @@
 import {
+  Chart,
   ChartHouse,
   ChartPlanet,
   Planet,
@@ -18,6 +19,10 @@ type AspectResponse = {
   planet_b_id: number;
   value: number;
 };
+
+export type CreateChartResponse =
+  | { ok: true; data: { chart: Chart } }
+  | { ok: false; error: string };
 
 const treatPlanetaryCollision = (planets: ChartPlanet[]): ChartPlanet[] => {
   const COLLISION_THRESHOLD = 10;

@@ -1,50 +1,27 @@
 "use client";
-import { Chart, ChartGenerationData } from "@/lib/chart.types";
 import { Button, Grid } from "@mui/material";
 import { LocationPicker } from "./LocationPicker";
 import { DateTimePicker } from "./DateTimePicker";
 import { useTranslations } from "next-intl";
 import { useChartContext, useSnackbar } from "@/hooks";
-
-type CreateChartResponse =
-  | { ok: true; data: { chart: Chart } }
-  | { ok: false; error: string };
+import { useCreateChart } from "@/hooks/useCreateChart";
 
 export function ChartCreationMenu() {
   const t = useTranslations();
-  const { dateValue, location, loading, setChart, setLoading } =
-    useChartContext();
+  const { dateValue, location, loading } = useChartContext();
   const { showMessage } = useSnackbar();
 
   const canFetchChart = dateValue && location;
 
-  const handleCreateChart = async () => {
+  const createChart = useCreateChart();
+
+  const handleCreate = async () => {
     if (!canFetchChart) {
+      showMessage("missing data");
       return;
-    }
-
-    setLoading(true);
-
-    const chartData: ChartGenerationData = {
-      latitude: location.latitude,
-      longitude: location.longitude,
-      referenceDate: dateValue,
-    };
-
-    const fetchResponse = await fetch("/api/create-chart", {
-      method: "POST",
-      body: JSON.stringify(chartData),
-    });
-
-    const response: CreateChartResponse = await fetchResponse.json();
-
-    if (!response.ok) {
-      showMessage(t(`chart.create.error.${response.error}`), "error");
     } else {
-      setChart(response.data.chart);
+      createChart();
     }
-
-    setLoading(false);
   };
 
   return (
@@ -67,7 +44,7 @@ export function ChartCreationMenu() {
       <Grid size={{ xs: 12, lg: 2 }}>
         <Button
           variant="contained"
-          onClick={handleCreateChart}
+          onClick={handleCreate}
           disabled={!canFetchChart || loading}
           loading={loading}
           size="small"
