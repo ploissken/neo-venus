@@ -1,6 +1,6 @@
 "use client";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Home, Info } from "@mui/icons-material";
+import { AutoAwesome, Home, Info } from "@mui/icons-material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
@@ -26,6 +26,11 @@ export function DrawerMenu() {
 
   const routes = [
     { text: t("menu.home"), icon: <Home />, route: "/" },
+    {
+      text: t("menu.create_chart"),
+      icon: <AutoAwesome />,
+      route: "/create-chart",
+    },
     { text: t("menu.about"), icon: <Info />, route: "/about" },
   ];
 

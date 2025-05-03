@@ -23,6 +23,7 @@
     }
   },
   "menu": {
+    "create_chart": "Create Astral Chart",
     "home": "Home",
     "about": "About"
   }

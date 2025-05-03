@@ -23,6 +23,7 @@
     }
   },
   "menu": {
+    "create_chart": "Criar Mapa Astral",
     "home": "Início",
     "about": "Sobre"
   }

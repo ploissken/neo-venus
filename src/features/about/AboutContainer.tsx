@@ -10,7 +10,7 @@ export default function AboutContainer() {
         <Typography
           variant="subtitle2"
           sx={{ fontStyle: "italic", width: "100%" }}
-          color="secondary"
+          color="silver"
         >
           {t("about.purpose")}
         </Typography>
