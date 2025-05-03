@@ -1,4 +1,4 @@
-import { Box, AppBar, Toolbar, Button } from "@mui/material";
+import { Box, AppBar, Toolbar } from "@mui/material";
 import { DrawerMenu } from "./DrawerMenu";
 import { LogoWithTitle } from "../logo";
 import { LocaleSwitcher } from "./LocaleSwitcher";
@@ -11,9 +11,6 @@ export default function Navbar() {
           <DrawerMenu />
           <LogoWithTitle size={40} color="white" />
           <LocaleSwitcher />
-          <Button color="inherit" disabled>
-            Login
-          </Button>
         </Toolbar>
       </AppBar>
     </Box>
