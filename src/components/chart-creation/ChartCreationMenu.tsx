@@ -39,7 +39,7 @@ export function ChartCreationMenu() {
     const response: CreateChartResponse = await fetchResponse.json();
 
     if (!response.ok) {
-      showMessage(`chart.create.error.${response.error}`, "error");
+      showMessage(t(`chart.create.error.${response.error}`), "error");
     } else {
       setChart(response.data.chart);
     }

@@ -19,9 +19,15 @@ export default function Providers({
   messages,
   children,
 }: ProviderProps) {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider
+        locale={locale}
+        messages={messages}
+        timeZone={timeZone}
+      >
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />

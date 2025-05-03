@@ -1,6 +1,6 @@
 import { DividerColors, SignColors } from "./chart.types";
 
-export const CHART_SMALL_SIZE = 350;
+export const CHART_SMALL_SIZE = 300;
 export const CHART_DEFAULT_SIZE = 500;
 export const CHART_LARGE_SIZE = 600;
 

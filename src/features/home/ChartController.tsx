@@ -54,7 +54,9 @@ export function ChartController() {
         {hasChart ? (
           <ChartView size={chartSize} />
         ) : (
-          <Typography variant="h5">{t("chart.create.helper")}</Typography>
+          <Typography variant="h5" textAlign="center">
+            {t("chart.create.helper")}
+          </Typography>
         )}
       </Grid>
     </Grid>

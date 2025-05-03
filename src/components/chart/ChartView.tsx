@@ -33,12 +33,13 @@ export default function ChartView({
       size={12}
       alignContent="center"
       sx={{
-        m: 4,
+        my: 4,
         position: "relative",
         top: 0,
         left: 0,
         width: size,
         height: size,
+        overflow: "hidden",
       }}
     >
       <Box style={absolutePosition}>
