@@ -1,7 +1,6 @@
 import { mapAspects, mapHouses, mapPlanets } from "@/lib/create-chart.helpers";
 import { NextRequest, NextResponse } from "next/server";
 import { Chart, ChartGenerationData } from "@/lib/chart.types";
-import { getISODateWithTimezone } from "@/lib/timezone.helper";
 
 const SERVICE_URL =
   process.env.NODE_ENV === "production"
@@ -10,11 +9,6 @@ const SERVICE_URL =
 
 export async function POST(req: NextRequest) {
   const requestBody: ChartGenerationData = await req.json();
-  const isoDateWithTZ = await getISODateWithTimezone(requestBody);
-
-  if (!isoDateWithTZ.ok) {
-    return NextResponse.json(isoDateWithTZ);
-  }
 
   try {
     const response = await fetch(SERVICE_URL, {
@@ -24,7 +18,6 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         ...requestBody,
-        referenceDate: isoDateWithTZ.data,
       }),
     });
 
