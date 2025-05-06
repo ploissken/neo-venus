@@ -1,22 +1,21 @@
 "use client";
-import { useContext } from "react";
 import React from "react";
-import { ChartPlanet } from "@/lib/chart.types";
-import { ChartContext } from "@/context/ChartContext";
+import { ChartHouse, ChartPlanet } from "@/lib/chart.types";
 import { PlanetSignDegreeItem } from "./PlanetSignDegreeItem";
 
-export function ChartDataTable() {
-  const { chart } = useContext(ChartContext);
+export interface ChartDataTableProps {
+  planets: ChartPlanet[];
+  ascendant?: ChartHouse;
+}
 
-  const chartLoaded = chart?.asc?.longitude;
-
-  return chartLoaded ? (
+export function ChartDataTable({ planets, ascendant }: ChartDataTableProps) {
+  return planets?.length > 0 ? (
     <>
       <h4>Planets, Signs and Degrees</h4>
-      {chart?.planets?.map((planet: ChartPlanet) => (
+      {planets?.map((planet: ChartPlanet) => (
         <PlanetSignDegreeItem key={planet.planetIndex} chartPlanet={planet} />
       ))}
-      <PlanetSignDegreeItem chartPlanet={chart?.asc} />
+      {ascendant && <PlanetSignDegreeItem chartPlanet={ascendant} />}
     </>
   ) : undefined;
 }

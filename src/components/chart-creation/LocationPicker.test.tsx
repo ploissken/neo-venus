@@ -17,10 +17,9 @@ const renderWithContext = () =>
         value={{
           ...mockChartContext,
           setLoading: mockSetLoading,
-          setLocation: mockSetLocation,
         }}
       >
-        <LocationPicker />
+        <LocationPicker onLocationChanged={mockSetLocation} />
       </ChartContext.Provider>
     </SnackbarContext.Provider>
   );
@@ -57,7 +56,7 @@ describe("LocationPicker component", () => {
     );
   });
 
-  it("calls API and sets locations on search", async () => {
+  it("fetches location and call onLocationChanged on search", async () => {
     (fetch as jest.Mock).mockResolvedValueOnce({
       json: async () => ({
         locations: [

@@ -5,28 +5,28 @@ import { DateTimePicker } from "./DateTimePicker";
 import { ChartContext, ChartContextType } from "@/context/ChartContext";
 import { mockChartContext } from "@/__mocks__";
 
-const renderComponent = (chartContext: ChartContextType) => {
+const mockSetDateValue = jest.fn();
+
+const renderComponent = (chartContext?: ChartContextType) => {
   render(
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <ChartContext.Provider value={chartContext}>
-        <DateTimePicker />
+      <ChartContext.Provider value={{ ...mockChartContext, ...chartContext }}>
+        <DateTimePicker onDateChanged={mockSetDateValue} />
       </ChartContext.Provider>
     </LocalizationProvider>
   );
 };
 
-describe("DateTimePicker", () => {
+describe("DateTimePicker component", () => {
   it("renders with default label", () => {
-    renderComponent(mockChartContext);
+    renderComponent();
 
     const input = screen.getByLabelText("chart.create.date");
     expect(input).toBeInTheDocument();
   });
 
   it("calls setDateValue when a new date is selected", async () => {
-    const mockSetDateValue = jest.fn();
-
-    renderComponent({ ...mockChartContext, setDateValue: mockSetDateValue });
+    renderComponent();
     expect(
       screen.queryByRole("option", { name: "AM" })
     ).not.toBeInTheDocument();

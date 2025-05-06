@@ -28,7 +28,7 @@ const renderWithContext = (contextOverrides = {}) =>
       <ChartContext.Provider
         value={{ ...mockChartContext, ...contextOverrides }}
       >
-        <ChartCreationMenu />
+        <ChartCreationMenu onChartCreated={mockSetChart} />
       </ChartContext.Provider>
     </SnackbarContext.Provider>
   );
@@ -86,9 +86,9 @@ describe("ChartCreationMenu component", () => {
         expect.objectContaining({
           method: "POST",
           body: JSON.stringify({
+            referenceDate: new Date(mockedDate),
             latitude,
             longitude,
-            referenceDate: new Date(mockedDate),
           }),
         })
       )

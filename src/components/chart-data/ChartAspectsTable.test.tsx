@@ -10,16 +10,17 @@ jest.mock("../icons", () => ({
 }));
 
 describe("ChartAspectsTable component", () => {
-  it("renders nothing when chart isnt loaded on context", () => {
+  it("renders nothing when no aspects are given", () => {
     const { container } = render(<ChartAspectsTable />);
     expect(container.firstChild).toBeNull();
   });
+
   it("renders planet and aspect icons properly", () => {
     const planets = Object.keys(Planet).filter((key) => isNaN(Number(key)));
 
     render(
       <ChartContext.Provider value={mockChartContext}>
-        <ChartAspectsTable />
+        <ChartAspectsTable aspects={mockChart.aspects} />
       </ChartContext.Provider>
     );
 

@@ -15,9 +15,13 @@ import {
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
-export function LocationPicker() {
+export interface LocationPickerProps {
+  onLocationChanged: (location?: ChartLocation) => void;
+}
+
+export function LocationPicker({ onLocationChanged }: LocationPickerProps) {
   const t = useTranslations();
-  const { loading, setLoading, setLocation } = useChartContext();
+  const { loading, setLoading } = useChartContext();
   const { showMessage } = useSnackbar();
   const [inputValue, setInputValue] = useState("");
   const [selectedLocationIndex, setSelectedLocationIndex] = useState(0);
@@ -55,18 +59,18 @@ export function LocationPicker() {
     setLocations([]);
     setSelectedLocationIndex(0);
     setInputValue("");
-    setLocation(undefined);
+    onLocationChanged(undefined);
   };
 
   useEffect(() => {
     const location = locations[selectedLocationIndex];
     if (location) {
-      setLocation({
+      onLocationChanged({
         latitude: location.latitude,
         longitude: location.longitude,
       });
     }
-  }, [selectedLocationIndex, locations, setLocation]);
+  }, [selectedLocationIndex, locations, onLocationChanged]);
 
   return (
     <Grid

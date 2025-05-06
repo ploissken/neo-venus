@@ -8,15 +8,15 @@ jest.mock("./PlanetSignDegreeItem", () => ({
 }));
 
 describe("ChartDataTable component", () => {
-  it("renders nothing when chart isnt loaded on context", () => {
-    const { container } = render(<ChartDataTable />);
+  it("renders nothing when no planets are provided", () => {
+    const { container } = render(<ChartDataTable planets={[]} />);
     expect(container.firstChild).toBeNull();
   });
 
-  it("renders planet info properly", () => {
+  it("renders planet info and title properly", () => {
     render(
       <ChartContext.Provider value={mockChartContext}>
-        <ChartDataTable />
+        <ChartDataTable planets={mockChart.planets} />
       </ChartContext.Provider>
     );
 
@@ -24,6 +24,21 @@ describe("ChartDataTable component", () => {
     const chartObjectData = screen.queryAllByText(/PlanetSignDegreeItem/);
 
     expect(chartDataTitle).toBeInTheDocument();
-    expect(chartObjectData).toHaveLength(mockChart.planets.length + 1); // + asc
+    expect(chartObjectData).toHaveLength(mockChart.planets.length);
+  });
+
+  it("renders planets and ascendant info when provided", () => {
+    render(
+      <ChartContext.Provider value={mockChartContext}>
+        <ChartDataTable
+          planets={mockChart.planets}
+          ascendant={mockChart.houses[0]}
+        />
+      </ChartContext.Provider>
+    );
+
+    const chartObjectData = screen.queryAllByText(/PlanetSignDegreeItem/);
+
+    expect(chartObjectData).toHaveLength(mockChart.planets.length + 1);
   });
 });

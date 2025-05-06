@@ -10,10 +10,10 @@ import { HousesWheel } from "./HousesWheel";
 import { PlanetsWheel } from "./PlanetsWheel";
 import { ZodiacWheel } from "./ZodiacWheel";
 import theme from "@/theme";
-import { useChartContext } from "@/hooks";
+import { Chart } from "@/lib/chart.types";
 
-export default function AstralChart() {
-  const { chart } = useChartContext();
+export default function AstralChart({ chart }: { chart: Chart }) {
+  // const { chart } = useChartContext();
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));

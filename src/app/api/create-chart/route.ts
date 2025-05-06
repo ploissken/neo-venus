@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     const { planets, houses, metadata, aspects } = data;
 
     const mappedHouses = mapHouses(houses);
-    const mappedPlanets = mapPlanets(planets, mappedHouses[0].longitude);
+    const mappedPlanets = mapPlanets(planets, mappedHouses[0]?.longitude || 0);
     const mappedAspects = mapAspects(aspects);
 
     const chart: Chart = {

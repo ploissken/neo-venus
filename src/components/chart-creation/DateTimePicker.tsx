@@ -8,15 +8,19 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 
 interface MapDateTimePickerProps {
+  onDateChanged: (date?: Date) => void;
   defaultLabel?: string;
 }
 
-export function DateTimePicker({ defaultLabel }: MapDateTimePickerProps) {
+export function DateTimePicker({
+  defaultLabel,
+  onDateChanged,
+}: MapDateTimePickerProps) {
   const t = useTranslations();
-  const { loading, setDateValue } = useContext(ChartContext);
+  const { loading } = useContext(ChartContext);
 
   const handleDateChange = (value: Dayjs | null) => {
-    setDateValue(new Date(dayjs(value).utc(true).format()));
+    onDateChanged(new Date(dayjs(value).utc(true).format()));
   };
 
   return (

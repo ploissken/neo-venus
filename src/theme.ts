@@ -1,9 +1,7 @@
 "use client";
-
 import { createTheme } from "@mui/material";
 
 //https:github.com/mui/material-ui/issues/21757#issuecomment-778308637
-
 const colorTheme = createTheme({
   palette: {
     mode: "dark",

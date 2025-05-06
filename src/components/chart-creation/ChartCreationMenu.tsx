@@ -5,10 +5,22 @@ import { DateTimePicker } from "./DateTimePicker";
 import { useTranslations } from "next-intl";
 import { useChartContext, useSnackbar } from "@/hooks";
 import { useCreateChart } from "@/hooks/useCreateChart";
+import { Chart } from "@/lib/chart.types";
 
-export function ChartCreationMenu() {
+export interface ChartCreationMenuProps {
+  onChartCreated: (chart: Chart) => void;
+}
+
+export function ChartCreationMenu({ onChartCreated }: ChartCreationMenuProps) {
   const t = useTranslations();
-  const { dateValue, location, loading } = useChartContext();
+  const {
+    dateValue,
+    location,
+    loading,
+    setDateValue,
+    setLocation,
+    setLoading,
+  } = useChartContext();
   const { showMessage } = useSnackbar();
 
   const canFetchChart = dateValue && location;
@@ -16,12 +28,17 @@ export function ChartCreationMenu() {
   const createChart = useCreateChart();
 
   const handleCreate = async () => {
-    if (!canFetchChart) {
-      showMessage("missing data");
-      return;
+    setLoading(true);
+    const chartResult = await createChart({
+      referenceDate: dateValue!,
+      ...location,
+    });
+    if ("error" in chartResult) {
+      showMessage(t(`chart.create.error.${chartResult.error}`), "error");
     } else {
-      createChart();
+      onChartCreated(chartResult);
     }
+    setLoading(false);
   };
 
   return (
@@ -35,11 +52,11 @@ export function ChartCreationMenu() {
       }}
     >
       <Grid size={{ xs: 12, lg: 4 }}>
-        <DateTimePicker />
+        <DateTimePicker onDateChanged={setDateValue} />
       </Grid>
 
       <Grid size={{ xs: 12, lg: "grow" }}>
-        <LocationPicker />
+        <LocationPicker onLocationChanged={setLocation} />
       </Grid>
       <Grid size={{ xs: 12, lg: 2 }}>
         <Button
