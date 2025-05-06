@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import HomeContainer from "./HomeContainer";
 
 // Mocking ChartController as we are testing HomeContainer only
-jest.mock("./ChartController", () => ({
+jest.mock("../create-chart/ChartController", () => ({
   ChartController: jest.fn(() => <div>ChartController</div>),
 }));
 
