@@ -1,6 +1,5 @@
 import { Grid, Box, useMediaQuery } from "@mui/material";
-import { ChartContext } from "@/context/ChartContext";
-import { CSSProperties, useContext } from "react";
+import { CSSProperties } from "react";
 import {
   CHART_DEFAULT_SIZE,
   CHART_LARGE_SIZE,
@@ -11,9 +10,10 @@ import { HousesWheel } from "./HousesWheel";
 import { PlanetsWheel } from "./PlanetsWheel";
 import { ZodiacWheel } from "./ZodiacWheel";
 import theme from "@/theme";
+import { useChartContext } from "@/hooks";
 
-export default function ChartView() {
-  const { chart } = useContext(ChartContext);
+export default function AstralChart() {
+  const { chart } = useChartContext();
 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));

@@ -2,7 +2,9 @@
 
 import { createTheme } from "@mui/material";
 
-const theme = createTheme({
+//https:github.com/mui/material-ui/issues/21757#issuecomment-778308637
+
+const colorTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
@@ -23,7 +25,14 @@ const theme = createTheme({
     success: {
       main: "#bf52f3",
     },
+    background: {
+      paper: "#222222",
+    },
   },
+});
+
+const theme = createTheme({
+  ...colorTheme,
   components: {
     MuiCssBaseline: {
       styleOverrides: {
@@ -38,10 +47,10 @@ const theme = createTheme({
     MuiLink: {
       styleOverrides: {
         root: {
-          color: "#e1abff",
+          color: colorTheme.palette.primary.main,
           textDecoration: "none",
           "&:hover": {
-            color: "#8ff378",
+            color: colorTheme.palette.primary.light,
           },
           transition: "all 0.3s ease",
         },

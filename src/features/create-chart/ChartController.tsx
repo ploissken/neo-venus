@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { Grid, Typography } from "@mui/material";
-import ChartView from "@/components/chart/ChartView";
+import { Grid, Theme, Typography } from "@mui/material";
 import { CHART_LARGE_SIZE } from "@/lib/chart.consts";
 import { ChartCreationMenu } from "@/components/chart-creation";
 import { ChartDataTable, ChartAspectsTable } from "@/components/chart-data";
 import { ChartContext } from "@/context/ChartContext";
 import { useTranslations } from "next-intl";
+import AstralChart from "@/components/chart/AstralChart";
 
 export function ChartController() {
   const t = useTranslations();
@@ -18,7 +18,11 @@ export function ChartController() {
     <Grid
       container
       spacing={2}
-      sx={{ minHeight: CHART_LARGE_SIZE }}
+      size={{ xs: 12, lg: 11 }}
+      sx={(theme: Theme) => ({
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: 2,
+      })}
       alignContent="start"
     >
       <ChartCreationMenu />
@@ -32,12 +36,14 @@ export function ChartController() {
         container
         size={hasChart ? { xs: 12, lg: 8 } : 12}
         justifyContent="center"
+        alignContent="center"
         order={{ xs: 1, lg: 2 }}
+        sx={{ minHeight: CHART_LARGE_SIZE }}
       >
         {hasChart ? (
-          <ChartView />
+          <AstralChart />
         ) : (
-          <Typography variant="h5" textAlign="center">
+          <Typography variant="h5" textAlign="center" sx={{ px: 2 }}>
             {t("chart.create.helper")}
           </Typography>
         )}
