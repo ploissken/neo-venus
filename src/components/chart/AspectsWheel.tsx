@@ -1,5 +1,6 @@
 import { ASPECT_WHEEL_PROPORTION } from "@/lib/chart.consts";
 import { Aspect, ChartPlanet, PlanetAspect } from "@/lib/chart.types";
+import { motion } from "framer-motion";
 
 interface AspectsWheelProps {
   aspects: PlanetAspect[];
@@ -10,10 +11,12 @@ interface AspectsWheelProps {
 const getAspectStyle = (aspectIndex: Aspect) => {
   const easy = {
     stroke: "cyan",
+    filter: "url(#glow)",
   };
 
   const difficult = {
     stroke: "red",
+    filter: "url(#pulse)",
   };
 
   const minor = { strokeDasharray: 4 };
@@ -53,29 +56,52 @@ export function AspectsWheel({ aspects, planets, size }: AspectsWheelProps) {
   }));
 
   return (
-    <svg width={size} height={size} viewBox={`0, 0, ${size} ${size}`}>
-      {renderingAspects.map((aspect, index) => (
-        <line
-          key={index}
-          x1={
-            size / 2 +
-            radius * Math.cos((aspect.planetALongitude! * Math.PI) / 180)
-          }
-          y1={
-            size / 2 +
-            radius * Math.sin((aspect.planetALongitude! * Math.PI) / 180)
-          }
-          x2={
-            size / 2 +
-            radius * Math.cos((aspect.planetBLongitude! * Math.PI) / 180)
-          }
-          y2={
-            size / 2 +
-            radius * Math.sin((aspect.planetBLongitude! * Math.PI) / 180)
-          }
-          {...getAspectStyle(aspect.aspectIndex)}
-        />
-      ))}
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        <filter id="pulse" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0">
+            <animate
+              attributeName="stdDeviation"
+              values="0;0.6;0"
+              dur="2s"
+              repeatCount="indefinite"
+            />
+          </feGaussianBlur>
+        </filter>
+      </defs>
+      {renderingAspects.map((aspect, index) => {
+        const angleA = (aspect.planetALongitude! * Math.PI) / 180;
+        const angleB = (aspect.planetBLongitude! * Math.PI) / 180;
+
+        const x1 = size / 2 + radius * Math.cos(angleA);
+        const y1 = size / 2 + radius * Math.sin(angleA);
+        const x2 = size / 2 + radius * Math.cos(angleB);
+        const y2 = size / 2 + radius * Math.sin(angleB);
+
+        return (
+          <motion.line
+            key={index}
+            x1={x1}
+            y1={y1}
+            initial={{ x2: x1, y2: y1 }}
+            animate={{ x2, y2 }}
+            transition={{
+              delay: 3 + index * 0.05,
+              duration: 0.1,
+              ease: "easeOut",
+            }}
+            {...getAspectStyle(aspect.aspectIndex)}
+          />
+        );
+      })}
     </svg>
   );
 }

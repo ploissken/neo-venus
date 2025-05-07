@@ -1,5 +1,6 @@
 import { Planet } from "@/lib/chart.types";
 import { PLANET_SIZE } from "@/lib/chart.consts";
+import { motion } from "framer-motion";
 import {
   Sun,
   Moon,
@@ -66,7 +67,18 @@ export function PlanetIcon({
       x={x}
       y={y}
     >
-      {planetIcon}
+      <motion.g
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 500,
+          damping: 20,
+          delay: 1.8 + 0.1 * planet,
+        }}
+      >
+        {planetIcon}
+      </motion.g>
     </svg>
   );
 }

@@ -3,6 +3,7 @@ import {
   Button,
   CircularProgress,
   Grid,
+  IconButton,
   Theme,
   Typography,
 } from "@mui/material";
@@ -61,6 +62,13 @@ export default function HomeContainer() {
     }
   };
 
+  const handleRefresh = () => {
+    setChart(undefined);
+    setTimeout(() => {
+      handleGetLocation();
+    }, 200);
+  };
+
   useEffect(() => {
     createChart({
       referenceDate: new Date(),
@@ -90,6 +98,9 @@ export default function HomeContainer() {
     >
       <Typography variant="h4" align="center">
         {t("chart.current_sky")}
+        <IconButton>
+          <Refresh onClick={handleRefresh} />
+        </IconButton>
       </Typography>
       {chart && !chart.asc && (
         <Grid container justifyContent="center">

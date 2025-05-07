@@ -1,5 +1,6 @@
 import { defaultDividerColor, defaultSignColors } from "@/lib/chart.consts";
 import { DividerColors, SignColors } from "@/lib/chart.types";
+import { motion } from "framer-motion";
 
 const CHART_DEFAULT_VIEWBOX_SIZE = 800;
 const DEFAULT_ROTATION = 0;
@@ -38,11 +39,16 @@ export function ZodiacWheel(props: ZodiacWheelProps) {
   const scaleFactor = size / CHART_DEFAULT_VIEWBOX_SIZE;
 
   return (
-    <svg
+    <motion.svg
       width={size}
       height={size}
-      viewBox={`0, 0, ${size} ${size}`}
-      transform={`rotate(${rotationDegrees})`}
+      viewBox={`0 0 ${size} ${size}`}
+      animate={{ rotate: rotationDegrees }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10,
+      }}
     >
       <circle
         id="outer-circle"
@@ -210,6 +216,6 @@ export function ZodiacWheel(props: ZodiacWheelProps) {
           <path d="M730.13,352.59c-1.18-2.23-.99-4.91-1.62-7.31-4.66-17.92-6.86-36.05-9.32-54.39-.28-2.1-.88-5.07-1.37-7.17-.43-1.88-3.57-7.25.02-7.64,1.68-.19,3.11,3.76,3.61,5.21,1.54,4.51,1.69,9.33,2.75,13.95.58,2.5,1.8,5.22,2.4,7.76,1.98,8.28,1.31,15.87,2.19,24.09.77,7.18,2.55,13.3,2.76,20.69.06,2.1,1.65,4.35-1.44,4.82Z" />
         </g>
       </g>
-    </svg>
+    </motion.svg>
   );
 }
