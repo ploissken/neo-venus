@@ -1,6 +1,7 @@
 import { Planet, PlanetAspect } from "@/lib/chart.types";
 import { Grid } from "@mui/material";
 import { AspectIcon, PlanetIcon } from "../icons";
+import { useTranslations } from "next-intl";
 
 const getAspect = (
   planetAIndex: Planet,
@@ -19,6 +20,7 @@ export interface ChartAspectsTableProps {
 }
 
 export function ChartAspectsTable({ aspects }: ChartAspectsTableProps) {
+  const t = useTranslations();
   if (!aspects) {
     return;
   }
@@ -28,7 +30,7 @@ export function ChartAspectsTable({ aspects }: ChartAspectsTableProps) {
 
   return (
     <>
-      <h4>Aspects</h4>
+      <h4>{t("chart.data.aspects")}</h4>
       <Grid>
         {planets.map((_, planetRowIndex) => (
           <Grid key={planetRowIndex} container>

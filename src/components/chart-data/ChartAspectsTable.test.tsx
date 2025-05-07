@@ -24,7 +24,7 @@ describe("ChartAspectsTable component", () => {
       </ChartContext.Provider>
     );
 
-    const chatAspectsTitle = screen.getByText(/Aspects/);
+    const chatAspectsTitle = screen.getByText("chart.data.aspects");
     const planetIcons = screen.queryAllByText(/PlanetIcon/);
     const aspectIcons = screen.queryAllByText(/AspectIcon/);
 

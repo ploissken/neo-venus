@@ -40,7 +40,7 @@ describe("HomeContainer component", () => {
     await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
 
     expect(screen.getByText("ChartController")).toBeInTheDocument();
-    expect(screen.getByText("Current sky")).toBeInTheDocument();
+    expect(screen.getByText("chart.current_sky")).toBeInTheDocument();
   });
 
   it("display a toast message when fetch fails", async () => {

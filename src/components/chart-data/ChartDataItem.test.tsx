@@ -10,13 +10,13 @@ jest.mock("../icons/ZodiacSignIcon", () => ({
 }));
 
 describe("ChartDataItem component", () => {
-  it("renders nothing when chartPlanet isnt provided", () => {
+  it("renders nothing when itemData isnt provided", () => {
     const { container } = render(<ChartDataItem />);
     expect(container.firstChild).toBeNull();
   });
 
-  it("renders Ascendant info when chartHouse is provided", () => {
-    const chartPlanet: ChartHouse = {
+  it("renders Ascendant info when a chartHouse is provided", () => {
+    const itemData: ChartHouse = {
       signIndex: 0,
       longitude: 0,
       renderLongitude: 0,
@@ -26,13 +26,13 @@ describe("ChartDataItem component", () => {
       houseIndex: 0,
     };
 
-    render(<ChartDataItem itemData={chartPlanet} />);
+    render(<ChartDataItem itemData={itemData} />);
 
     const planetIcon = screen.queryByText(`planet:`);
-    const ascendantLabel = screen.queryByText(/Ascendant/i);
-    const ascendantIcon = screen.queryByText(/AC/i);
+    const ascendantLabel = screen.queryByText("chart.ascendant");
+    const ascendantIcon = screen.queryByText(/AC/);
     const degreeLabel = screen.getByText(
-      `${chartPlanet.degrees}°${chartPlanet.minutes}'${chartPlanet.seconds}"`
+      `${itemData.degrees}°${itemData.minutes}'${itemData.seconds}"`
     );
 
     expect(ascendantLabel).toBeInTheDocument();
@@ -56,9 +56,11 @@ describe("ChartDataItem component", () => {
     render(<ChartDataItem itemData={chartPlanet} />);
 
     const ascendantLabel = screen.queryByText(/Ascendant/i);
-    const ascendantIcon = screen.queryByText(/AC/i);
+    const ascendantIcon = screen.queryByText(/AC/);
     const planetIcon = screen.getByText(`planet: ${chartPlanet.planetIndex}`);
+    const planetLabel = screen.getByText(`planet.Moon`);
     const signIcon = screen.getByText(`sign: ${chartPlanet.signIndex}`);
+    const signLabel = screen.getByText(`zodiac_sign.Aquarius`);
     const degreeLabel = screen.getByText(
       `${chartPlanet.degrees}°${chartPlanet.minutes}'${chartPlanet.seconds}"`
     );
@@ -66,7 +68,9 @@ describe("ChartDataItem component", () => {
     expect(ascendantLabel).not.toBeInTheDocument();
     expect(ascendantIcon).not.toBeInTheDocument();
     expect(planetIcon).toBeInTheDocument();
+    expect(planetLabel).toBeInTheDocument();
     expect(signIcon).toBeInTheDocument();
+    expect(signLabel).toBeInTheDocument();
     expect(degreeLabel).toBeInTheDocument();
   });
 });

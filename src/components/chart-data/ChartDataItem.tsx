@@ -1,13 +1,15 @@
 import { Grid, Box } from "@mui/material";
-import { ChartHouse, ChartPlanet, Planet } from "@/lib/chart.types";
+import { ChartHouse, ChartPlanet, Planet, ZodiacSign } from "@/lib/chart.types";
 import { ZodiacSignIcon, PlanetIcon } from "@/components/icons";
 import { PLANET_SIZE } from "@/lib/chart.consts";
+import { useTranslations } from "next-intl";
 
 interface ChartDataItemProps {
   itemData?: ChartPlanet | ChartHouse;
 }
 
 export function ChartDataItem({ itemData }: ChartDataItemProps) {
+  const t = useTranslations();
   if (!itemData) {
     return <></>;
   }
@@ -21,7 +23,11 @@ export function ChartDataItem({ itemData }: ChartDataItemProps) {
     );
 
   const label =
-    "planetIndex" in itemData ? `${Planet[itemData.planetIndex]}` : "Ascendant";
+    "planetIndex" in itemData
+      ? t(`planet.${Planet[itemData.planetIndex]}`)
+      : t(`chart.ascendant`);
+
+  const signLabel = t(`zodiac_sign.${ZodiacSign[itemData.signIndex]}`);
 
   return (
     <Grid container spacing={1} alignItems="center">
@@ -31,6 +37,7 @@ export function ChartDataItem({ itemData }: ChartDataItemProps) {
       <Grid>{label}</Grid>
       <Grid container alignItems="center" sx={{ mx: 1 }}>
         <ZodiacSignIcon sign={signIndex} />
+        <Grid sx={{ color: "grey" }}>{signLabel}</Grid>
       </Grid>
       <Grid container size="grow" justifyContent="flex-end">
         {`${degrees}°${minutes}'${seconds}"`}

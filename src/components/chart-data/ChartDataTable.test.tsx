@@ -20,7 +20,7 @@ describe("ChartDataTable component", () => {
       </ChartContext.Provider>
     );
 
-    const chartDataTitle = screen.getByText(/Planets, Signs and Degrees/);
+    const chartDataTitle = screen.getByText("chart.data.title");
     const chartObjectData = screen.queryAllByText(/ChartDataItem/);
 
     expect(chartDataTitle).toBeInTheDocument();

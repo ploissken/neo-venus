@@ -38,7 +38,7 @@ export default function HomeContainer() {
         m: 2,
       })}
     >
-      {chart && <Typography variant="h4">Current sky</Typography>}
+      {chart && <Typography variant="h4">{t("chart.current_sky")}</Typography>}
       {chart && <ChartController chart={chart} />}
     </Grid>
   );

@@ -7,6 +7,7 @@
     "whoami": "Este é um <github>projeto paralelo em desenvolvimento</github>. Se você curtir, entre em contato comigo pelo <linkedin>LinkedIn</linkedin>."
   },
   "chart": {
+    "ascendant": "Ascendente",
     "create": {
       "city": "Cidade",
       "clear_city": "Limpar Cidade",
@@ -20,11 +21,42 @@
         "no_results": "Nenhuma cidade encontrada para {inputValue}.",
         "timezone_fetch_failed": "Erro ao buscar fuso horário. Tente novamente mais tarde."
       }
+    },
+    "current_sky": "Céu Atual",
+    "data": {
+      "aspects": "Aspectos",
+      "title": "Assinatura Celeste"
     }
   },
   "menu": {
     "create_chart": "Criar Mapa Astral",
     "home": "Início",
     "about": "Sobre"
+  },
+  "planet": {
+    "Sun": "Sol",
+    "Moon": "Lua",
+    "Mercury": "Mercúrio",
+    "Venus": "Vênus",
+    "Mars": "Marte",
+    "Jupiter": "Júpiter",
+    "Saturn": "Saturno",
+    "Uranus": "Urano",
+    "Neptune": "Netuno",
+    "Pluto": "Plutão"
+  },
+  "zodiac_sign": {
+    "Aries": "Áries",
+    "Taurus": "Touro",
+    "Gemini": "Gêmeos",
+    "Cancer": "Câncer",
+    "Leo": "Leão",
+    "Virgo": "Virgem",
+    "Libra": "Libra",
+    "Scorpio": "Escorpião",
+    "Sagittarius": "Sagitário",
+    "Capricorn": "Capricórnio",
+    "Aquarius": "Aquário",
+    "Pisces": "Peixes"
   }
 }
