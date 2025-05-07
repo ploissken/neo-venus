@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { PlanetSignDegreeItem } from ".";
+import { ChartDataItem } from ".";
 import { ChartHouse, ChartPlanet, Planet, ZodiacSign } from "@/lib/chart.types";
 
 jest.mock("../icons/PlanetIcon", () => ({
@@ -9,9 +9,9 @@ jest.mock("../icons/ZodiacSignIcon", () => ({
   ZodiacSignIcon: jest.fn(({ sign }) => <div>sign: {sign}</div>),
 }));
 
-describe("PlanetSignDegreeItem component", () => {
+describe("ChartDataItem component", () => {
   it("renders nothing when chartPlanet isnt provided", () => {
-    const { container } = render(<PlanetSignDegreeItem />);
+    const { container } = render(<ChartDataItem />);
     expect(container.firstChild).toBeNull();
   });
 
@@ -26,7 +26,7 @@ describe("PlanetSignDegreeItem component", () => {
       houseIndex: 0,
     };
 
-    render(<PlanetSignDegreeItem chartPlanet={chartPlanet} />);
+    render(<ChartDataItem itemData={chartPlanet} />);
 
     const planetIcon = screen.queryByText(`planet:`);
     const ascendantLabel = screen.queryByText(/Ascendant/i);
@@ -53,7 +53,7 @@ describe("PlanetSignDegreeItem component", () => {
       renderMarker: 0,
     };
 
-    render(<PlanetSignDegreeItem chartPlanet={chartPlanet} />);
+    render(<ChartDataItem itemData={chartPlanet} />);
 
     const ascendantLabel = screen.queryByText(/Ascendant/i);
     const ascendantIcon = screen.queryByText(/AC/i);

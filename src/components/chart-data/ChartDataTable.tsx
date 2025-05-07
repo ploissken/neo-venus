@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { ChartHouse, ChartPlanet } from "@/lib/chart.types";
-import { PlanetSignDegreeItem } from "./PlanetSignDegreeItem";
+import { ChartDataItem } from "./ChartDataItem";
 
 export interface ChartDataTableProps {
   planets: ChartPlanet[];
@@ -13,9 +13,9 @@ export function ChartDataTable({ planets, ascendant }: ChartDataTableProps) {
     <>
       <h4>Planets, Signs and Degrees</h4>
       {planets?.map((planet: ChartPlanet) => (
-        <PlanetSignDegreeItem key={planet.planetIndex} chartPlanet={planet} />
+        <ChartDataItem key={planet.planetIndex} itemData={planet} />
       ))}
-      {ascendant && <PlanetSignDegreeItem chartPlanet={ascendant} />}
+      {ascendant && <ChartDataItem itemData={ascendant} />}
     </>
   ) : undefined;
 }

@@ -3,29 +3,25 @@ import { ChartHouse, ChartPlanet, Planet } from "@/lib/chart.types";
 import { ZodiacSignIcon, PlanetIcon } from "@/components/icons";
 import { PLANET_SIZE } from "@/lib/chart.consts";
 
-interface PlanetSignDegreeItemProps {
-  chartPlanet?: ChartPlanet | ChartHouse;
+interface ChartDataItemProps {
+  itemData?: ChartPlanet | ChartHouse;
 }
 
-export function PlanetSignDegreeItem({
-  chartPlanet,
-}: PlanetSignDegreeItemProps) {
-  if (!chartPlanet) {
+export function ChartDataItem({ itemData }: ChartDataItemProps) {
+  if (!itemData) {
     return <></>;
   }
 
-  const { signIndex, degrees, minutes, seconds } = chartPlanet;
+  const { signIndex, degrees, minutes, seconds } = itemData;
   const icon =
-    "planetIndex" in chartPlanet ? (
-      <PlanetIcon planet={chartPlanet.planetIndex} />
+    "planetIndex" in itemData ? (
+      <PlanetIcon planet={itemData.planetIndex} />
     ) : (
       <Box sx={{ width: PLANET_SIZE }}>AC</Box>
     );
 
   const label =
-    "planetIndex" in chartPlanet
-      ? `${Planet[chartPlanet.planetIndex]}`
-      : "Ascendant";
+    "planetIndex" in itemData ? `${Planet[itemData.planetIndex]}` : "Ascendant";
 
   return (
     <Grid container spacing={1} alignItems="center">

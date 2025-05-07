@@ -1,3 +1,3 @@
 export * from "./ChartAspectsTable";
-export * from "./PlanetSignDegreeItem";
+export * from "./ChartDataItem";
 export * from "./ChartDataTable";

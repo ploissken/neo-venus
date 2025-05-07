@@ -3,8 +3,8 @@ import { ChartDataTable } from ".";
 import { ChartContext } from "@/context/ChartContext";
 import { mockChart, mockChartContext } from "@/__mocks__";
 
-jest.mock("./PlanetSignDegreeItem", () => ({
-  PlanetSignDegreeItem: jest.fn(() => <div>PlanetSignDegreeItem</div>),
+jest.mock("./ChartDataItem", () => ({
+  ChartDataItem: jest.fn(() => <div>ChartDataItem</div>),
 }));
 
 describe("ChartDataTable component", () => {
@@ -21,7 +21,7 @@ describe("ChartDataTable component", () => {
     );
 
     const chartDataTitle = screen.getByText(/Planets, Signs and Degrees/);
-    const chartObjectData = screen.queryAllByText(/PlanetSignDegreeItem/);
+    const chartObjectData = screen.queryAllByText(/ChartDataItem/);
 
     expect(chartDataTitle).toBeInTheDocument();
     expect(chartObjectData).toHaveLength(mockChart.planets.length);
@@ -37,7 +37,7 @@ describe("ChartDataTable component", () => {
       </ChartContext.Provider>
     );
 
-    const chartObjectData = screen.queryAllByText(/PlanetSignDegreeItem/);
+    const chartObjectData = screen.queryAllByText(/ChartDataItem/);
 
     expect(chartObjectData).toHaveLength(mockChart.planets.length + 1);
   });
