@@ -27,7 +27,7 @@ export function ChartCreationMenu({ onChartCreated }: ChartCreationMenuProps) {
 
   const createChart = useCreateChart();
 
-  const handleCreate = async () => {
+  const handleCreateChart = async () => {
     setLoading(true);
     const chartResult = await createChart({
       referenceDate: dateValue!,
@@ -53,7 +53,7 @@ export function ChartCreationMenu({ onChartCreated }: ChartCreationMenuProps) {
       <Grid size={{ xs: 12, lg: 2 }}>
         <Button
           variant="contained"
-          onClick={handleCreate}
+          onClick={handleCreateChart}
           disabled={!canFetchChart || loading}
           loading={loading}
           size="small"
