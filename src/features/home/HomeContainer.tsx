@@ -1,11 +1,12 @@
 "use client";
-import { Grid, Theme, Typography } from "@mui/material";
+import { CircularProgress, Grid, Theme, Typography } from "@mui/material";
 import { ChartController } from "../create-chart/ChartController";
 import { useCreateChart } from "@/hooks/useCreateChart";
 import { useEffect, useState } from "react";
 import { Chart } from "@/lib/chart.types";
 import { useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
+import { CHART_LARGE_SIZE } from "@/lib/chart.consts";
 
 export default function HomeContainer() {
   const createChart = useCreateChart();
@@ -30,16 +31,33 @@ export default function HomeContainer() {
     <Grid
       data-testid="home-container"
       container
+      direction="column"
       justifyContent="center"
       sx={(theme: Theme) => ({
         backgroundColor: theme.palette.background.paper,
         borderRadius: 2,
+        minHeight: CHART_LARGE_SIZE,
         p: 2,
         m: 2,
       })}
     >
-      {chart && <Typography variant="h4">{t("chart.current_sky")}</Typography>}
-      {chart && <ChartController chart={chart} />}
+      <Typography variant="h4" align="center">
+        {t("chart.current_sky")}
+      </Typography>
+      {chart ? (
+        <>
+          <ChartController chart={chart} />
+        </>
+      ) : (
+        <Grid
+          container
+          justifyContent="center"
+          alignContent="center"
+          sx={{ minHeight: CHART_LARGE_SIZE }}
+        >
+          <CircularProgress />
+        </Grid>
+      )}
     </Grid>
   );
 }

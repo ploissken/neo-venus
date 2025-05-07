@@ -11,6 +11,7 @@ import {
   InputLabel,
   InputAdornment,
   TextField,
+  Button,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -114,6 +115,11 @@ export function LocationPicker({ onLocationChanged }: LocationPickerProps) {
               value={inputValue}
               disabled={loading}
               onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearchLocation();
+                }
+              }}
               sx={{ height: "100%", width: "100%" }}
               slotProps={{
                 input: {
@@ -122,6 +128,7 @@ export function LocationPicker({ onLocationChanged }: LocationPickerProps) {
                       <IconButton
                         aria-label={t("chart.create.search_city")}
                         onClick={handleSearchLocation}
+                        loading={loading}
                       >
                         <Search />
                       </IconButton>
@@ -136,13 +143,14 @@ export function LocationPicker({ onLocationChanged }: LocationPickerProps) {
 
       {hasLocationsLoaded && (
         <Grid size={2} container justifyContent="center">
-          <IconButton
-            size="large"
+          <Button
+            fullWidth
+            color="info"
             aria-label={t("chart.create.clear_city")}
             onClick={handleClearLocation}
           >
             <Cancel />
-          </IconButton>
+          </Button>
         </Grid>
       )}
     </Grid>

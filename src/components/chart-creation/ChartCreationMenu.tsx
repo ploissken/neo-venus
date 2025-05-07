@@ -42,15 +42,7 @@ export function ChartCreationMenu({ onChartCreated }: ChartCreationMenuProps) {
   };
 
   return (
-    <Grid
-      container
-      size={12}
-      spacing={2}
-      sx={{
-        justifyContent: "space-between",
-        alignItems: "stretch",
-      }}
-    >
+    <Grid container size={12} spacing={2} alignContent="start">
       <Grid size={{ xs: 12, lg: 4 }}>
         <DateTimePicker onDateChanged={setDateValue} />
       </Grid>
