@@ -28,6 +28,14 @@
       "title": "Celestial Signature"
     }
   },
+  "location_service": {
+    "regenerate_chart": "Regenarete considering my location",
+    "error": {
+      "denied": "Unable to access location. Permission denied.",
+      "unavailable": "Location service unavailable.",
+      "timeout": "Unable to access location. Request took too long."
+    }
+  },
   "menu": {
     "create_chart": "Create Astral Chart",
     "home": "Home",

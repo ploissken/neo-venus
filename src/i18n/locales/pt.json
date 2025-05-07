@@ -28,6 +28,14 @@
       "title": "Assinatura Celeste"
     }
   },
+  "location_service": {
+    "regenerate_chart": "Regerar considerando minha localização",
+    "error": {
+      "denied": "Não foi possível acessar sua localização. Permissão negada.",
+      "unavailable": "Serviço de localização indisponível.",
+      "timeout": "Não foi possível acessar sua localização. A solicitação demorou muito."
+    }
+  },
   "menu": {
     "create_chart": "Criar Mapa Astral",
     "home": "Início",

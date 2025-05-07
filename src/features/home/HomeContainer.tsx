@@ -1,5 +1,11 @@
 "use client";
-import { CircularProgress, Grid, Theme, Typography } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  Theme,
+  Typography,
+} from "@mui/material";
 import { ChartController } from "../create-chart/ChartController";
 import { useCreateChart } from "@/hooks/useCreateChart";
 import { useEffect, useState } from "react";
@@ -7,12 +13,53 @@ import { Chart } from "@/lib/chart.types";
 import { useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { CHART_LARGE_SIZE } from "@/lib/chart.consts";
+import { LOCATION_SERVICE_TIMEOUT } from "@/lib/location.types";
+import { Refresh } from "@mui/icons-material";
 
 export default function HomeContainer() {
   const createChart = useCreateChart();
   const { showMessage } = useSnackbar();
   const t = useTranslations();
   const [chart, setChart] = useState<Chart | undefined>();
+
+  const handleGetLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        ({ coords }) => {
+          const { latitude, longitude } = coords;
+          createChart({
+            referenceDate: new Date(),
+            latitude,
+            longitude,
+          }).then((chartResult) => {
+            if ("error" in chartResult) {
+              showMessage(
+                t(`chart.create.error.${chartResult.error}`),
+                "error"
+              );
+            } else {
+              setChart(chartResult);
+            }
+          });
+        },
+        (error) => {
+          if (error.code === 1) {
+            showMessage(t("location_service.error.denied"), "error");
+          } else if (error.code === 2) {
+            showMessage(t("location_service.error.unavailable"), "error");
+          } else if (error.code === 3) {
+            showMessage(t("location_service.error.timeout"), "error");
+          }
+        },
+        {
+          timeout: LOCATION_SERVICE_TIMEOUT,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      showMessage(t("location_service.error.unavailable"), "error");
+    }
+  };
 
   useEffect(() => {
     createChart({
@@ -44,10 +91,19 @@ export default function HomeContainer() {
       <Typography variant="h4" align="center">
         {t("chart.current_sky")}
       </Typography>
+      {chart && !chart.asc && (
+        <Grid container justifyContent="center">
+          <Button
+            color="secondary"
+            onClick={handleGetLocation}
+            startIcon={<Refresh />}
+          >
+            {t("location_service.regenerate_chart")}
+          </Button>
+        </Grid>
+      )}
       {chart ? (
-        <>
-          <ChartController chart={chart} />
-        </>
+        <ChartController chart={chart} />
       ) : (
         <Grid
           container
