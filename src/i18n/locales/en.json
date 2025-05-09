@@ -29,7 +29,7 @@
     }
   },
   "location_service": {
-    "regenerate_chart": "Regenarete considering my location",
+    "regenerate_chart": "Regenerate considering my location",
     "error": {
       "denied": "Unable to access location. Permission denied.",
       "unavailable": "Location service unavailable.",
