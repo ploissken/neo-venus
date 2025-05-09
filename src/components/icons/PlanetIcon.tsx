@@ -1,5 +1,9 @@
 import { Planet } from "@/lib/chart.types";
-import { PLANET_SIZE } from "@/lib/chart.consts";
+import {
+  ANIMATION_PLANET_DELAY,
+  ANIMATION_ZODIAC_HOUSE_TOTAL,
+  PLANET_SIZE,
+} from "@/lib/chart.consts";
 import { motion } from "framer-motion";
 import {
   Sun,
@@ -17,6 +21,7 @@ import {
 interface PlanetIconProps {
   planet: Planet;
   color?: string;
+  delayAnimation?: boolean;
   size?: number;
   x?: number;
   y?: number;
@@ -53,10 +58,12 @@ export function PlanetIcon({
   planet,
   color = "lightgrey",
   size = PLANET_SIZE,
+  delayAnimation = true,
   x = 0,
   y = 0,
 }: PlanetIconProps) {
   const planetIcon = getPlanetIcon(planet);
+  const animationDelay = delayAnimation ? ANIMATION_ZODIAC_HOUSE_TOTAL : 0;
 
   return (
     <svg
@@ -74,7 +81,7 @@ export function PlanetIcon({
           type: "spring",
           stiffness: 500,
           damping: 20,
-          delay: 1.8 + 0.1 * planet,
+          delay: animationDelay + ANIMATION_PLANET_DELAY * planet,
         }}
       >
         {planetIcon}

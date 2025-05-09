@@ -1,4 +1,9 @@
-import { ASPECT_WHEEL_PROPORTION } from "@/lib/chart.consts";
+import {
+  ANIMATION_ASPECT_DELAY,
+  ANIMATION_ASPECT_DURATION,
+  ANIMATION_ZODIAC_HOUSE_TOTAL,
+  ASPECT_WHEEL_PROPORTION,
+} from "@/lib/chart.consts";
 import { Aspect, ChartPlanet, PlanetAspect } from "@/lib/chart.types";
 import { motion } from "framer-motion";
 
@@ -6,6 +11,7 @@ interface AspectsWheelProps {
   aspects: PlanetAspect[];
   planets: ChartPlanet[];
   size: number;
+  delayAnimation?: boolean;
 }
 
 const getAspectStyle = (aspectIndex: Aspect) => {
@@ -44,7 +50,12 @@ const getAspectStyle = (aspectIndex: Aspect) => {
   }
 };
 
-export function AspectsWheel({ aspects, planets, size }: AspectsWheelProps) {
+export function AspectsWheel({
+  aspects,
+  planets,
+  size,
+  delayAnimation = true,
+}: AspectsWheelProps) {
   const radius = ASPECT_WHEEL_PROPORTION * size;
 
   const renderingAspects = aspects.map(({ aspectIndex, planetA, planetB }) => ({
@@ -80,6 +91,9 @@ export function AspectsWheel({ aspects, planets, size }: AspectsWheelProps) {
       {renderingAspects.map((aspect, index) => {
         const angleA = (aspect.planetALongitude! * Math.PI) / 180;
         const angleB = (aspect.planetBLongitude! * Math.PI) / 180;
+        const animationDelay = delayAnimation
+          ? ANIMATION_ZODIAC_HOUSE_TOTAL
+          : 0;
 
         const x1 = size / 2 + radius * Math.cos(angleA);
         const y1 = size / 2 + radius * Math.sin(angleA);
@@ -94,8 +108,8 @@ export function AspectsWheel({ aspects, planets, size }: AspectsWheelProps) {
             initial={{ x2: x1, y2: y1 }}
             animate={{ x2, y2 }}
             transition={{
-              delay: 3 + index * 0.05,
-              duration: 0.1,
+              delay: animationDelay + index * ANIMATION_ASPECT_DELAY,
+              duration: ANIMATION_ASPECT_DURATION,
               ease: "easeOut",
             }}
             {...getAspectStyle(aspect.aspectIndex)}

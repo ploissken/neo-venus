@@ -8,7 +8,7 @@ import { useCreateChart } from "@/hooks/useCreateChart";
 import { Chart } from "@/lib/chart.types";
 
 export interface ChartCreationMenuProps {
-  onChartCreated: (chart: Chart) => void;
+  onChartCreated: (chart: Chart | undefined) => void;
 }
 
 export function ChartCreationMenu({ onChartCreated }: ChartCreationMenuProps) {
@@ -28,6 +28,7 @@ export function ChartCreationMenu({ onChartCreated }: ChartCreationMenuProps) {
   const createChart = useCreateChart();
 
   const handleCreateChart = async () => {
+    onChartCreated(undefined);
     setLoading(true);
     const chartResult = await createChart({
       referenceDate: dateValue!,
@@ -55,7 +56,6 @@ export function ChartCreationMenu({ onChartCreated }: ChartCreationMenuProps) {
           variant="contained"
           onClick={handleCreateChart}
           disabled={!canFetchChart || loading}
-          loading={loading}
           size="small"
           sx={{ width: "100%", height: (theme) => theme.spacing(7) }}
         >

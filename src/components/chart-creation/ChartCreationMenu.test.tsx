@@ -116,7 +116,7 @@ describe("ChartCreationMenu component", () => {
     expect(mockSetLoading).toHaveBeenCalledWith(true);
 
     await waitFor(() => {
-      expect(mockSetChart).not.toHaveBeenCalled();
+      expect(mockSetChart).toHaveBeenCalledWith(undefined);
       expect(mockedShowMessage).toHaveBeenCalledWith(
         "chart.create.error.error_cause",
         "error"

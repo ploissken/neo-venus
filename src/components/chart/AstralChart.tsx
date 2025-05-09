@@ -56,13 +56,18 @@ export default function AstralChart({ chart }: { chart: Chart }) {
         <HousesWheel size={chartSize} houses={chart.houses} />
       </Box>
       <Box style={absolutePosition}>
-        <PlanetsWheel chartPlanets={chart.planets} size={chartSize} />
+        <PlanetsWheel
+          chartPlanets={chart.planets}
+          size={chartSize}
+          delayAnimation={ascendantLongitude !== 0}
+        />
       </Box>
       <Box style={absolutePosition}>
         <AspectsWheel
           planets={chart.planets}
           aspects={chart.aspects}
           size={chartSize}
+          delayAnimation={ascendantLongitude !== 0}
         />
       </Box>
     </Grid>

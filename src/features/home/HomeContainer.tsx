@@ -24,6 +24,8 @@ export default function HomeContainer() {
   const [chart, setChart] = useState<Chart | undefined>();
 
   const handleGetLocation = () => {
+    const previousChart = chart ? { ...chart } : undefined;
+    setChart(undefined);
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         ({ coords }) => {
@@ -51,6 +53,7 @@ export default function HomeContainer() {
           } else if (error.code === 3) {
             showMessage(t("location_service.error.timeout"), "error");
           }
+          setChart(previousChart);
         },
         {
           timeout: LOCATION_SERVICE_TIMEOUT,
@@ -59,14 +62,13 @@ export default function HomeContainer() {
       );
     } else {
       showMessage(t("location_service.error.unavailable"), "error");
+      setChart(previousChart);
     }
   };
 
   const handleRefresh = () => {
     setChart(undefined);
-    setTimeout(() => {
-      handleGetLocation();
-    }, 200);
+    handleGetLocation();
   };
 
   useEffect(() => {

@@ -1,4 +1,6 @@
 import {
+  ANIMATION_HOUSE_DELAY,
+  ANIMATION_ZODIAC_DURATION,
   HOUSE_WHEEL_PROPORTION,
   defaultDividerColor,
 } from "@/lib/chart.consts";
@@ -15,12 +17,12 @@ const HIGHLIGHED_HOUSE_STROKE = 3;
 
 export function HousesWheel({ size, houses }: HousesWheelProps) {
   const radius = HOUSE_WHEEL_PROPORTION * size;
-  const importantHouseMarkers = [0, 3, 6, 9]; // ac, ic, dc, mc
+  const majorHouseIndexes = [0, 3, 6, 9]; // ac, ic, dc, mc
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      {houses.map(({ houseIndex, renderLongitude }, i) => {
-        const isMajor = importantHouseMarkers.includes(houseIndex);
+      {houses.map(({ houseIndex, renderLongitude }) => {
+        const isMajorHouse = majorHouseIndexes.includes(houseIndex);
         const angleRad = (renderLongitude * Math.PI) / 180;
         const x2 = size / 2 + radius * Math.cos(angleRad);
         const y2 = size / 2 + radius * Math.sin(angleRad);
@@ -33,13 +35,14 @@ export function HousesWheel({ size, houses }: HousesWheelProps) {
             initial={{ x2: size / 2, y2: size / 2 }}
             animate={{ x2, y2 }}
             transition={{
-              delay: 1 + i * 0.03,
-              duration: 0.5,
+              delay:
+                ANIMATION_ZODIAC_DURATION + houseIndex * ANIMATION_HOUSE_DELAY,
+              duration: 0.1,
               ease: "easeOut",
             }}
             stroke={defaultDividerColor.house}
             strokeWidth={
-              isMajor ? HIGHLIGHED_HOUSE_STROKE : DEFAULT_HOUSE_STROKE
+              isMajorHouse ? HIGHLIGHED_HOUSE_STROKE : DEFAULT_HOUSE_STROKE
             }
           />
         );
