@@ -1,6 +1,5 @@
-import { Aspect } from "@/lib/chart.types";
+import { Aspect, ASPECT_SIZE, getAspectProperties } from "@/lib";
 
-import { ASPECT_SIZE } from "@/lib/chart.consts";
 import {
   Conjunction,
   SemiSextile,
@@ -54,21 +53,30 @@ function getAspectIcon(aspect: Aspect) {
 
 export function AspectIcon({
   aspect,
-  color = "lightgrey",
   size = ASPECT_SIZE,
   x = 0,
   y = 0,
 }: AspectIconProps) {
+  const easy = { fill: "cyan" };
+  const difficult = { fill: "red" };
+  const minor = { fill: "white" };
+
   const aspectIcon = getAspectIcon(aspect);
+  const aspectProperties = getAspectProperties(aspect);
+  const aspectStyle = aspectProperties.major
+    ? aspectProperties.challenging
+      ? difficult
+      : easy
+    : minor;
 
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 35 35"
-      fill={color}
       x={x}
       y={y}
+      {...aspectStyle}
     >
       {aspectIcon}
     </svg>

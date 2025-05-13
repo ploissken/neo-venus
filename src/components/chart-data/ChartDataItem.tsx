@@ -36,8 +36,8 @@ export function ChartDataItem({ itemData }: ChartDataItemProps) {
       </Grid>
       <Grid>{label}</Grid>
       <Grid container alignItems="center" sx={{ mx: 1 }}>
-        <ZodiacSignIcon sign={signIndex} />
-        <Grid sx={{ color: "grey" }}>{signLabel}</Grid>
+        <ZodiacSignIcon sign={signIndex} color="silver" />
+        <Grid sx={{ color: "silver" }}>{signLabel}</Grid>
       </Grid>
       <Grid container size="grow" justifyContent="flex-end">
         {`${degrees}°${minutes}'${seconds}"`}

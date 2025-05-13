@@ -3,8 +3,12 @@ import {
   ANIMATION_ASPECT_DURATION,
   ANIMATION_ZODIAC_HOUSE_TOTAL,
   ASPECT_WHEEL_PROPORTION,
-} from "@/lib/chart.consts";
-import { Aspect, ChartPlanet, PlanetAspect } from "@/lib/chart.types";
+  Aspect,
+  ChartPlanet,
+  PlanetAspect,
+  getAspectProperties,
+} from "@/lib";
+
 import { motion } from "framer-motion";
 
 interface AspectsWheelProps {
@@ -27,26 +31,12 @@ const getAspectStyle = (aspectIndex: Aspect) => {
 
   const minor = { strokeDasharray: 4 };
 
-  switch (aspectIndex) {
-    case Aspect.Opposition:
-    case Aspect.Square:
-      return { ...difficult };
+  const aspectProperties = getAspectProperties(aspectIndex);
 
-    case Aspect.SemiSquare:
-    case Aspect.SesquiQuadrate:
-    case Aspect.Quincux:
-    case Aspect.SemiSextile:
-      return { ...difficult, ...minor };
-
-    case Aspect.Conjunction:
-    case Aspect.Trine:
-    case Aspect.Sextile:
-      return { ...easy };
-
-    case Aspect.Quintile:
-      return { ...easy, ...minor };
-    default:
-      return { stroke: "white", ...minor };
+  if (aspectProperties.challenging) {
+    return aspectProperties.major ? difficult : { ...difficult, ...minor };
+  } else {
+    return aspectProperties.major ? easy : { stroke: "white", ...minor };
   }
 };
 
