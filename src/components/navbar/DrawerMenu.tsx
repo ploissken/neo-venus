@@ -14,6 +14,7 @@ import {
   Grid,
 } from "@mui/material";
 import { LogoWithTitle } from "../logo";
+import NextLink from "next/link";
 
 export function DrawerMenu() {
   const t = useTranslations();
@@ -31,6 +32,7 @@ export function DrawerMenu() {
       icon: <AutoAwesome />,
       route: "/create-chart",
     },
+    { text: t("menu.sign_up"), icon: <Info />, route: "/sign-up" },
     { text: t("menu.about"), icon: <Info />, route: "/about" },
   ];
 
@@ -39,7 +41,13 @@ export function DrawerMenu() {
       <LogoWithTitle size={40} color="white" />
       <List sx={{ mt: 4, width: "100%" }}>
         {routes.map(({ text, icon, route }) => (
-          <Link href={route} key={text} sx={{ textDecoration: "none" }}>
+          <Link
+            component={NextLink}
+            href={route}
+            key={text}
+            sx={{ textDecoration: "none" }}
+            onClick={toggleDrawer(false)}
+          >
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{icon}</ListItemIcon>
