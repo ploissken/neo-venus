@@ -2,16 +2,18 @@ import { mapAspects, mapHouses, mapPlanets } from "@/lib/create-chart.helpers";
 import { NextRequest, NextResponse } from "next/server";
 import { Chart, ChartGenerationData } from "@/lib/chart.types";
 
-const SERVICE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://be-merc.txto.com.br/chart/create"
-    : "http://localhost:8888/chart/create";
-
 export async function POST(req: NextRequest) {
+  const BASE_URL = process.env.API_BASE_URL;
+  const SERVICE_PATH = "/chart/create";
+
+  if (!BASE_URL) {
+    throw new Error("Missing API_BASE_URL in environment variables");
+  }
+
   const requestBody: ChartGenerationData = await req.json();
 
   try {
-    const response = await fetch(SERVICE_URL, {
+    const response = await fetch(`${BASE_URL}${SERVICE_PATH}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

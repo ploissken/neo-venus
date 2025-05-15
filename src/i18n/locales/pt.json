@@ -37,9 +37,10 @@
     }
   },
   "menu": {
+    "about": "Sobre",
     "create_chart": "Criar Mapa Astral",
     "home": "Início",
-    "about": "Sobre"
+    "sign_up": "Criar Perfil"
   },
   "planet": {
     "Sun": "Sol",
@@ -52,6 +53,26 @@
     "Uranus": "Urano",
     "Neptune": "Netuno",
     "Pluto": "Plutão"
+  },
+  "form": {
+    "identity": {
+      "email": {
+        "label": "E-mail",
+        "required": "E-mail é obrigatório",
+        "helper": "Por favor, digite um endereço de e-mail válido"
+      },
+      "confirm_password": {
+        "label": "Confirmar Senha",
+        "required": "Por favor, confirme sua senha",
+        "helper": "Senhas são diferentes"
+      },
+      "password": {
+        "label": "Senha",
+        "required": "Senha é obrigatório",
+        "helper": "A senha precisa ter pelo menos 8 caracteres"
+      },
+      "submit": "Criar Conta"
+    }
   },
   "zodiac_sign": {
     "Aries": "Áries",

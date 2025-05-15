@@ -37,9 +37,10 @@
     }
   },
   "menu": {
+    "about": "About",
     "create_chart": "Create Astral Chart",
     "home": "Home",
-    "about": "About"
+    "sign_up": "Sign Up"
   },
   "planet": {
     "Sun": "Sun",
@@ -52,6 +53,26 @@
     "Uranus": "Uranus",
     "Neptune": "Neptune",
     "Pluto": "Pluto"
+  },
+  "form": {
+    "identity": {
+      "email": {
+        "label": "E-mail",
+        "required": "E-mail is required",
+        "helper": "Please enter a valid e-mail address"
+      },
+      "confirm_password": {
+        "label": "Confirm Password",
+        "required": "Please confirm your password",
+        "helper": "Passwords do not match"
+      },
+      "password": {
+        "label": "Password",
+        "required": "Password is required",
+        "helper": "Password must be at least 8 characters long"
+      },
+      "submit": "Sign Up"
+    }
   },
   "zodiac_sign": {
     "Aries": "Aries",

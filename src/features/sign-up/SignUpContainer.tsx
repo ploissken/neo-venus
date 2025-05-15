@@ -1,7 +1,7 @@
 "use client";
 import { Grid, Step, StepLabel, Stepper, Theme } from "@mui/material";
 import { useState } from "react";
-import { IdentityStep } from "./IdentityStep";
+import { IdentityStepContainer } from "./identity-step/IdentityStepContainer";
 import { ProfileStep } from "./ProfileStep";
 import { FriendsFinderStep } from "./FriendsStep";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,9 @@ export function SignUpContainer() {
         ))}
       </Stepper>
       {activeStep === 0 && (
-        <IdentityStep onStepComplete={() => setActiveStep(activeStep + 1)} />
+        <IdentityStepContainer
+          onStepComplete={() => setActiveStep(activeStep + 1)}
+        />
       )}
       {activeStep === 1 && (
         <ProfileStep onStepComplete={() => setActiveStep(activeStep + 1)} />
