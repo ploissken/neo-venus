@@ -11,20 +11,20 @@ export function IdentityStepContainer({
     <Grid
       data-testid="identity-step-container"
       container
-      size={6}
+      size={{ xs: 12, md: 6 }}
       direction="column"
       sx={{
         py: 4,
         gap: 2,
       }}
     >
-      <Button variant="outlined" startIcon={<Google />}>
+      <Button variant="outlined" startIcon={<Google />} disabled>
         Sign up with Google
       </Button>
       <Divider>
         <Chip label="OR" size="small" />
       </Divider>
-      <IdentityForm onStepComplete={onStepComplete} />
+      <IdentityForm onIdentityCreated={onStepComplete} />
     </Grid>
   );
 }

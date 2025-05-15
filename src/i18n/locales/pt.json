@@ -61,6 +61,12 @@
         "required": "E-mail é obrigatório",
         "helper": "Por favor, digite um endereço de e-mail válido"
       },
+      "error": {
+        "user_email_unique": "E-mail já cadastrado",
+        "invalid_email": "E-mail inválido",
+        "missing_data": "E-mail ou senha inválido",
+        "password_too_short": "A senha precisa ter pelo menos 8 caracteres"
+      },
       "confirm_password": {
         "label": "Confirmar Senha",
         "required": "Por favor, confirme sua senha",

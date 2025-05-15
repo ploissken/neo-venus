@@ -61,6 +61,12 @@
         "required": "E-mail is required",
         "helper": "Please enter a valid e-mail address"
       },
+      "error": {
+        "user_email_unique": "E-mail already registered",
+        "invalid_email": "E-mail is invalid",
+        "missing_data": "E-mail or password missing",
+        "password_too_short": "Password must be at least 8 characters long"
+      },
       "confirm_password": {
         "label": "Confirm Password",
         "required": "Please confirm your password",

@@ -1,4 +1,5 @@
 import { useSnackbar } from "@/hooks";
+import { BackendErrorResponse, BackendResponse } from "@/lib";
 import { Button, Grid, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -10,10 +11,15 @@ export type IdentityFormInputs = {
   confirmPassword: string;
 };
 
+export type UserResponse = {
+  id: string;
+  email: string;
+};
+
 export function IdentityForm({
   onIdentityCreated,
 }: {
-  onIdentityCreated: (account: unknown) => void;
+  onIdentityCreated: (user: UserResponse) => void;
 }) {
   const {
     register,
@@ -32,15 +38,18 @@ export function IdentityForm({
     setLoading(true);
     fetch("/api/sign-up", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     })
       .then(async (response) => {
-        const data = await response.json();
-        if (data.ok) {
-          showMessage(t(`chart.ok`), "info");
-          onIdentityCreated(data.account);
+        const fetchData: BackendResponse<UserResponse> | BackendErrorResponse =
+          await response.json();
+        if (fetchData.ok) {
+          onIdentityCreated(fetchData.data);
         } else {
-          showMessage(t(`chart.create.error`), "error");
+          showMessage(t(`form.identity.error.${fetchData.error}`), "error");
         }
       })
       .finally(() => setLoading(false));
@@ -55,12 +64,11 @@ export function IdentityForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Grid
-        data-testid="identity-step-container"
+        data-testid="identity-step-form"
         container
         size={12}
         direction="column"
         sx={{
-          py: 4,
           gap: 2,
         }}
       >

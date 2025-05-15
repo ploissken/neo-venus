@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { IdentityFormInputs } from "@/features/sign-up/identity-step/IdentityForm";
+import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {
   const BASE_URL = process.env.API_BASE_URL;
@@ -10,29 +11,29 @@ export async function POST(req: NextRequest) {
   }
 
   const requestBody: IdentityFormInputs = await req.json();
+  const { email, password } = requestBody;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token");
 
   try {
     const response = await fetch(`${BASE_URL}${SERVICE_PATH}`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        Cookie: `token=${token?.value}`,
       },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify({ email, password }),
     });
+    const responseData = await response.json();
+    const nextRes = NextResponse.json(responseData);
 
-    const data = await response.json();
-
-    if (data.ok) {
-      return NextResponse.json({
-        ok: true,
-        data: data.account,
-      });
-    } else {
-      return NextResponse.json({
-        ok: false,
-        data,
-      });
+    const setCookie = response.headers.get("set-cookie");
+    if (setCookie) {
+      nextRes.headers.set("set-cookie", setCookie);
     }
+
+    return nextRes;
   } catch {
     return NextResponse.json({
       ok: false,
