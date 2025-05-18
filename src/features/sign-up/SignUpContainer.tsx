@@ -1,5 +1,14 @@
 "use client";
-import { Grid, Step, StepLabel, Stepper, Theme } from "@mui/material";
+import {
+  Box,
+  Fade,
+  Grid,
+  Slide,
+  Step,
+  StepLabel,
+  Stepper,
+  Theme,
+} from "@mui/material";
 import { useState } from "react";
 import { IdentityStepContainer } from "./identity-step/IdentityStepContainer";
 import { ProfileStepContainer } from "./profile-step/ProfileStepContainer";
@@ -9,10 +18,33 @@ import { useRouter } from "next/navigation";
 const steps = ["Identity Step", "Create your profile", "Add friends"];
 
 export function SignUpContainer() {
+  const TRANSITION_DURATION = 200;
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
-  const handleSignupComplete = () => {
-    router.push("/");
+  const [show, setShow] = useState(true);
+  const [direction, setDirection] = useState<"left" | "right">("left");
+
+  const handleNext = () => {
+    setDirection("right");
+    setShow(false);
+    setTimeout(() => {
+      setDirection("left");
+      setActiveStep(activeStep + 1);
+      setShow(true);
+    }, TRANSITION_DURATION + 50);
+  };
+
+  const renderStep = () => {
+    switch (activeStep) {
+      case 0:
+        return <IdentityStepContainer onStepComplete={handleNext} />;
+      case 1:
+        return <ProfileStepContainer onStepComplete={handleNext} />;
+      case 2:
+        return <FriendsFinderStep onStepComplete={() => router.push("/")} />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -36,26 +68,33 @@ export function SignUpContainer() {
         sx={{ py: 4 }}
       >
         <Stepper nonLinear activeStep={activeStep}>
-          {steps.map((label) => (
-            <Step key={label} completed={false}>
+          {steps.map((label, index) => (
+            <Step key={label} completed={activeStep > index}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
       </Grid>
-      {activeStep === 0 && (
-        <IdentityStepContainer
-          onStepComplete={() => setActiveStep(activeStep + 1)}
-        />
-      )}
-      {activeStep === 1 && (
-        <ProfileStepContainer
-          onStepComplete={() => setActiveStep(activeStep + 1)}
-        />
-      )}
-      {activeStep === 2 && (
-        <FriendsFinderStep onStepComplete={handleSignupComplete} />
-      )}
+      <Grid
+        container
+        size={{ xs: 12, md: 6 }}
+        direction="column"
+        alignItems="center"
+        sx={{ minHeight: "50vh", overflow: "hidden" }}
+      >
+        <Slide
+          direction={direction}
+          in={show}
+          appear={false}
+          timeout={TRANSITION_DURATION}
+        >
+          <Box sx={{ width: "100%" }}>
+            <Fade in={show} appear={false} timeout={TRANSITION_DURATION}>
+              <Box>{renderStep()}</Box>
+            </Fade>
+          </Box>
+        </Slide>
+      </Grid>
     </Grid>
   );
 }
