@@ -11,7 +11,7 @@ export function IdentityStepContainer({
     <Grid
       data-testid="identity-step-container"
       container
-      size={{ xs: 12, md: 6 }}
+      size={12}
       direction="column"
       sx={{
         py: 4,
