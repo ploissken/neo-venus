@@ -1,5 +1,4 @@
-import { Google } from "@mui/icons-material";
-import { Button, Chip, Divider, Grid, TextField } from "@mui/material";
+import { Button, Chip, Divider, Grid } from "@mui/material";
 
 export function FriendsFinderStep({
   onStepComplete,
@@ -10,35 +9,19 @@ export function FriendsFinderStep({
     <Grid
       data-testid="friends-finder-step-container"
       container
-      size={6}
+      size={12}
       direction="column"
       sx={{
         py: 4,
         gap: 2,
       }}
     >
-      <Button variant="outlined" startIcon={<Google />}>
-        Sign up with Google
-      </Button>
       <Divider>
-        <Chip label="OR" size="small" />
+        <Chip label="TODO" size="small" />
       </Divider>
-      <TextField id="username" label="Username" variant="outlined" />
-      <TextField id="email" label="E-mail" variant="outlined" type="email" />
-      <TextField
-        id="password"
-        label="Password"
-        variant="outlined"
-        type="password"
-      />
-      <TextField
-        id="confirm-password"
-        label="Confirm Password"
-        variant="outlined"
-        type="password"
-      />
+
       <Button variant="contained" onClick={onStepComplete}>
-        Sign up
+        OK
       </Button>
     </Grid>
   );

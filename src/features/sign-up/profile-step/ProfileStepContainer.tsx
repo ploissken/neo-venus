@@ -1,6 +1,4 @@
-import {
-  Grid,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import { ProfileForm } from "./ProfileForm";
 
 export function ProfileStepContainer({
@@ -12,18 +10,14 @@ export function ProfileStepContainer({
     <Grid
       data-testid="identity-step-container"
       container
-      size={{ xs: 12, md: 6 }}
+      size={12}
       direction="column"
       sx={{
         py: 4,
         gap: 2,
       }}
     >
-      <ProfileForm
-        onStepComplete={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
+      <ProfileForm onIdentityCreated={onStepComplete} />
     </Grid>
   );
 }
