@@ -1,5 +1,9 @@
 import { useSnackbar } from "@/hooks";
-import { BackendErrorResponse, BackendResponse } from "@/lib";
+import {
+  BackendErrorResponse,
+  BackendResponse,
+  ProfileFormFields,
+} from "@/lib";
 import { Button, Grid, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -57,7 +61,7 @@ export function IdentityForm({
 
   useEffect(() => {
     if (password) {
-      trigger("confirmPassword");
+      trigger(ProfileFormFields.ConfirmPassword);
     }
   }, [password, trigger]);
 
@@ -68,9 +72,7 @@ export function IdentityForm({
         container
         size={12}
         direction="column"
-        sx={{
-          gap: 2,
-        }}
+        sx={{ gap: 2 }}
       >
         <TextField
           id="email"
@@ -79,7 +81,7 @@ export function IdentityForm({
           type="email"
           error={!!errors?.email}
           helperText={errors?.email?.message}
-          {...register("email", {
+          {...register(ProfileFormFields.Email, {
             required: t("form.identity.email.required"),
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -94,7 +96,7 @@ export function IdentityForm({
           type="password"
           error={!!errors?.password}
           helperText={errors?.password?.message}
-          {...register("password", {
+          {...register(ProfileFormFields.Password, {
             required: t("form.identity.password.required"),
             pattern: {
               value: /^.{8,}$/,
@@ -109,7 +111,7 @@ export function IdentityForm({
           type="password"
           error={!!errors?.confirmPassword}
           helperText={errors?.confirmPassword?.message}
-          {...register("confirmPassword", {
+          {...register(ProfileFormFields.ConfirmPassword, {
             required: t("form.identity.confirm_password.required"),
             validate: (value) =>
               value === watch("password") ||

@@ -4,3 +4,4 @@ export * from "./chart.types";
 export * from "./common.types";
 export * from "./create-chart.helpers";
 export * from "./location.types";
+export * from "./profile.helpers";

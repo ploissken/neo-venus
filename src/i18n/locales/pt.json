@@ -54,6 +54,28 @@
     "Neptune": "Netuno",
     "Pluto": "Plutão"
   },
+  "sogi": {
+    "label": "Orientação sexual & Identidade de Gênero",
+    "gender": {
+      "male": "Homem",
+      "female": "Mulher",
+      "nb": "Não Binário",
+      "trans": "Transexual",
+      "neutral": "Neutro",
+      "other": "Outro",
+      "undeclared": "Prefiro não declarar"
+    },
+    "orientation": {
+      "straight": "Heterossexual",
+      "gay": "Gay / Lésbica",
+      "bi": "Bisesxual",
+      "queer": "Queer",
+      "pan": "Pansexual",
+      "asex": "Assexual",
+      "other": "Outro",
+      "undeclared": "Prefiro não declarar"
+    }
+  },
   "form": {
     "identity": {
       "email": {
@@ -78,6 +100,33 @@
         "helper": "A senha precisa ter pelo menos 8 caracteres"
       },
       "submit": "Criar Conta"
+    },
+    "profile": {
+      "avatar": {
+        "label": "Avatar do Usuário"
+      },
+      "full_name": {
+        "label": "Nome Completo"
+      },
+      "gender": {
+        "label": "Identidade de Gênero"
+      },
+      "orientation": {
+        "label": "Orientação Sexual"
+      },
+      "submit": "Criar perfil",
+      "username": {
+        "available": "Nome de usuário disponível",
+        "label": "Nome de usuário",
+        "required": "Nome de usuário é obrigatório",
+        "no_spaces": "Nome de usuário não pode conter espaços",
+        "min_length": "Nome de usuário deve ter no mínimo 3 caracteres",
+        "max_length": "Nome de usuário deve ter no máximo 32 caracteres",
+        "unavailable": "Nome de usuário já existe"
+      },
+      "error": {
+        "unknown": "Erro desconhecido. Tente novamente mais tarde."
+      }
     }
   },
   "zodiac_sign": {

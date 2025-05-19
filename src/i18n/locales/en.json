@@ -54,6 +54,28 @@
     "Neptune": "Neptune",
     "Pluto": "Pluto"
   },
+  "sogi": {
+    "label": "Sexual Orientation & Gender Identity",
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "nb": "Non Binary",
+      "trans": "Transexual",
+      "neutral": "Neutral",
+      "other": "Other",
+      "undeclared": "I'd rather not declare"
+    },
+    "orientation": {
+      "straight": "Heteroseuxal",
+      "gay": "Gay / Lesbian",
+      "bi": "Bisexual",
+      "queer": "Queer",
+      "pan": "Pansexual",
+      "asex": "Assexual",
+      "other": "Other",
+      "undeclared": "I'd rather not declare"
+    }
+  },
   "form": {
     "identity": {
       "email": {
@@ -78,6 +100,33 @@
         "helper": "Password must be at least 8 characters long"
       },
       "submit": "Sign Up"
+    },
+    "profile": {
+      "avatar": {
+        "label": "User Avatar"
+      },
+      "full_name": {
+        "label": "Full Name"
+      },
+      "gender": {
+        "label": "Gender Identity"
+      },
+      "orientation": {
+        "label": "Sexual Orientation"
+      },
+      "submit": "Create Profile",
+      "username": {
+        "available": "Username available",
+        "label": "Username",
+        "required": "Username is required",
+        "no_spaces": "Username cannot contain spaces",
+        "min_length": "Username must have at least 3 characters",
+        "max_length": "Username must have 32 characters maximum",
+        "unavailable": "Username unavailable"
+      },
+      "error": {
+        "unknown": "Unknown error. Please try again later."
+      }
     }
   },
   "zodiac_sign": {

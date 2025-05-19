@@ -1,9 +1,11 @@
-import { TextField } from "@mui/material";
+import { InputAdornment, TextField, Tooltip } from "@mui/material";
 import { useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { ProfileFormInputs } from "@/features/sign-up/profile-step/ProfileForm";
+import CheckIcon from "@mui/icons-material/Check";
+import { ProfileFormFields } from "@/lib";
 
 export function UsernameField() {
   const t = useTranslations();
@@ -22,7 +24,7 @@ export function UsernameField() {
 
   const handleUsernameBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const trimmed = event.target.value.trim();
-    setValue("username", trimmed, { shouldValidate: true });
+    setValue(ProfileFormFields.Username, trimmed, { shouldValidate: true });
 
     if (!errors.username) {
       setUsernameStatus("checking");
@@ -43,45 +45,58 @@ export function UsernameField() {
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsernameStatus(undefined);
-    clearErrors("username");
-    setValue("username", event.target.value.toLowerCase(), {
+    clearErrors(ProfileFormFields.Username);
+    setValue(ProfileFormFields.Username, event.target.value.toLowerCase(), {
       shouldValidate: true,
       shouldTouch: true,
     });
   };
 
   useEffect(() => {
-    trigger("username");
+    trigger(ProfileFormFields.Username);
   }, [trigger, usernameStatus]);
 
   return (
     <Controller
-      name="username"
+      name={ProfileFormFields.Username}
       control={control}
       render={({ field }) => (
         <TextField
           {...field}
-          name="username"
-          label="Username"
+          label={t("form.profile.username.label")}
           variant="outlined"
+          disabled={usernameStatus === "checking"}
           error={touchedFields.username && !!errors.username}
           helperText={
             touchedFields.username ? errors.username?.message : undefined
           }
           onBlur={handleUsernameBlur}
           onChange={handleUsernameChange}
+          slotProps={{
+            input: {
+              endAdornment: usernameStatus === "available" && (
+                <InputAdornment position="end">
+                  <Tooltip title={t("form.profile.username.available")}>
+                    <CheckIcon color="success" />
+                  </Tooltip>
+                </InputAdornment>
+              ),
+            },
+          }}
         />
       )}
       rules={{
-        required: "Username is required",
+        required: t("form.profile.username.required"),
         validate: {
-          noSpaces: (v) => /^\S+$/.test(v) || "Username cannot contain spaces",
+          noSpaces: (v) =>
+            /^\S+$/.test(v) || t("form.profile.username.no_spaces"),
           minLength: (v) =>
-            v.length >= 3 || "Username must be at least 3 characters",
+            v.length >= 3 || t("form.profile.username.min_length"),
           maxLength: (v) =>
-            v.length <= 32 || "Username must be 32 characters maximum",
+            v.length <= 32 || t("form.profile.username.max_length"),
           available: () =>
-            usernameStatus !== "unavailable" || "Username already registered",
+            usernameStatus !== "unavailable" ||
+            t("form.profile.username.unavailable"),
         },
       }}
     />

@@ -5,9 +5,13 @@ import { useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { ChartLocation } from "@/lib";
+import {
+  ChartLocation,
+  ProfileFormFields,
+  useGenderOptions,
+  useOrientationOptions,
+} from "@/lib";
 import { ControlledMultiSelect } from "@/components/common/ControlledMultiSelect";
-import { useGenderOptions, useOrientationOptions } from "@/lib/profile.helpers";
 import { UsernameField } from "@/components/common/UsernameField";
 
 export type ProfileFormInputs = {
@@ -24,7 +28,13 @@ export function ProfileForm({
 }: {
   onIdentityCreated: () => void;
 }) {
-  const methods = useForm<ProfileFormInputs>({ mode: "onChange" });
+  const methods = useForm<ProfileFormInputs>({
+    defaultValues: {
+      // must be set so react understands it as a controlled component
+      [ProfileFormFields.Username]: "",
+    },
+    mode: "onChange",
+  });
   const { register, handleSubmit, control } = methods;
   const t = useTranslations();
   const [loading, setLoading] = useState(false);
@@ -74,7 +84,7 @@ export function ProfileForm({
             >
               <Image
                 src={defaultAvatar}
-                alt="User Avatar"
+                alt={t("form.profile.avatar.label")}
                 style={{
                   width: "100%",
                   height: "auto",
@@ -84,16 +94,15 @@ export function ProfileForm({
           </Grid>
           <TextField
             id="fullName"
-            label="Full Name"
+            label={t("form.profile.full_name.label")}
             variant="outlined"
-            {...register("fullName")}
+            {...register(ProfileFormFields.FullName)}
           />
           <UsernameField />
 
           <Divider>
             <Chip
-              id="SOGI"
-              label="Gender and Sexual Orientation"
+              label={t("sogi.label")}
               size="small"
               color="primary"
               variant="outlined"
@@ -102,20 +111,20 @@ export function ProfileForm({
 
           <ControlledMultiSelect<ProfileFormInputs>
             control={control}
-            name="genderIdentities"
+            name={ProfileFormFields.Gender}
             options={useGenderOptions()}
-            label="Gender Identities"
+            label={t("form.profile.gender.label")}
           />
 
           <ControlledMultiSelect<ProfileFormInputs>
             control={control}
-            name="sexualOrientations"
+            name={ProfileFormFields.Orientation}
             options={useOrientationOptions()}
-            label="Sexual Orientations"
+            label={t("form.profile.orientation.label")}
           />
 
           <Button variant="contained" type="submit" loading={loading}>
-            Create Profile
+            {t("form.profile.submit")}
           </Button>
         </Grid>
       </form>
