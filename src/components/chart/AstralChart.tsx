@@ -12,9 +12,13 @@ import { ZodiacWheel } from "./ZodiacWheel";
 import theme from "@/theme";
 import { Chart } from "@/lib/chart.types";
 
-export default function AstralChart({ chart }: { chart: Chart }) {
-  // const { chart } = useChartContext();
-
+export default function AstralChart({
+  chart,
+  size,
+}: {
+  chart: Chart;
+  size?: number;
+}) {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const chartSize = isSmallScreen
@@ -44,21 +48,24 @@ export default function AstralChart({ chart }: { chart: Chart }) {
         position: "relative",
         top: 0,
         left: 0,
-        width: chartSize,
-        height: chartSize,
+        width: size || chartSize,
+        height: size || chartSize,
         overflow: "hidden",
       }}
     >
       <Box style={absolutePosition}>
-        <ZodiacWheel size={chartSize} rotationDegrees={-ascendantLongitude} />
+        <ZodiacWheel
+          size={size || chartSize}
+          rotationDegrees={-ascendantLongitude}
+        />
       </Box>
       <Box style={absolutePosition}>
-        <HousesWheel size={chartSize} houses={chart.houses} />
+        <HousesWheel size={size || chartSize} houses={chart.houses} />
       </Box>
       <Box style={absolutePosition}>
         <PlanetsWheel
           chartPlanets={chart.planets}
-          size={chartSize}
+          size={size || chartSize}
           delayAnimation={ascendantLongitude !== 0}
         />
       </Box>
@@ -66,7 +73,7 @@ export default function AstralChart({ chart }: { chart: Chart }) {
         <AspectsWheel
           planets={chart.planets}
           aspects={chart.aspects}
-          size={chartSize}
+          size={size || chartSize}
           delayAnimation={ascendantLongitude !== 0}
         />
       </Box>

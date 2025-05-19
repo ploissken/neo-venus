@@ -77,6 +77,17 @@
     }
   },
   "form": {
+    "chart": {
+      "date": {
+        "required": "Date and time are required"
+      },
+      "edit": "Edit",
+      "generate": "Generate Astral Chart",
+      "save": "Save",
+      "location": {
+        "required": "A location is required"
+      }
+    },
     "identity": {
       "email": {
         "label": "E-mail",

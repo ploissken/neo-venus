@@ -1,12 +1,11 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { LocationPicker } from "./LocationPicker";
 import { mockChartContext } from "@/__mocks__";
-import React from "react";
+import React, { act } from "react";
 import { SnackbarContext, ChartContext } from "@/context";
 
 global.fetch = jest.fn();
 
-const mockSetLoading = jest.fn();
 const mockSetLocation = jest.fn();
 const mockedShowMessage = jest.fn();
 
@@ -16,10 +15,9 @@ const renderWithContext = () =>
       <ChartContext.Provider
         value={{
           ...mockChartContext,
-          setLoading: mockSetLoading,
         }}
       >
-        <LocationPicker onLocationChanged={mockSetLocation} />
+        <LocationPicker onChange={mockSetLocation} />
       </ChartContext.Provider>
     </SnackbarContext.Provider>
   );
@@ -56,7 +54,7 @@ describe("LocationPicker component", () => {
     );
   });
 
-  it("fetches location and call onLocationChanged on search", async () => {
+  it("fetches location and call onChange on search", async () => {
     (fetch as jest.Mock).mockResolvedValueOnce({
       json: async () => ({
         locations: [
@@ -75,18 +73,23 @@ describe("LocationPicker component", () => {
     const input = screen.getByLabelText("chart.create.city");
     fireEvent.change(input, { target: { value: "Paris" } });
 
-    const searchButton = screen.getByRole("button", {
-      name: "chart.create.search_city",
+    await act(async () => {
+      const searchButton = screen.getByRole("button", {
+        name: "chart.create.search_city",
+      });
+      fireEvent.click(searchButton);
+      expect(
+        document.querySelector(".MuiIconButton-loadingIndicator")
+      ).toBeInTheDocument();
     });
-    fireEvent.click(searchButton);
-
-    expect(mockSetLoading).toHaveBeenCalledWith(true);
 
     await waitFor(() =>
       expect(fetch).toHaveBeenCalledWith("/api/get-geolocation?city=Paris")
     );
 
-    expect(mockSetLoading).toHaveBeenCalledWith(false);
+    expect(
+      document.querySelector(".MuiIconButton-loadingIndicator")
+    ).not.toBeInTheDocument();
   });
 
   it("displays a toast when no locations were found", async () => {

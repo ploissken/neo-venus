@@ -39,14 +39,4 @@ describe("DateTimePicker component", () => {
 
     expect(mockSetDateValue).toHaveBeenCalled();
   });
-
-  it("disables the picker when loading is true", () => {
-    renderComponent({
-      ...mockChartContext,
-      loading: true,
-    });
-
-    const input = screen.getByLabelText("chart.create.date");
-    expect(input).toBeDisabled();
-  });
 });

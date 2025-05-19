@@ -14,8 +14,14 @@ import { IdentityStepContainer } from "./identity-step/IdentityStepContainer";
 import { ProfileStepContainer } from "./profile-step/ProfileStepContainer";
 import { FriendsFinderStep } from "./FriendsStep";
 import { useRouter } from "next/navigation";
+import { ChartStepContainer } from "./chart-step/ChartStepContainer";
 
-const steps = ["Identity Step", "Create your profile", "Add friends"];
+const steps = [
+  "Identity Step",
+  "Create your profile",
+  "Create your Chart",
+  "Add friends",
+];
 
 export function SignUpContainer() {
   const TRANSITION_DURATION = 200;
@@ -41,6 +47,8 @@ export function SignUpContainer() {
       case 1:
         return <ProfileStepContainer onStepComplete={handleNext} />;
       case 2:
+        return <ChartStepContainer onStepComplete={() => router.push("/")} />;
+      case 3:
         return <FriendsFinderStep onStepComplete={() => router.push("/")} />;
       default:
         return null;

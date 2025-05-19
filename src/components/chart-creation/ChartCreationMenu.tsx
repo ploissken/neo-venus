@@ -49,7 +49,7 @@ export function ChartCreationMenu({ onChartCreated }: ChartCreationMenuProps) {
       </Grid>
 
       <Grid size={{ xs: 12, lg: "grow" }}>
-        <LocationPicker onLocationChanged={setLocation} />
+        <LocationPicker onChange={setLocation} />
       </Grid>
       <Grid size={{ xs: 12, lg: 2 }}>
         <Button

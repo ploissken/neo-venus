@@ -1,4 +1,4 @@
-import { useChartContext, useSnackbar } from "@/hooks";
+import { useSnackbar } from "@/hooks";
 import { ChartLocation } from "@/lib/location.types";
 import { Cancel, Search } from "@mui/icons-material";
 import {
@@ -15,15 +15,24 @@ import {
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { FieldError } from "react-hook-form";
 
 export interface LocationPickerProps {
-  onLocationChanged: (location?: ChartLocation) => void;
+  onChange: (location: ChartLocation | undefined) => void;
+  value?: ChartLocation;
+  defaultValue?: ChartLocation;
+  error?: FieldError;
 }
 
-export function LocationPicker({ onLocationChanged }: LocationPickerProps) {
+export function LocationPicker({
+  value,
+  onChange,
+  defaultValue,
+  error,
+}: LocationPickerProps) {
   const t = useTranslations();
-  const { loading, setLoading } = useChartContext();
   const { showMessage } = useSnackbar();
+  const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selectedLocationIndex, setSelectedLocationIndex] = useState(0);
   const [locations, setLocations] = useState<ChartLocation[]>([]);
@@ -60,18 +69,18 @@ export function LocationPicker({ onLocationChanged }: LocationPickerProps) {
     setLocations([]);
     setSelectedLocationIndex(0);
     setInputValue("");
-    onLocationChanged(undefined);
+    onChange(undefined);
   };
 
   useEffect(() => {
     const location = locations[selectedLocationIndex];
     if (location) {
-      onLocationChanged({
+      onChange({
         latitude: location.latitude,
         longitude: location.longitude,
       });
     }
-  }, [selectedLocationIndex, locations, onLocationChanged]);
+  }, [selectedLocationIndex, locations, onChange]);
 
   return (
     <Grid
@@ -114,13 +123,21 @@ export function LocationPicker({ onLocationChanged }: LocationPickerProps) {
               variant="outlined"
               value={inputValue}
               disabled={loading}
+              error={!!error?.message}
+              helperText={!!error?.message && error?.message}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleSearchLocation();
                 }
               }}
-              sx={{ height: "100%", width: "100%" }}
+              sx={{
+                height: "100%",
+                width: "100%",
+                "& .MuiInputBase-root": {
+                  p: 0,
+                },
+              }}
               slotProps={{
                 input: {
                   endAdornment: (

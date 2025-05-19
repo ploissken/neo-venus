@@ -77,6 +77,17 @@
     }
   },
   "form": {
+    "chart": {
+      "date": {
+        "required": "Data e hora são necessários"
+      },
+      "edit": "Editar",
+      "generate": "Gerar Mapa Astral",
+      "save": "Salvar",
+      "location": {
+        "required": "Local é necessário"
+      }
+    },
     "identity": {
       "email": {
         "label": "E-mail",
