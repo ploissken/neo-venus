@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { ChartAspectsTable } from ".";
-import { ChartContext } from "@/context/ChartContext";
-import { mockChart, mockChartContext } from "@/__mocks__";
+import { mockChart } from "@/__mocks__";
 import { Planet } from "@/lib/chart.types";
 
 jest.mock("../icons", () => ({
@@ -18,11 +17,7 @@ describe("ChartAspectsTable component", () => {
   it("renders planet and aspect icons properly", () => {
     const planets = Object.keys(Planet).filter((key) => isNaN(Number(key)));
 
-    render(
-      <ChartContext.Provider value={mockChartContext}>
-        <ChartAspectsTable aspects={mockChart.aspects} />
-      </ChartContext.Provider>
-    );
+    render(<ChartAspectsTable aspects={mockChart.aspects} />);
 
     const chatAspectsTitle = screen.getByText("chart.data.aspects");
     const planetIcons = screen.queryAllByText(/PlanetIcon/);

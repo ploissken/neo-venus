@@ -1,8 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { LocationPicker } from "./LocationPicker";
-import { mockChartContext } from "@/__mocks__";
 import React, { act } from "react";
-import { SnackbarContext, ChartContext } from "@/context";
+import { SnackbarContext } from "@/context";
 
 global.fetch = jest.fn();
 
@@ -12,13 +11,7 @@ const mockedShowMessage = jest.fn();
 const renderWithContext = () =>
   render(
     <SnackbarContext.Provider value={{ showMessage: mockedShowMessage }}>
-      <ChartContext.Provider
-        value={{
-          ...mockChartContext,
-        }}
-      >
-        <LocationPicker onChange={mockSetLocation} />
-      </ChartContext.Provider>
+      <LocationPicker onChange={mockSetLocation} />
     </SnackbarContext.Provider>
   );
 

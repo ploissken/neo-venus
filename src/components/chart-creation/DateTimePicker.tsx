@@ -1,66 +1,51 @@
-import dayjs, { Dayjs } from "dayjs";
+import * as React from "react";
 import { DateTimePicker as MuiDatePicker } from "@mui/x-date-pickers";
-import { useState, useEffect } from "react";
+import dayjs, { Dayjs } from "dayjs";
 import { useTranslations } from "next-intl";
-import utc from "dayjs/plugin/utc";
 import { FieldError } from "react-hook-form";
 
-dayjs.extend(utc);
-
-interface ControlledProps {
+type DateTimePickerProps = {
   value: Dayjs | null;
-  onChange: (value: Dayjs | null) => void;
-}
-
-interface UncontrolledProps {
-  defaultValue?: Dayjs | null;
-  onDateChanged?: (date?: Date) => void;
-}
-
-interface BaseProps {
-  defaultLabel?: string;
+  onChange: (value: dayjs.Dayjs | null) => void;
+  label?: string;
   disabled?: boolean;
   error?: FieldError;
-}
+};
 
-type DateTimePickerProps = BaseProps & (ControlledProps | UncontrolledProps);
-
-export function DateTimePicker(props: DateTimePickerProps) {
+export function DateTimePicker({
+  value,
+  onChange,
+  label,
+  disabled,
+  error,
+}: DateTimePickerProps) {
   const t = useTranslations();
-  const isControlled = "value" in props;
-
-  const [internalValue, setInternalValue] = useState<Dayjs | null>(
-    "defaultValue" in props ? props.defaultValue ?? null : null
-  );
-
-  useEffect(() => {
-    if (isControlled) {
-      setInternalValue(props.value);
-    }
-  }, [props, isControlled]);
+  const displayValue =
+    value && dayjs.isDayjs(value) && value.isValid()
+      ? dayjs(value.format("YYYY-MM-DDTHH:mm"))
+      : null;
 
   const handleChange = (newValue: Dayjs | null) => {
-    if (isControlled) {
-      props.onChange(dayjs(newValue).utc(true));
-    } else {
-      setInternalValue(newValue);
-      props.onDateChanged?.(
-        newValue ? new Date(dayjs(newValue).utc(true).format()) : undefined
-      );
+    if (!newValue || !dayjs.isDayjs(newValue) || !newValue.isValid()) {
+      onChange(null);
+      return;
     }
+
+    const parsed = dayjs(newValue.format("YYYY-MM-DDTHH:mm"));
+    onChange(parsed);
   };
 
   return (
     <MuiDatePicker
-      value={isControlled ? props.value : internalValue}
+      value={displayValue}
       onChange={handleChange}
-      label={props.defaultLabel || t("chart.create.date")}
-      disabled={props.disabled}
+      label={label || t("chart.create.date")}
+      disabled={disabled}
       sx={{ height: "100%", width: "100%" }}
       slotProps={{
         textField: {
-          error: !!props.error?.message,
-          helperText: props.error?.message,
+          error: !!error?.message,
+          helperText: error?.message,
           fullWidth: true,
         },
       }}

@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { ChartDataTable } from ".";
-import { ChartContext } from "@/context/ChartContext";
-import { mockChart, mockChartContext } from "@/__mocks__";
+import { mockChart } from "@/__mocks__";
 
 jest.mock("./ChartDataItem", () => ({
   ChartDataItem: jest.fn(() => <div>ChartDataItem</div>),
@@ -14,11 +13,7 @@ describe("ChartDataTable component", () => {
   });
 
   it("renders planet info and title properly", () => {
-    render(
-      <ChartContext.Provider value={mockChartContext}>
-        <ChartDataTable planets={mockChart.planets} />
-      </ChartContext.Provider>
-    );
+    render(<ChartDataTable planets={mockChart.planets} />);
 
     const chartDataTitle = screen.getByText("chart.data.title");
     const chartObjectData = screen.queryAllByText(/ChartDataItem/);
@@ -29,12 +24,10 @@ describe("ChartDataTable component", () => {
 
   it("renders planets and ascendant info when provided", () => {
     render(
-      <ChartContext.Provider value={mockChartContext}>
-        <ChartDataTable
-          planets={mockChart.planets}
-          ascendant={mockChart.houses[0]}
-        />
-      </ChartContext.Provider>
+      <ChartDataTable
+        planets={mockChart.planets}
+        ascendant={mockChart.houses[0]}
+      />
     );
 
     const chartObjectData = screen.queryAllByText(/ChartDataItem/);

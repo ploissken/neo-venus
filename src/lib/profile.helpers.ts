@@ -32,9 +32,6 @@ export const ProfileFormFields = {
   FullName: "fullName",
   Gender: "genderIdentities",
   Orientation: "sexualOrientations",
-  Date: "date",
-  Time: "time",
-  Location: "location",
 } as const;
 
 function useOptions<T extends readonly string[]>(ids: T, scope: string) {

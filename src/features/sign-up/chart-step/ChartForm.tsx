@@ -1,89 +1,122 @@
 import { DateTimePicker, LocationPicker } from "@/components/chart-creation";
-import { ChartLocation, ProfileFormFields } from "@/lib";
+import { ChartLocation } from "@/lib";
 import { Button, Grid } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
 
-dayjs.extend(utc);
 export type ChartFormInputs = {
   date: string;
-  time: string;
   location: ChartLocation;
 };
 
+export const ChartFormFields = {
+  Date: "date",
+  Location: "location",
+} as const;
+
 export type ChartFormProps = {
-  onChartDataReady: ({
-    location,
-    date,
-  }: {
-    location: ChartLocation;
+  onChartDataReady: (chartData: ChartFormInputs) => void;
+  displayStyle?: "row" | "column";
+  loading?: boolean;
+  disabled?: boolean;
+  onLocationsLoaded?: (locations: ChartLocation[]) => void;
+  startingLocations?: ChartLocation[];
+  chartData?: {
     date: string;
-  }) => void;
+    location: ChartLocation;
+  };
 };
 
-export function ChartForm({ onChartDataReady }: ChartFormProps) {
+export function ChartForm({
+  onChartDataReady,
+  displayStyle = "column",
+  loading,
+  disabled,
+  chartData,
+  startingLocations,
+  onLocationsLoaded,
+}: ChartFormProps) {
   const { handleSubmit, control } = useForm<ChartFormInputs>({
     mode: "onChange",
+    defaultValues: {
+      [ChartFormFields.Date]: chartData?.date,
+      [ChartFormFields.Location]: chartData?.location,
+    },
   });
   const t = useTranslations();
-  const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<ChartFormInputs> = (data) => {
-    setLoading(true);
-    onChartDataReady({ location, date: dayjs(data.date).utc(true).format() });
+    onChartDataReady(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+      style={{ width: "100%" }}
+    >
       <Grid
         data-testid="chart-step-form"
         container
         size={12}
-        direction="column"
+        direction={displayStyle}
         sx={{ gap: 2 }}
       >
-        <Controller
-          name={ProfileFormFields.Date}
-          control={control}
-          render={({ field, fieldState }) => (
-            <DateTimePicker
-              value={field.value ? dayjs(field.value).utc(true) : null}
-              onChange={(newValue) => field.onChange(newValue)}
-              error={fieldState.error}
-            />
-          )}
-          rules={{
-            required: t("form.chart.date.required"),
-          }}
-        />
-
-        <Controller
-          name={ProfileFormFields.Location}
-          control={control}
-          render={({ field, fieldState }) => {
-            return (
-              <LocationPicker
-                value={field.value}
-                onChange={field.onChange}
+        <Grid container size={displayStyle === "row" ? { xs: 12, lg: 4 } : 12}>
+          <Controller
+            name={ChartFormFields.Date}
+            control={control}
+            render={({ field, fieldState }) => (
+              <DateTimePicker
+                value={field.value ? dayjs(field.value) : null}
+                onChange={(newValue) =>
+                  field.onChange(dayjs(newValue).format("YYYY-MM-DDTHH:mm"))
+                }
                 error={fieldState.error}
               />
-            );
-          }}
-          rules={{
-            required: t("form.chart.location.required"),
-          }}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          loading={loading}
-          disabled={loading}
+            )}
+            rules={{
+              required: t("form.chart.date.required"),
+            }}
+          />
+        </Grid>
+
+        <Grid container size={displayStyle === "row" ? { xs: 12, lg: 4 } : 12}>
+          <Controller
+            name={ChartFormFields.Location}
+            control={control}
+            render={({ field, fieldState }) => {
+              return (
+                <LocationPicker
+                  value={field.value}
+                  onChange={field.onChange}
+                  onLocationsLoaded={onLocationsLoaded}
+                  startingLocations={startingLocations}
+                  error={fieldState.error}
+                />
+              );
+            }}
+            rules={{
+              required: t("form.chart.location.required"),
+            }}
+          />
+        </Grid>
+        <Grid
+          container
+          direction="column"
+          size={displayStyle === "row" ? { xs: 12, lg: "grow" } : 12}
         >
-          {t("form.chart.generate")}
-        </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            loading={loading}
+            disabled={disabled}
+            sx={{ height: (theme) => theme.spacing(7) }}
+          >
+            {t("form.chart.generate")}
+          </Button>
+        </Grid>
       </Grid>
     </form>
   );

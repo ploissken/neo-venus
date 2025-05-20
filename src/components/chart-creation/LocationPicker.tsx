@@ -19,23 +19,34 @@ import { FieldError } from "react-hook-form";
 
 export interface LocationPickerProps {
   onChange: (location: ChartLocation | undefined) => void;
+  onLocationsLoaded?: (locations: ChartLocation[]) => void;
+  startingLocations?: ChartLocation[];
   value?: ChartLocation;
-  defaultValue?: ChartLocation;
   error?: FieldError;
 }
 
 export function LocationPicker({
   value,
   onChange,
-  defaultValue,
+  onLocationsLoaded,
+  startingLocations = [],
   error,
 }: LocationPickerProps) {
   const t = useTranslations();
   const { showMessage } = useSnackbar();
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [selectedLocationIndex, setSelectedLocationIndex] = useState(0);
-  const [locations, setLocations] = useState<ChartLocation[]>([]);
+  const [selectedLocationIndex, setSelectedLocationIndex] = useState(
+    value && startingLocations?.length > 0
+      ? startingLocations.findIndex(
+          (location) =>
+            location.latitude === value.latitude &&
+            location.longitude === value.longitude
+        )
+      : 0
+  );
+  const [locations, setLocations] =
+    useState<ChartLocation[]>(startingLocations);
 
   const hasLocationsLoaded = locations.length > 0;
 
@@ -52,6 +63,7 @@ export function LocationPicker({
 
     if (data.locations.length > 0) {
       setLocations(data.locations);
+      onLocationsLoaded?.(data.locations);
       setSelectedLocationIndex(0);
     } else {
       showMessage(
@@ -67,6 +79,7 @@ export function LocationPicker({
 
   const handleClearLocation = () => {
     setLocations([]);
+    onLocationsLoaded?.([]);
     setSelectedLocationIndex(0);
     setInputValue("");
     onChange(undefined);

@@ -1,4 +1,3 @@
-import { ChartContextType } from "@/context/ChartContext";
 import { BaseChartObject, Chart } from "@/lib/chart.types";
 
 const baseChartObject: BaseChartObject = {
@@ -49,11 +48,4 @@ export const mockChart: Chart = {
       value: 2,
     },
   ],
-};
-
-export const mockChartContext: ChartContextType = {
-  loading: false,
-  setDateValue: () => {},
-  setLocation: () => {},
-  setLoading: () => {},
 };
