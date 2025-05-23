@@ -47,7 +47,7 @@ export function SignUpContainer() {
       case 1:
         return <ProfileStepContainer onStepComplete={handleNext} />;
       case 2:
-        return <ChartStepContainer onStepComplete={() => router.push("/")} />;
+        return <ChartStepContainer onStepComplete={handleNext} />;
       case 3:
         return <FriendsFinderStep onStepComplete={() => router.push("/")} />;
       default:

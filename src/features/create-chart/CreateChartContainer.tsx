@@ -8,9 +8,6 @@ import { useTranslations } from "next-intl";
 import { useSnackbar } from "@/hooks";
 import { ChartForm, ChartFormInputs } from "../sign-up/chart-step/ChartForm";
 import { useCreateChart } from "@/hooks/useCreateChart";
-import utc from "dayjs/plugin/utc";
-import dayjs from "dayjs";
-dayjs.extend(utc);
 
 export default function CreateChartContainer() {
   const [chart, setChart] = useState<Chart | undefined>();
@@ -22,7 +19,7 @@ export default function CreateChartContainer() {
   const handleChartCreation = async ({ location, date }: ChartFormInputs) => {
     setLoading(true);
     const chartData = {
-      referenceDate: new Date(dayjs(date).utc(true).format()),
+      referenceDate: date,
       ...location,
     };
     const chartResult = await createChart(chartData);

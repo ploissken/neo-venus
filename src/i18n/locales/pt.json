@@ -83,7 +83,9 @@
       },
       "edit": "Editar",
       "generate": "Gerar Mapa Astral",
+      "my_chart": "Meu Mapa Astral",
       "save": "Salvar",
+      "save_success": "\"{name}\" salvo",
       "location": {
         "required": "Local é necessário"
       }

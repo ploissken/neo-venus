@@ -6,6 +6,7 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import dayjs from "dayjs";
 
 export type ChartFormInputs = {
+  name: string;
   date: string;
   location: ChartLocation;
 };
@@ -13,6 +14,7 @@ export type ChartFormInputs = {
 export const ChartFormFields = {
   Date: "date",
   Location: "location",
+  Name: "name",
 } as const;
 
 export type ChartFormProps = {
@@ -37,14 +39,15 @@ export function ChartForm({
   startingLocations,
   onLocationsLoaded,
 }: ChartFormProps) {
+  const t = useTranslations();
   const { handleSubmit, control } = useForm<ChartFormInputs>({
     mode: "onChange",
     defaultValues: {
+      [ChartFormFields.Name]: t("form.chart.my_chart"),
       [ChartFormFields.Date]: chartData?.date,
       [ChartFormFields.Location]: chartData?.location,
     },
   });
-  const t = useTranslations();
 
   const onSubmit: SubmitHandler<ChartFormInputs> = (data) => {
     onChartDataReady(data);

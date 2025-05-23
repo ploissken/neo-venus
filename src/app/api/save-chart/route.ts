@@ -1,13 +1,13 @@
-import { mapAspects, mapHouses, mapPlanets } from "@/lib/create-chart.helpers";
 import { NextRequest, NextResponse } from "next/server";
-import { Chart, ChartGenerationData } from "@/lib";
+import { ChartGenerationData } from "@/lib";
 import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
+import { cookies } from "next/headers";
 dayjs.extend(utc);
 
 export async function POST(req: NextRequest) {
   const BASE_URL = process.env.API_BASE_URL;
-  const SERVICE_PATH = "/chart/create";
+  const SERVICE_PATH = "/chart/save";
 
   if (!BASE_URL) {
     throw new Error("Missing API_BASE_URL in environment variables");
@@ -15,11 +15,16 @@ export async function POST(req: NextRequest) {
 
   const requestBody: ChartGenerationData = await req.json();
 
+  // TODO: add authFetch middleware
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token");
   try {
     const response = await fetch(`${BASE_URL}${SERVICE_PATH}`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        Cookie: `token=${token?.value}`,
       },
       body: JSON.stringify({
         ...requestBody,
@@ -30,22 +35,10 @@ export async function POST(req: NextRequest) {
     });
 
     const data = await response.json();
-    const { planets, houses, metadata, aspects } = data;
-
-    const mappedHouses = mapHouses(houses);
-    const mappedPlanets = mapPlanets(planets, mappedHouses[0]?.longitude || 0);
-    const mappedAspects = mapAspects(aspects);
-
-    const chart: Chart = {
-      aspects: mappedAspects,
-      planets: mappedPlanets,
-      houses: mappedHouses,
-      asc: mappedHouses[0],
-    };
 
     return NextResponse.json({
       ok: true,
-      data: { chart, metadata },
+      data,
     });
   } catch {
     return NextResponse.json({

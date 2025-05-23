@@ -83,7 +83,9 @@
       },
       "edit": "Edit",
       "generate": "Generate Astral Chart",
+      "my_chart": "My Astral Chart",
       "save": "Save",
+      "save_success": "\"{name}\" saved",
       "location": {
         "required": "A location is required"
       }

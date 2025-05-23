@@ -41,7 +41,8 @@ export enum Aspect {
 }
 
 export interface ChartGenerationData {
-  referenceDate: Date;
+  referenceDate: string;
+  name?: string;
   latitude?: number;
   longitude?: number;
 }
