@@ -13,7 +13,7 @@ jest.mock("./ChartController", () => ({
   ChartController: jest.fn(() => <div>ChartController</div>),
 }));
 
-jest.mock("../sign-up/chart-step/ChartForm", () => ({
+jest.mock("../user/sign-up/chart-step/ChartForm", () => ({
   ChartForm: ({
     onChartDataReady,
   }: {

@@ -1,6 +1,6 @@
 "use client";
 import MenuIcon from "@mui/icons-material/Menu";
-import { AutoAwesome, Home, Info } from "@mui/icons-material";
+import { AutoAwesome, Home, Info, Logout } from "@mui/icons-material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
@@ -15,9 +15,11 @@ import {
 } from "@mui/material";
 import { LogoWithTitle } from "../logo";
 import NextLink from "next/link";
+import { useUser } from "@/context";
 
 export function DrawerMenu() {
   const t = useTranslations();
+  const { isLoggedIn, logout } = useUser();
 
   const [open, setOpen] = useState(false);
 
@@ -32,7 +34,6 @@ export function DrawerMenu() {
       icon: <AutoAwesome />,
       route: "/create-chart",
     },
-    { text: t("menu.sign_up"), icon: <Info />, route: "/sign-up" },
     { text: t("menu.about"), icon: <Info />, route: "/about" },
   ];
 
@@ -56,6 +57,16 @@ export function DrawerMenu() {
             </ListItem>
           </Link>
         ))}
+        {isLoggedIn && (
+          <ListItem disablePadding onClick={logout}>
+            <ListItemButton>
+              <ListItemIcon>
+                <Logout />
+              </ListItemIcon>
+              {t("menu.logout")}
+            </ListItemButton>
+          </ListItem>
+        )}
       </List>
     </Grid>
   );

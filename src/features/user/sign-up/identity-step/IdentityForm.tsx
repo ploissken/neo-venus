@@ -124,7 +124,7 @@ export function IdentityForm({
           loading={loading}
           disabled={loading}
         >
-          {t("form.identity.submit")}
+          {t("form.identity.sign_up")}
         </Button>
       </Grid>
     </form>

@@ -1,7 +1,21 @@
 import { render, screen } from "@testing-library/react";
 import Navbar from "./Navbar";
 
-// Mock dependencies
+jest.mock("@/context", () => ({
+  useUser: () => ({
+    isLoggedIn: true,
+    logout: jest.fn(),
+  }),
+}));
+
+const pushMock = jest.fn();
+
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
+}));
+
 jest.mock("../logo", () => ({
   LogoWithTitle: () => <div data-testid="mock-logo">LogoWithTitle</div>,
 }));
@@ -15,7 +29,7 @@ jest.mock("./LocaleSwitcher", () => ({
 }));
 
 describe("Navbar component", () => {
-  it("renders DrawerMenu, LogoWithTitle, and a disabled Login button", () => {
+  it("renders DrawerMenu, LogoWithTitle", () => {
     render(<Navbar />);
 
     expect(screen.getByTestId("mock-logo")).toBeInTheDocument();

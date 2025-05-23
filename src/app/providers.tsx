@@ -8,6 +8,7 @@ import { CssBaseline } from "@mui/material";
 import { PropsWithChildren } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { SnackbarProvider } from "@/context/SnackbarContext";
+import { UserProvider } from "@/context/UserContext";
 
 type ProviderProps = PropsWithChildren & {
   locale: string;
@@ -29,10 +30,12 @@ export default function Providers({
         timeZone={timeZone}
       >
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <SnackbarProvider>{children}</SnackbarProvider>
-          </ThemeProvider>
+          <UserProvider>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <SnackbarProvider>{children}</SnackbarProvider>
+            </ThemeProvider>
+          </UserProvider>
         </AppRouterCacheProvider>
       </NextIntlClientProvider>
     </LocalizationProvider>

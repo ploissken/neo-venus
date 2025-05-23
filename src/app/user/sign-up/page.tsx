@@ -1,6 +1,6 @@
 "use client";
 
-import { SignUpContainer } from "@/features/sign-up/SignUpContainer";
+import { SignUpContainer } from "@/features/user/sign-up/SignUpContainer";
 
 export default function SignUp() {
   return <SignUpContainer />;

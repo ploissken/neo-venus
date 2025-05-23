@@ -1,13 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-const SERVICE_URL =
-  "https://nominatim.openstreetmap.org/search.php?polygon_geojson=1&format=jsonv2";
-
-const createServiceURL = (city: string) => {
-  return `${SERVICE_URL}&q=${city}`;
-};
-
 export async function GET(req: NextRequest) {
   const BASE_URL = process.env.API_BASE_URL;
   const SERVICE_PATH = "/user/username-available";

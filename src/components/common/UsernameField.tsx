@@ -3,7 +3,7 @@ import { useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { ProfileFormInputs } from "@/features/sign-up/profile-step/ProfileForm";
+import { ProfileFormInputs } from "@/features/user/sign-up/profile-step/ProfileForm";
 import CheckIcon from "@mui/icons-material/Check";
 import { ProfileFormFields } from "@/lib";
 

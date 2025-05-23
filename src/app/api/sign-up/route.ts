@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { IdentityFormInputs } from "@/features/sign-up/identity-step/IdentityForm";
+import { IdentityFormInputs } from "@/features/user/sign-up/identity-step/IdentityForm";
 import { cookies } from "next/headers";
 
 export async function POST(req: NextRequest) {

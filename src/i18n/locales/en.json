@@ -40,6 +40,8 @@
     "about": "About",
     "create_chart": "Create Astral Chart",
     "home": "Home",
+    "logout": "Logout",
+    "sign_in": "Sign In",
     "sign_up": "Sign Up"
   },
   "planet": {
@@ -100,7 +102,8 @@
         "user_email_unique": "E-mail already registered",
         "invalid_email": "E-mail is invalid",
         "missing_data": "E-mail or password missing",
-        "password_too_short": "Password must be at least 8 characters long"
+        "password_too_short": "Password must be at least 8 characters long",
+        "wrong_credentials": "E-mail or password didn't match. Please retry."
       },
       "confirm_password": {
         "label": "Confirm Password",
@@ -112,7 +115,8 @@
         "required": "Password is required",
         "helper": "Password must be at least 8 characters long"
       },
-      "submit": "Sign Up"
+      "sign_up": "Sign Up",
+      "sign_in": "Sign In"
     },
     "profile": {
       "avatar": {

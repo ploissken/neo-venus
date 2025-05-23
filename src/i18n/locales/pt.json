@@ -40,6 +40,8 @@
     "about": "Sobre",
     "create_chart": "Criar Mapa Astral",
     "home": "Início",
+    "logout": "Sair",
+    "sign_in": "Entrar",
     "sign_up": "Criar Perfil"
   },
   "planet": {
@@ -100,7 +102,8 @@
         "user_email_unique": "E-mail já cadastrado",
         "invalid_email": "E-mail inválido",
         "missing_data": "E-mail ou senha inválido",
-        "password_too_short": "A senha precisa ter pelo menos 8 caracteres"
+        "password_too_short": "A senha precisa ter pelo menos 8 caracteres",
+        "wrong_credentials": "E-mail ou senha incorretos. Tente novamente."
       },
       "confirm_password": {
         "label": "Confirmar Senha",
@@ -112,7 +115,8 @@
         "required": "Senha é obrigatório",
         "helper": "A senha precisa ter pelo menos 8 caracteres"
       },
-      "submit": "Criar Conta"
+      "sign_up": "Criar Conta",
+      "sign_in": "Entrar"
     },
     "profile": {
       "avatar": {

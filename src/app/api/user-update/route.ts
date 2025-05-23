@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { ProfileFormInputs } from "@/features/sign-up/profile-step/ProfileForm";
+import { ProfileFormInputs } from "@/features/user/sign-up/profile-step/ProfileForm";
 
 export async function POST(req: NextRequest) {
   const BASE_URL = process.env.API_BASE_URL;

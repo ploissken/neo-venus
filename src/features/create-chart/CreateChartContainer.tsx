@@ -6,7 +6,10 @@ import { useState } from "react";
 import { CHART_LARGE_SIZE } from "@/lib/chart.consts";
 import { useTranslations } from "next-intl";
 import { useSnackbar } from "@/hooks";
-import { ChartForm, ChartFormInputs } from "../sign-up/chart-step/ChartForm";
+import {
+  ChartForm,
+  ChartFormInputs,
+} from "../user/sign-up/chart-step/ChartForm";
 import { useCreateChart } from "@/hooks/useCreateChart";
 
 export default function CreateChartContainer() {
