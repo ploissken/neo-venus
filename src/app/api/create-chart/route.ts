@@ -3,34 +3,30 @@ import { NextRequest, NextResponse } from "next/server";
 import { Chart, ChartGenerationData } from "@/lib";
 import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
+import { anonProxyFetch } from "@/lib/fetch.proxy";
 dayjs.extend(utc);
 
 export async function POST(req: NextRequest) {
-  const BASE_URL = process.env.API_BASE_URL;
-  const SERVICE_PATH = "/chart/create";
-
-  if (!BASE_URL) {
-    throw new Error("Missing API_BASE_URL in environment variables");
-  }
+  const servicePath = "/chart/create";
 
   const requestBody: ChartGenerationData = await req.json();
 
-  try {
-    const response = await fetch(`${BASE_URL}${SERVICE_PATH}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...requestBody,
-        referenceDate: new Date(
-          dayjs(requestBody.referenceDate).utc(true).format()
-        ),
-      }),
-    });
+  const response = await anonProxyFetch(req, servicePath, {
+    ...requestBody,
+    referenceDate: new Date(
+      dayjs(requestBody.referenceDate).utc(true).format()
+    ),
+  });
 
-    const data = await response.json();
-    const { planets, houses, metadata, aspects } = data;
+  if (!response.ok) {
+    return NextResponse.json(response);
+  }
+
+  try {
+    const { planets, houses, metadata, aspects } = await response.json();
+    // const repsonseJson = await response.json();
+    // console.log("datadatadata", repsonseJson);
+    // return {};
 
     const mappedHouses = mapHouses(houses);
     const mappedPlanets = mapPlanets(planets, mappedHouses[0]?.longitude || 0);
@@ -44,13 +40,13 @@ export async function POST(req: NextRequest) {
     };
 
     return NextResponse.json({
-      ok: true,
-      data: { chart, metadata },
+      chart,
+      metadata,
     });
   } catch {
     return NextResponse.json({
       ok: false,
-      error: `chart_fetch_error`,
+      error: `chart_parse_error`,
     });
   }
 }

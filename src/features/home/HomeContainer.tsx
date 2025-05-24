@@ -31,7 +31,7 @@ export default function HomeContainer() {
         ({ coords }) => {
           const { latitude, longitude } = coords;
           createChart({
-            referenceDate: new Date(),
+            referenceDate: new Date().toString(),
             latitude,
             longitude,
           }).then((chartResult) => {

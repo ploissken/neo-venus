@@ -1,12 +1,10 @@
 import {
-  Chart,
   ChartHouse,
   ChartPlanet,
   Planet,
   PlanetAspect,
   ZodiacSign,
 } from "./chart.types";
-import { BackendErrorResponse } from "./common.types";
 
 type BackendNumberResponse = {
   [key: string]: number;
@@ -20,10 +18,6 @@ type AspectResponse = {
   planet_b_id: number;
   value: number;
 };
-
-export type CreateChartResponse =
-  // TODO : refactor with BackendResponse<Chart>
-  { ok: true; data: { chart: Chart } } | BackendErrorResponse;
 
 const treatPlanetaryCollision = (planets: ChartPlanet[]): ChartPlanet[] => {
   const COLLISION_THRESHOLD = 10;

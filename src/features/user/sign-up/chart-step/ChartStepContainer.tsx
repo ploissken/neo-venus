@@ -1,11 +1,12 @@
 import { Grid } from "@mui/material";
 import { ChartForm, ChartFormInputs } from "./ChartForm";
-import { Chart, ChartLocation } from "@/lib";
+import { BackendErrorResponse, Chart, ChartLocation } from "@/lib";
 import { useCreateChart } from "@/hooks/useCreateChart";
 import { useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { ChartPreview } from "./ChartPreview";
+import { useAuthFetch } from "@/hooks/useAuthFetch";
 
 export function ChartStepContainer({
   onStepComplete,
@@ -19,6 +20,7 @@ export function ChartStepContainer({
   const [loading, setLoading] = useState(false);
   const [chartData, setChartData] = useState<ChartFormInputs | undefined>();
   const [locations, setLocations] = useState<ChartLocation[]>([]);
+  const authFetch = useAuthFetch();
 
   const onChartDataReady = async ({
     location,
@@ -43,17 +45,16 @@ export function ChartStepContainer({
 
   const handleSaveChart = async () => {
     setLoading(true);
-    fetch("/api/save-chart", {
+    authFetch("/api/save-chart", {
       method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(chartData),
     })
       .then(async (response) => {
-        const fetchData = await response.json();
-        if (fetchData.ok) {
+        // todo: define persisted chart type
+        const fetchData: { persistedChart: unknown } | BackendErrorResponse =
+          await response.json();
+
+        if ("persistedChart" in fetchData) {
           showMessage(
             t(`form.chart.save_success`, { chartName: chartData?.name || "" }),
             "info"

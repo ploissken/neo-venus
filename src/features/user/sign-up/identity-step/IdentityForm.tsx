@@ -1,3 +1,4 @@
+import { useUser } from "@/context";
 import { useSnackbar } from "@/hooks";
 import {
   BackendErrorResponse,
@@ -37,6 +38,7 @@ export function IdentityForm({
   const t = useTranslations();
   const [loading, setLoading] = useState(false);
   const { showMessage } = useSnackbar();
+  const { setIsLoggedIn } = useUser();
 
   const onSubmit: SubmitHandler<IdentityFormInputs> = (data) => {
     setLoading(true);
@@ -51,6 +53,7 @@ export function IdentityForm({
         const fetchData: BackendResponse<UserResponse> | BackendErrorResponse =
           await response.json();
         if (fetchData.ok) {
+          setIsLoggedIn(true);
           onIdentityCreated(fetchData.data);
         } else {
           showMessage(t(`form.identity.error.${fetchData.error}`), "error");

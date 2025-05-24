@@ -47,7 +47,8 @@ export function SignUpContainer() {
       case 1:
         return <ProfileStepContainer onStepComplete={handleNext} />;
       case 2:
-        return <ChartStepContainer onStepComplete={handleNext} />;
+        // todo: handleNext when adding friends is ready
+        return <ChartStepContainer onStepComplete={() => router.push("/")} />;
       case 3:
         return <FriendsFinderStep onStepComplete={() => router.push("/")} />;
       default:

@@ -1,11 +1,11 @@
+import { anonProxyFetch } from "@/lib/fetch.proxy";
 import { ChartLocation } from "@/lib/location.types";
 import { NextRequest, NextResponse } from "next/server";
 
-const SERVICE_URL =
-  "https://nominatim.openstreetmap.org/search.php?polygon_geojson=1&format=jsonv2";
-
-const createServiceURL = (city: string) => {
-  return `${SERVICE_URL}&q=${city}`;
+const buildLocationServiceUrl = (city: string) => {
+  const serviceUrl =
+    "https://nominatim.openstreetmap.org/search.php?polygon_geojson=1&format=jsonv2";
+  return `${serviceUrl}&q=${city}`;
 };
 
 export async function GET(req: NextRequest) {
@@ -13,16 +13,17 @@ export async function GET(req: NextRequest) {
   const city = url.searchParams.get("city");
 
   if (!city) {
-    throw new Error("no city provided");
+    return NextResponse.json({
+      ok: false,
+      error: "no_city_provided",
+    });
   }
 
-  const response = await fetch(createServiceURL(city), {
-    method: "GET",
-  });
-
+  const response = await anonProxyFetch(req, buildLocationServiceUrl(city));
   if (!response.ok) {
-    throw new Error("Failed to fetch location data");
+    return NextResponse.json(response);
   }
+
   const responseJson = await response.json();
 
   const locations: ChartLocation[] = responseJson.map(

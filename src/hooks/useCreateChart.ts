@@ -1,5 +1,5 @@
-import { CreateChartResponse } from "@/lib/create-chart.helpers";
-import { ChartGenerationData } from "@/lib/chart.types";
+import { BackendErrorResponse } from "@/lib";
+import { Chart, ChartGenerationData } from "@/lib/chart.types";
 import { useCallback } from "react";
 
 export const useCreateChart = () => {
@@ -10,10 +10,11 @@ export const useCreateChart = () => {
         body: JSON.stringify(chartData),
       });
 
-      const response: CreateChartResponse = await fetchResponse.json();
+      const response: { chart: Chart } | BackendErrorResponse =
+        await fetchResponse.json();
 
-      if (response.ok) {
-        return response.data.chart;
+      if ("chart" in response) {
+        return response.chart;
       } else {
         return response;
       }
