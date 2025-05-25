@@ -100,10 +100,7 @@ export function LocationPicker({
   useEffect(() => {
     const location = locations[selectedLocationIndex];
     if (location) {
-      onChange({
-        latitude: location.latitude,
-        longitude: location.longitude,
-      });
+      onChange(location);
     }
   }, [selectedLocationIndex, locations, onChange]);
 
@@ -133,11 +130,9 @@ export function LocationPicker({
               >
                 {locations.map((location: ChartLocation, index: number) => (
                   <MenuItem key={index} value={index}>
-                    <>
-                      <Typography variant="caption">
-                        {`${location.name} (${location.displayName})`}
-                      </Typography>
-                    </>
+                    <Typography variant="caption">
+                      {location.displayName}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Select>

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const buildLocationServiceUrl = (city: string) => {
   const serviceUrl =
-    "https://nominatim.openstreetmap.org/search.php?polygon_geojson=1&format=jsonv2";
+    "https://nominatim.openstreetmap.org/search?polygon_geojson=1&format=jsonv2&addressdetails=1";
   return `${serviceUrl}&q=${city}`;
 };
 
@@ -27,15 +27,34 @@ export async function GET(req: NextRequest) {
   const responseJson = await response.json();
 
   const locations: ChartLocation[] = responseJson.map(
-    ({ lat, lon, name, display_name }: { [key: string]: string }) => ({
-      latitude: parseFloat(lat),
-      longitude: parseFloat(lon),
-      name: name,
-      displayName:
-        display_name.length > 50
-          ? `${display_name.slice(0, 50)}...`
-          : display_name,
-    })
+    ({
+      lat,
+      lon,
+      name,
+      address,
+    }: {
+      name: string;
+      lat: string;
+      lon: string;
+      address: { state: string; country: string; country_code: string };
+    }) => {
+      const { state, country, country_code } = address;
+      const displayName = [name, state, country].join(", ");
+      return {
+        latitude: parseFloat(lat),
+        longitude: parseFloat(lon),
+        name: name,
+        details: {
+          countryCode: country_code.toUpperCase(),
+          country,
+          state,
+        },
+        displayName:
+          displayName.length > 50
+            ? `${displayName.slice(0, 50)}...`
+            : displayName,
+      };
+    }
   );
 
   return NextResponse.json({
