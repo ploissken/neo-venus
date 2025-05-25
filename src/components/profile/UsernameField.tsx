@@ -11,7 +11,7 @@ import { useFetch } from "@/hooks/useFetch";
 export function UsernameField() {
   const t = useTranslations();
   const { showMessage } = useSnackbar();
-  const serverFetch = useFetch({ auth: true });
+  const { authFetch } = useFetch();
   const [usernameStatus, setUsernameStatus] = useState<
     "checking" | "available" | "unavailable" | undefined
   >(undefined);
@@ -31,7 +31,7 @@ export function UsernameField() {
     if (!errors.username) {
       setUsernameStatus("checking");
 
-      serverFetch<{ available: boolean }>(
+      authFetch<{ available: boolean }>(
         `/api/user/username-available?u=${trimmed}`
       ).then((response) => {
         if (response.ok) {

@@ -22,34 +22,6 @@ async function proxyFetch(
       credentials,
     });
 
-    if (response.status === 400) {
-      return NextResponse.json(
-        { ok: false, error: "server.error.bad_request" },
-        { status: 400 }
-      );
-    }
-
-    if (response.status === 401) {
-      return NextResponse.json(
-        { ok: false, error: "server.error.unauthorized" },
-        { status: 401 }
-      );
-    }
-
-    if (response.status === 404) {
-      return NextResponse.json(
-        { ok: false, error: "server.error.not_found" },
-        { status: 404 }
-      );
-    }
-
-    if (response.status === 500) {
-      return NextResponse.json(
-        { ok: false, error: "server.error.internal_server_error" },
-        { status: response.status }
-      );
-    }
-
     const proxyResponse = new NextResponse(response.body, {
       status: response.status,
       headers: response.headers,

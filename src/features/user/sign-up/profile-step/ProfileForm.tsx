@@ -36,7 +36,7 @@ export function ProfileForm({
   });
   const { register, handleSubmit, control } = methods;
   const t = useTranslations();
-  const authFetch = useFetch({ auth: true });
+  const { authFetch } = useFetch();
 
   const [loading, setLoading] = useState(false);
 

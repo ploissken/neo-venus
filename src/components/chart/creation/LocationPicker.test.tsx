@@ -2,11 +2,14 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { LocationPicker } from "./LocationPicker";
 import React, { act } from "react";
 import { SnackbarContext } from "@/context";
-import { useFetch } from "@/hooks/useFetch";
 
-global.fetch = jest.fn();
+const mockAuthFetch = jest.fn();
+const mockAnonFetch = jest.fn();
 jest.mock("@/hooks/useFetch", () => ({
-  useFetch: jest.fn(),
+  useFetch: () => ({
+    authFetch: mockAuthFetch,
+    anonFetch: mockAnonFetch,
+  }),
 }));
 
 const mockSetLocation = jest.fn();
@@ -58,14 +61,12 @@ describe("LocationPicker component", () => {
   });
 
   it("fetches location and call onChange on search", async () => {
-    const mockFetchFn = jest.fn().mockResolvedValue({
+    mockAnonFetch.mockResolvedValue({
       ok: true,
       data: {
         locations: [parisLocation],
       },
     });
-
-    (useFetch as jest.Mock).mockReturnValue(mockFetchFn);
 
     renderWithContext();
 
@@ -83,7 +84,7 @@ describe("LocationPicker component", () => {
     });
 
     await waitFor(() =>
-      expect(mockFetchFn).toHaveBeenCalledWith(
+      expect(mockAnonFetch).toHaveBeenCalledWith(
         "/api/chart/get-geolocation?city=Paris"
       )
     );
@@ -94,14 +95,12 @@ describe("LocationPicker component", () => {
   });
 
   it("displays a toast when no locations were found", async () => {
-    const mockFetchFn = jest.fn().mockResolvedValue({
+    mockAnonFetch.mockResolvedValue({
       ok: true,
       data: {
         locations: [],
       },
     });
-
-    (useFetch as jest.Mock).mockReturnValue(mockFetchFn);
 
     renderWithContext();
     const input = screen.getByLabelText("chart.create.city");
@@ -119,14 +118,12 @@ describe("LocationPicker component", () => {
   });
 
   it("clears location when clear button is clicked", async () => {
-    const mockFetchFn = jest.fn().mockResolvedValue({
+    mockAnonFetch.mockResolvedValue({
       ok: true,
       data: {
         locations: [parisLocation],
       },
     });
-
-    (useFetch as jest.Mock).mockReturnValue(mockFetchFn);
 
     renderWithContext();
 

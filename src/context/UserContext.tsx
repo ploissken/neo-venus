@@ -19,26 +19,29 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const anonFetch = useFetch();
+  const { authFetch } = useFetch();
 
   useEffect(() => {
-    fetch("/api/user/is-logged")
-      .then((res) => res.json())
-      .then((data) => setIsLoggedIn(data.hasAuthToken))
-      .catch(() => setIsLoggedIn(false));
-  }, []);
+    authFetch<{ hasAuthToken: boolean }>("/api/user/is-logged").then(
+      (response) => {
+        if ("error" in response) {
+          setIsLoggedIn(false);
+        } else {
+          const { data } = response;
+          setIsLoggedIn(data.hasAuthToken);
+        }
+      }
+    );
+  }, [authFetch]);
 
   const logout = async () => {
-    await anonFetch("/api/user/logout");
+    await authFetch("/api/user/logout");
     setIsLoggedIn(false);
   };
 
   const signIn = async (credentials: Credentials) => {
-    const result = await anonFetch("/api/user/sign-in", {
+    const result = await authFetch("/api/user/sign-in", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(credentials),
     });
 

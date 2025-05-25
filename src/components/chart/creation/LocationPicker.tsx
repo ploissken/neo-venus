@@ -35,7 +35,7 @@ export function LocationPicker({
 }: LocationPickerProps) {
   const t = useTranslations();
   const { showMessage } = useSnackbar();
-  const serverFetch = useFetch();
+  const { anonFetch } = useFetch();
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selectedLocationIndex, setSelectedLocationIndex] = useState(
@@ -60,7 +60,7 @@ export function LocationPicker({
 
     setLoading(true);
 
-    const response = await serverFetch<{ locations: ChartLocation[] }>(
+    const response = await anonFetch<{ locations: ChartLocation[] }>(
       `/api/chart/get-geolocation?city=${inputValue}`
     );
 

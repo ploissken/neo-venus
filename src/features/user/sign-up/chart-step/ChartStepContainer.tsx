@@ -20,7 +20,7 @@ export function ChartStepContainer({
   const [loading, setLoading] = useState(false);
   const [chartData, setChartData] = useState<ChartFormInputs | undefined>();
   const [locations, setLocations] = useState<ChartLocation[]>([]);
-  const authFetch = useFetch({ auth: true });
+  const { authFetch } = useFetch();
 
   const onChartDataReady = async ({
     location,

@@ -1,7 +1,5 @@
 import { useUser } from "@/context";
 import {
-  FailedFetchResult,
-  SuccessFetchResult,
   useFetch,
   useSnackbar,
 } from "@/hooks";
@@ -39,19 +37,16 @@ export function IdentityForm({
   const t = useTranslations();
   const [loading, setLoading] = useState(false);
   const { showMessage } = useSnackbar();
-  const anonFetch = useFetch();
+  const { authFetch } = useFetch();
 
   const { setIsLoggedIn } = useUser();
 
   const onSubmit: SubmitHandler<IdentityFormInputs> = (data) => {
     setLoading(true);
-    anonFetch<FailedFetchResult | SuccessFetchResult<UserResponse>>(
-      "/api/user/sign-up",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-      }
-    )
+    authFetch<UserResponse>("/api/user/sign-up", {
+      method: "POST",
+      body: JSON.stringify(data),
+    })
       .then(async (response) => {
         if (response.ok) {
           onIdentityCreated();

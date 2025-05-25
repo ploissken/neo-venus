@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useFetch } from "./useFetch";
 
 export const useCreateChart = () => {
-  const anonFetch = useFetch();
+  const { anonFetch } = useFetch();
 
   const handleCreateChart = useCallback(
     async (chartData: ChartGenerationData) => {
