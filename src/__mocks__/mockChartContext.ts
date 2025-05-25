@@ -1,4 +1,4 @@
-import { BaseChartObject, Chart } from "@/lib/chart.types";
+import { BaseChartObject, Chart } from "@/lib/chart";
 
 const baseChartObject: BaseChartObject = {
   signIndex: 0,

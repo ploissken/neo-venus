@@ -30,12 +30,14 @@ export default function Providers({
         timeZone={timeZone}
       >
         <AppRouterCacheProvider>
-          <UserProvider>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <SnackbarProvider>{children}</SnackbarProvider>
-            </ThemeProvider>
-          </UserProvider>
+          <SnackbarProvider>
+            <UserProvider>
+              <ThemeProvider theme={theme}>
+                <CssBaseline />
+                {children}
+              </ThemeProvider>
+            </UserProvider>
+          </SnackbarProvider>
         </AppRouterCacheProvider>
       </NextIntlClientProvider>
     </LocalizationProvider>

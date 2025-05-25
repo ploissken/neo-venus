@@ -32,7 +32,6 @@ export function SignInForm({}) {
     if (response.ok) {
       router.push("/");
     } else {
-      // todo: fix ts warning
       showMessage(t(`form.identity.error.${response.error}`), "error");
       setLoading(false);
     }

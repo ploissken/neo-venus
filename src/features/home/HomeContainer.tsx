@@ -8,13 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import { ChartController } from "../create-chart/ChartController";
-import { useCreateChart } from "@/hooks/useCreateChart";
 import { useEffect, useState } from "react";
-import { Chart } from "@/lib/chart.types";
-import { useSnackbar } from "@/hooks";
+import { useCreateChart, useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
-import { CHART_LARGE_SIZE } from "@/lib/chart.consts";
-import { LOCATION_SERVICE_TIMEOUT } from "@/lib/location.types";
+import { Chart, CHART_LARGE_SIZE, LOCATION_SERVICE_TIMEOUT } from "@/lib/chart";
 import { Refresh } from "@mui/icons-material";
 
 export default function HomeContainer() {

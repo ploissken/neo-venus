@@ -3,12 +3,12 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "./useSnackbar";
 import { useTranslations } from "next-intl";
 
-type FailedFetchResult = {
+export type FailedFetchResult = {
   ok: false;
   error: string;
 };
 
-type SuccessFetchResult<T> = {
+export type SuccessFetchResult<T> = {
   ok: true;
   data: T;
 };

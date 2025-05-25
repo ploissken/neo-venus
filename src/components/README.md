@@ -9,12 +9,14 @@ This folder contains the building blocks of the interface — from atomic elemen
 ## 🧱 Structure
 
     /components
-      ├── /chart             # Renders the visual astral chart
-      ├── /chart-creation    # UI input and form components for creating new charts
-      ├── /chart-data        # Displays astral chart data in a readable way
+      ├── /chart             # Astral Chart related components
+            ├── /creation    # Inputs for creating an astral
+            ├── /data        # Data display components
+            └── /drawings    # SVG Visual Chart components
       ├── /icons             # Custom icon components
       ├── /logo              # App logo components
-      └── /navbar            # Navigation bar and drawer components
+      ├── /navbar            # Navigation bar and drawer components
+      └── /profile           # User profile related components
 
 ---
 
@@ -22,18 +24,19 @@ This folder contains the building blocks of the interface — from atomic elemen
 
 ### `/chart`
 
-- Core component for **rendering the astrology chart**.
-- SVG based chart wheel, planets, houses and aspects
+- Core components for **astrology charts**.
 
-### `/chart-creation`
+### `/chart/creation`
 
-- Components responsible for the **chart creation flow**.
-- Inputs, date/time/location pickers, menus
+- Components responsible for the **chart creation flow**, such as DateTime and Location Pickers.
 
-### `/chart-data`
+### `/chart/drawings`
 
-- Visual representation of raw **astrological data**.
-- Includes positions, aspects, house info — complements the chart visually and in tabular forms
+- Visual representation of the **astrological charts**. Planet positions, aspects, signs, and houses info in SVG. Animatied with [motion](https://motion.dev/)
+
+### `/chart/data`
+
+- Textual representation of raw **astrological data**. Includes metadata, planet positions, aspects, and houses info, mostly in tabular forms
 
 ### `/icons`
 
@@ -42,9 +45,13 @@ This folder contains the building blocks of the interface — from atomic elemen
 
 ### `/logo`
 
-- Contains variants of the **application logo**.
+- Contains variants of **mercuryou logo**.
 
 ### `/navbar`
 
 - **Navigation bar** used across pages.
 - Includes menu drawer for feature navigation
+
+### `/profile`
+
+- **User profile** creation/edition components

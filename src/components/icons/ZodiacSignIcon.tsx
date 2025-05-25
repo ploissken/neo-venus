@@ -1,5 +1,4 @@
-import { ZodiacSign } from "@/lib/chart.types";
-import { ZODIAC_SIGN_SIZE } from "@/lib/chart.consts";
+import { ZodiacSign, ZODIAC_SIGN_SIZE } from "@/lib/chart";
 import {
   Aries,
   Taurus,

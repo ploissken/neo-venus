@@ -6,10 +6,10 @@ This folder contains **React Contexts** used for state or logic that spans multi
 
 ---
 
-## 📚 Examples
+## 🧱 Structure
 
-- `ThemeContext.tsx` — Dark/light mode + MUI theme management (TODO)
-- `ChartContext.tsx` — Active chart data
+- `SnackbarContext.tsx` — Context for displaying toast messages
+- `UserContext.tsx` — Login/Logout handler context
 
 ---
 

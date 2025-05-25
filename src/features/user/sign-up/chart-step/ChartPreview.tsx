@@ -2,7 +2,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import { ChartFormInputs } from "./ChartForm";
 import { Chart, ChartLocation } from "@/lib";
 import { useTranslations } from "next-intl";
-import AstralChart from "@/components/chart/AstralChart";
+import AstralChart from "@/components/chart/drawings/AstralChart";
 
 export function ChartPreview({
   chart,

@@ -1,4 +1,4 @@
-import { DateTimePicker, LocationPicker } from "@/components/chart-creation";
+import { DateTimePicker, LocationPicker } from "@/components/chart/creation";
 import { ChartLocation } from "@/lib";
 import { Button, Grid } from "@mui/material";
 import { useTranslations } from "next-intl";

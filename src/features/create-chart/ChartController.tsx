@@ -1,16 +1,12 @@
 import React from "react";
 import { Grid, Theme, Typography } from "@mui/material";
-import { CHART_LARGE_SIZE } from "@/lib/chart.consts";
-import { ChartDataTable, ChartAspectsTable } from "@/components/chart-data";
+import { Chart, CHART_LARGE_SIZE } from "@/lib/chart";
+import { ChartDataTable, ChartAspectsTable } from "@/components/chart/data";
 import { useTranslations } from "next-intl";
-import AstralChart from "@/components/chart/AstralChart";
-import { Chart } from "@/lib/chart.types";
+import AstralChart from "@/components/chart/drawings/AstralChart";
 
 export function ChartController({ chart }: { chart: Chart }) {
   const t = useTranslations();
-
-  // const { chart } = useContext(ChartContext);
-
   const hasChart = chart && chart.planets?.length > 0;
 
   return (

@@ -46,7 +46,7 @@ export function ChartStepContainer({
   const handleSaveChart = async () => {
     setLoading(true);
     // todo: define persisted chart type
-    authFetch<{ persistedChart: unknown }>("/api/save-chart", {
+    authFetch<{ persistedChart: unknown }>("/api/chart/save", {
       method: "POST",
       body: JSON.stringify(chartData),
     })

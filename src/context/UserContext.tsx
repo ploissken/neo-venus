@@ -1,10 +1,13 @@
+import { FailedFetchResult, SuccessFetchResult, useFetch } from "@/hooks";
 import { createContext, useContext, useState, useEffect } from "react";
 
 type UserContextType = {
   isLoggedIn: boolean;
   setIsLoggedIn: (loggedIn: boolean) => void;
   logout: () => Promise<void>;
-  signIn: (credentials: Credentials) => Promise<Response>;
+  signIn: (
+    credentials: Credentials
+  ) => Promise<FailedFetchResult | SuccessFetchResult<unknown>>;
 };
 
 type Credentials = {
@@ -16,6 +19,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const anonFetch = useFetch();
 
   useEffect(() => {
     fetch("/api/user/is-logged")
@@ -25,25 +29,24 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logout = async () => {
-    await fetch("/api/user/logout");
+    await anonFetch("/api/user/logout");
     setIsLoggedIn(false);
   };
 
   const signIn = async (credentials: Credentials) => {
-    const result = await fetch("/api/user/sign-in", {
+    const result = await anonFetch("/api/user/sign-in", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(credentials),
     });
-    const resultJson = await result.json();
 
-    if (resultJson.ok) {
+    if (result.ok) {
       setIsLoggedIn(true);
     }
 
-    return resultJson;
+    return result;
   };
 
   return (

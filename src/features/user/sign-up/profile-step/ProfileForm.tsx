@@ -1,7 +1,7 @@
 import Image from "next/image";
 import defaultAvatar from "@/assets/images/avatar/default-1.png";
 import { Avatar, Button, Chip, Divider, Grid, TextField } from "@mui/material";
-import { useSnackbar } from "@/hooks";
+import { useSnackbar, useFetch } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -11,9 +11,7 @@ import {
   useGenderOptions,
   useOrientationOptions,
 } from "@/lib";
-import { ControlledMultiSelect } from "@/components/common/ControlledMultiSelect";
-import { UsernameField } from "@/components/common/UsernameField";
-import { useFetch } from "@/hooks/useFetch";
+import { UsernameField, ControlledMultiSelect } from "@/components/profile";
 
 export type ProfileFormInputs = {
   fullName: string;

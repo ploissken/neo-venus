@@ -21,7 +21,16 @@ jest.mock("../user/sign-up/chart-step/ChartForm", () => ({
   }) => <button onClick={() => onChartDataReady({})}>ChartForm</button>,
 }));
 
+jest.mock("@/hooks", () => ({
+  useCreateChart: () => mockCreateChart,
+  useSnackbar: () => ({
+    showMessage: mockedShowMessage,
+  }),
+}));
+
+const mockCreateChart = jest.fn();
 const mockedShowMessage = jest.fn();
+
 const renderComponent = () => {
   render(
     <SnackbarContext.Provider value={{ showMessage: mockedShowMessage }}>
@@ -38,13 +47,12 @@ describe("CreateChartContainer component", () => {
   });
 
   it("renders the ChartController when chart is present", async () => {
-    const mockFetch = jest.fn().mockResolvedValueOnce({
+    mockCreateChart.mockResolvedValueOnce({
       ok: true,
       json: jest.fn().mockResolvedValue({
         data: { chart: mockChart },
       }),
     });
-    global.fetch = mockFetch;
     renderComponent();
     expect(screen.queryByText("ChartController")).not.toBeInTheDocument();
     await act(async () => {

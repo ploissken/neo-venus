@@ -1,24 +1,26 @@
-import { BackendErrorResponse } from "@/lib";
-import { Chart, ChartGenerationData } from "@/lib/chart.types";
+import { Chart, ChartGenerationData } from "@/lib/chart";
 import { useCallback } from "react";
+import { useFetch } from "./useFetch";
 
 export const useCreateChart = () => {
+  const anonFetch = useFetch();
+
   const handleCreateChart = useCallback(
     async (chartData: ChartGenerationData) => {
-      const fetchResponse = await fetch("/api/create-chart", {
-        method: "POST",
-        body: JSON.stringify(chartData),
-      });
-
-      const response: { chart: Chart } | BackendErrorResponse =
-        await fetchResponse.json();
-
-      if ("chart" in response) {
-        return response.chart;
+      const fetchResponse = await anonFetch<{ chart: Chart }>(
+        "/api/chart/create",
+        {
+          method: "POST",
+          body: JSON.stringify(chartData),
+        }
+      );
+      if (fetchResponse.ok) {
+        return fetchResponse.data.chart;
       } else {
-        return response;
+        return fetchResponse;
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 

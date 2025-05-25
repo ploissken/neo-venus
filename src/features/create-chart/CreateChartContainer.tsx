@@ -1,16 +1,14 @@
 "use client";
 import { CircularProgress, Grid, Theme, Typography } from "@mui/material";
 import { ChartController } from "./ChartController";
-import { Chart } from "@/lib/chart.types";
+import { Chart, CHART_LARGE_SIZE } from "@/lib/chart";
 import { useState } from "react";
-import { CHART_LARGE_SIZE } from "@/lib/chart.consts";
 import { useTranslations } from "next-intl";
-import { useSnackbar } from "@/hooks";
+import { useSnackbar, useCreateChart } from "@/hooks";
 import {
   ChartForm,
   ChartFormInputs,
 } from "../user/sign-up/chart-step/ChartForm";
-import { useCreateChart } from "@/hooks/useCreateChart";
 
 export default function CreateChartContainer() {
   const [chart, setChart] = useState<Chart | undefined>();

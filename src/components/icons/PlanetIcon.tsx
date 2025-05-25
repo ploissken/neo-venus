@@ -1,9 +1,9 @@
-import { Planet } from "@/lib/chart.types";
 import {
+  Planet,
   ANIMATION_PLANET_DELAY,
   ANIMATION_ZODIAC_HOUSE_TOTAL,
   PLANET_SIZE,
-} from "@/lib/chart.consts";
+} from "@/lib/chart";
 import { motion } from "framer-motion";
 import {
   Sun,

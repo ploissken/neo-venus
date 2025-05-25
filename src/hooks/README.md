@@ -6,9 +6,30 @@ This folder contains **custom React hooks** used throughout the application. Eac
 
 ---
 
-## 📚 So far we have
+## 🧱 Structure so far
 
-- `useChartContext.ts` — Fetch and structure data from chart services.
+- `useCreateChart.ts` — Generates an Astral Chart with basic inputs
+- `useFetch.ts` — Wraps fetch logic, with a single place for fetching, authentication and error handling
+- `useSnackabr.ts` — Handles toast displaying
+
+---
+
+## 📚 Folder Breakdown
+
+### `useCreateChart`
+
+- Hook for generating **astrology charts**.
+
+### `useFetch`
+
+- Provides a single entrypoint for fetch, try/catch, and error checking all over the app
+- Handles cookie-based auth with consistency
+- Seamless handles statuses (e.g. all 401s redirect to /user/sign-in)
+- Display toasts on server errors (400, 401, 404, 500) without cluttering every component
+
+### `useSnackabr`
+
+- Hook for handling and displaying feedback toasts for the user
 
 ---
 

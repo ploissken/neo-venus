@@ -1,10 +1,11 @@
 import { useUser } from "@/context";
-import { useSnackbar } from "@/hooks";
 import {
-  BackendErrorResponse,
-  BackendResponse,
-  ProfileFormFields,
-} from "@/lib";
+  FailedFetchResult,
+  SuccessFetchResult,
+  useFetch,
+  useSnackbar,
+} from "@/hooks";
+import { ProfileFormFields } from "@/lib";
 import { Button, Grid, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -24,7 +25,7 @@ export type UserResponse = {
 export function IdentityForm({
   onIdentityCreated,
 }: {
-  onIdentityCreated: (user: UserResponse) => void;
+  onIdentityCreated: () => void;
 }) {
   const {
     register,
@@ -38,25 +39,25 @@ export function IdentityForm({
   const t = useTranslations();
   const [loading, setLoading] = useState(false);
   const { showMessage } = useSnackbar();
+  const anonFetch = useFetch();
+
   const { setIsLoggedIn } = useUser();
 
   const onSubmit: SubmitHandler<IdentityFormInputs> = (data) => {
     setLoading(true);
-    fetch("/api/sign-up", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    anonFetch<FailedFetchResult | SuccessFetchResult<UserResponse>>(
+      "/api/user/sign-up",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    )
       .then(async (response) => {
-        const fetchData: BackendResponse<UserResponse> | BackendErrorResponse =
-          await response.json();
-        if (fetchData.ok) {
+        if (response.ok) {
+          onIdentityCreated();
           setIsLoggedIn(true);
-          onIdentityCreated(fetchData.data);
         } else {
-          showMessage(t(`form.identity.error.${fetchData.error}`), "error");
+          showMessage(t(`form.identity.error.${response.error}`), "error");
         }
       })
       .finally(() => setLoading(false));
