@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ProfileFormInputs } from "@/features/user/sign-up/profile-step/ProfileForm";
 import { authProxyFetch } from "@/lib/fetch.proxy";
+import { handleServerError } from "@/lib/endpoint.proxy";
 
 export async function POST(req: NextRequest) {
   const servicePath = "/user/update";
@@ -9,7 +10,7 @@ export async function POST(req: NextRequest) {
   const response = await authProxyFetch(req, servicePath, requestBody);
 
   if (!response.ok) {
-    return NextResponse.json(response);
+    return await handleServerError(response);
   }
 
   const { data } = await response.json();

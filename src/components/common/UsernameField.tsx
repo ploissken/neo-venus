@@ -6,10 +6,12 @@ import { Controller, useFormContext } from "react-hook-form";
 import { ProfileFormInputs } from "@/features/user/sign-up/profile-step/ProfileForm";
 import CheckIcon from "@mui/icons-material/Check";
 import { ProfileFormFields } from "@/lib";
+import { useFetch } from "@/hooks/useFetch";
 
 export function UsernameField() {
   const t = useTranslations();
   const { showMessage } = useSnackbar();
+  const serverFetch = useFetch({ auth: true });
   const [usernameStatus, setUsernameStatus] = useState<
     "checking" | "available" | "unavailable" | undefined
   >(undefined);
@@ -29,17 +31,18 @@ export function UsernameField() {
     if (!errors.username) {
       setUsernameStatus("checking");
 
-      fetch(`/api/username-available?u=${trimmed}`)
-        .then(async (response) => await response.json())
-        .then((response) => {
+      serverFetch<{ available: boolean }>(
+        `/api/username-available?u=${trimmed}`
+      ).then((response) => {
+        if (response.ok) {
           setUsernameStatus(
             response.data.available ? "available" : "unavailable"
           );
-        })
-        .catch(() => {
+        } else {
           showMessage(t("form.profile.error.unknown"), "error");
           setUsernameStatus(undefined);
-        });
+        }
+      });
     }
   };
 

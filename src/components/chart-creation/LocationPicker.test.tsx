@@ -2,11 +2,21 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { LocationPicker } from "./LocationPicker";
 import React, { act } from "react";
 import { SnackbarContext } from "@/context";
+import { useFetch } from "@/hooks/useFetch";
 
 global.fetch = jest.fn();
+jest.mock("@/hooks/useFetch", () => ({
+  useFetch: jest.fn(),
+}));
 
 const mockSetLocation = jest.fn();
 const mockedShowMessage = jest.fn();
+const parisLocation = {
+  name: "Paris",
+  displayName: "France",
+  latitude: 48.8566,
+  longitude: 2.3522,
+};
 
 const renderWithContext = () =>
   render(
@@ -48,18 +58,14 @@ describe("LocationPicker component", () => {
   });
 
   it("fetches location and call onChange on search", async () => {
-    (fetch as jest.Mock).mockResolvedValueOnce({
-      json: async () => ({
-        locations: [
-          {
-            name: "Paris",
-            displayName: "France",
-            latitude: 48.8566,
-            longitude: 2.3522,
-          },
-        ],
-      }),
+    const mockFetchFn = jest.fn().mockResolvedValue({
+      ok: true,
+      data: {
+        locations: [parisLocation],
+      },
     });
+
+    (useFetch as jest.Mock).mockReturnValue(mockFetchFn);
 
     renderWithContext();
 
@@ -77,7 +83,9 @@ describe("LocationPicker component", () => {
     });
 
     await waitFor(() =>
-      expect(fetch).toHaveBeenCalledWith("/api/get-geolocation?city=Paris")
+      expect(mockFetchFn).toHaveBeenCalledWith(
+        "/api/get-geolocation?city=Paris"
+      )
     );
 
     expect(
@@ -86,11 +94,14 @@ describe("LocationPicker component", () => {
   });
 
   it("displays a toast when no locations were found", async () => {
-    (fetch as jest.Mock).mockResolvedValueOnce({
-      json: async () => ({
+    const mockFetchFn = jest.fn().mockResolvedValue({
+      ok: true,
+      data: {
         locations: [],
-      }),
+      },
     });
+
+    (useFetch as jest.Mock).mockReturnValue(mockFetchFn);
 
     renderWithContext();
     const input = screen.getByLabelText("chart.create.city");
@@ -108,18 +119,14 @@ describe("LocationPicker component", () => {
   });
 
   it("clears location when clear button is clicked", async () => {
-    (fetch as jest.Mock).mockResolvedValueOnce({
-      json: async () => ({
-        locations: [
-          {
-            name: "Paris",
-            displayName: "France",
-            latitude: 48.8566,
-            longitude: 2.3522,
-          },
-        ],
-      }),
+    const mockFetchFn = jest.fn().mockResolvedValue({
+      ok: true,
+      data: {
+        locations: [parisLocation],
+      },
     });
+
+    (useFetch as jest.Mock).mockReturnValue(mockFetchFn);
 
     renderWithContext();
 

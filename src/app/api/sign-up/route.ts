@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { IdentityFormInputs } from "@/features/user/sign-up/identity-step/IdentityForm";
 import { anonProxyFetch } from "@/lib/fetch.proxy";
+import { handleServerError } from "@/lib/endpoint.proxy";
 
 export async function POST(req: NextRequest) {
   const servicePath = "/sign-up/create";
@@ -9,7 +10,7 @@ export async function POST(req: NextRequest) {
   const response = await anonProxyFetch(req, servicePath, requestBody);
 
   if (!response.ok) {
-    return NextResponse.json(response);
+    return await handleServerError(response);
   }
 
   const responseData = await response.json();

@@ -1,3 +1,4 @@
+import { handleServerError } from "@/lib/endpoint.proxy";
 import { authProxyFetch } from "@/lib/fetch.proxy";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -13,7 +14,7 @@ export async function GET(req: NextRequest) {
   );
 
   if (!response.ok) {
-    return NextResponse.json(response);
+    return await handleServerError(response);
   }
 
   const responseJson = await response.json();

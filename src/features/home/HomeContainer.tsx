@@ -73,7 +73,7 @@ export default function HomeContainer() {
 
   useEffect(() => {
     createChart({
-      referenceDate: new Date(),
+      referenceDate: new Date().toString(),
     }).then((chartResult) => {
       if ("error" in chartResult) {
         showMessage(t(`chart.create.error.${chartResult.error}`), "error");

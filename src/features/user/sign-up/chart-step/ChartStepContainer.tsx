@@ -1,12 +1,12 @@
 import { Grid } from "@mui/material";
 import { ChartForm, ChartFormInputs } from "./ChartForm";
-import { BackendErrorResponse, Chart, ChartLocation } from "@/lib";
+import { Chart, ChartLocation } from "@/lib";
 import { useCreateChart } from "@/hooks/useCreateChart";
 import { useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { ChartPreview } from "./ChartPreview";
-import { useAuthFetch } from "@/hooks/useAuthFetch";
+import { useFetch } from "@/hooks/useFetch";
 
 export function ChartStepContainer({
   onStepComplete,
@@ -20,7 +20,7 @@ export function ChartStepContainer({
   const [loading, setLoading] = useState(false);
   const [chartData, setChartData] = useState<ChartFormInputs | undefined>();
   const [locations, setLocations] = useState<ChartLocation[]>([]);
-  const authFetch = useAuthFetch();
+  const authFetch = useFetch({ auth: true });
 
   const onChartDataReady = async ({
     location,
@@ -45,23 +45,20 @@ export function ChartStepContainer({
 
   const handleSaveChart = async () => {
     setLoading(true);
-    authFetch("/api/save-chart", {
+    // todo: define persisted chart type
+    authFetch<{ persistedChart: unknown }>("/api/save-chart", {
       method: "POST",
       body: JSON.stringify(chartData),
     })
       .then(async (response) => {
-        // todo: define persisted chart type
-        const fetchData: { persistedChart: unknown } | BackendErrorResponse =
-          await response.json();
-
-        if ("persistedChart" in fetchData) {
+        if (response.ok) {
           showMessage(
-            t(`form.chart.save_success`, { chartName: chartData?.name || "" }),
+            t(`form.chart.save_success`, { name: chartData?.name || "" }),
             "info"
           );
           onStepComplete();
         } else {
-          showMessage(t(`form.profile.error.${fetchData.error}`), "error");
+          showMessage(t(`form.profile.error.${response.error}`), "error");
         }
       })
       .finally(() => setLoading(false));

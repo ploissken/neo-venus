@@ -1,8 +1,9 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { ChartGenerationData } from "@/lib";
 import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
 import { authProxyFetch } from "@/lib/fetch.proxy";
+import { handleServerError } from "@/lib/endpoint.proxy";
 dayjs.extend(utc);
 
 export async function POST(req: NextRequest) {
@@ -10,10 +11,16 @@ export async function POST(req: NextRequest) {
 
   const requestBody: ChartGenerationData = await req.json();
 
-  return await authProxyFetch(req, servicePath, {
+  const response = await authProxyFetch(req, servicePath, {
     ...requestBody,
     referenceDate: new Date(
       dayjs(requestBody.referenceDate).utc(true).format()
     ),
   });
+
+  if (!response.ok) {
+    return await handleServerError(response);
+  }
+
+  return NextResponse.json(response);
 }

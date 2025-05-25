@@ -4,6 +4,7 @@ import { Chart, ChartGenerationData } from "@/lib";
 import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
 import { anonProxyFetch } from "@/lib/fetch.proxy";
+import { handleServerError } from "@/lib/endpoint.proxy";
 dayjs.extend(utc);
 
 export async function POST(req: NextRequest) {
@@ -19,15 +20,11 @@ export async function POST(req: NextRequest) {
   });
 
   if (!response.ok) {
-    return NextResponse.json(response);
+    return await handleServerError(response);
   }
 
   try {
     const { planets, houses, metadata, aspects } = await response.json();
-    // const repsonseJson = await response.json();
-    // console.log("datadatadata", repsonseJson);
-    // return {};
-
     const mappedHouses = mapHouses(houses);
     const mappedPlanets = mapPlanets(planets, mappedHouses[0]?.longitude || 0);
     const mappedAspects = mapAspects(aspects);

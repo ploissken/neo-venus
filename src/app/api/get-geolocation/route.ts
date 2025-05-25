@@ -1,3 +1,4 @@
+import { handleServerError } from "@/lib/endpoint.proxy";
 import { anonProxyFetch } from "@/lib/fetch.proxy";
 import { ChartLocation } from "@/lib/location.types";
 import { NextRequest, NextResponse } from "next/server";
@@ -21,7 +22,7 @@ export async function GET(req: NextRequest) {
 
   const response = await anonProxyFetch(req, buildLocationServiceUrl(city));
   if (!response.ok) {
-    return NextResponse.json(response);
+    return await handleServerError(response);
   }
 
   const responseJson = await response.json();

@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 export function getEndpoint(serviceUrl: string) {
   const BASE_URL = process.env.API_BASE_URL;
   if (!BASE_URL) {
@@ -7,4 +9,9 @@ export function getEndpoint(serviceUrl: string) {
   return serviceUrl.startsWith("http")
     ? serviceUrl
     : `${BASE_URL}${serviceUrl}`;
+}
+
+export async function handleServerError(response: NextResponse) {
+  const errorBody = await response.json();
+  return NextResponse.json(errorBody, { status: response.status });
 }

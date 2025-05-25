@@ -1,4 +1,5 @@
 import { useSnackbar } from "@/hooks";
+import { useFetch } from "@/hooks/useFetch";
 import { ChartLocation } from "@/lib/location.types";
 import { Cancel, Search } from "@mui/icons-material";
 import {
@@ -34,6 +35,7 @@ export function LocationPicker({
 }: LocationPickerProps) {
   const t = useTranslations();
   const { showMessage } = useSnackbar();
+  const serverFetch = useFetch();
   const [loading, setLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selectedLocationIndex, setSelectedLocationIndex] = useState(
@@ -58,12 +60,22 @@ export function LocationPicker({
 
     setLoading(true);
 
-    const response = await fetch(`/api/get-geolocation?city=${inputValue}`);
-    const data = await response.json();
+    const response = await serverFetch<{ locations: ChartLocation[] }>(
+      `/api/get-geolocation?city=${inputValue}`
+    );
 
-    if (data.locations.length > 0) {
-      setLocations(data.locations);
-      onLocationsLoaded?.(data.locations);
+    if (!response.ok) {
+      setLoading(false);
+      return;
+    }
+
+    const {
+      data: { locations },
+    } = response;
+
+    if (locations?.length > 0) {
+      setLocations(locations);
+      onLocationsLoaded?.(locations);
       setSelectedLocationIndex(0);
     } else {
       showMessage(

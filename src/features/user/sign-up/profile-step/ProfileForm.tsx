@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import {
-  BackendErrorResponse,
   ChartLocation,
   ProfileFormFields,
   useGenderOptions,
@@ -14,7 +13,7 @@ import {
 } from "@/lib";
 import { ControlledMultiSelect } from "@/components/common/ControlledMultiSelect";
 import { UsernameField } from "@/components/common/UsernameField";
-import { useAuthFetch } from "@/hooks/useAuthFetch";
+import { useFetch } from "@/hooks/useFetch";
 
 export type ProfileFormInputs = {
   fullName: string;
@@ -39,25 +38,24 @@ export function ProfileForm({
   });
   const { register, handleSubmit, control } = methods;
   const t = useTranslations();
-  const authFetch = useAuthFetch();
+  const authFetch = useFetch({ auth: true });
+
   const [loading, setLoading] = useState(false);
 
   const { showMessage } = useSnackbar();
 
   const onSubmit: SubmitHandler<ProfileFormInputs> = (data) => {
     setLoading(true);
-    authFetch("/api/user/update", {
+    // todo: define type user
+    authFetch<{ user: unknown }>("/api/user/update", {
       method: "POST",
       body: JSON.stringify(data),
     })
       .then(async (response) => {
-        // todo: define type user
-        const fetchData: { user: unknown } | BackendErrorResponse =
-          await response.json();
-        if ("user" in fetchData) {
+        if (response.ok) {
           onIdentityCreated();
         } else {
-          showMessage(t(`form.profile.error.${fetchData.error}`), "error");
+          showMessage(t(`form.profile.error.${response.error}`), "error");
         }
       })
       .finally(() => setLoading(false));

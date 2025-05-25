@@ -56,6 +56,15 @@
     "Neptune": "Neptune",
     "Pluto": "Pluto"
   },
+  "server": {
+    "error": {
+      "bad_request": "There is an error in one or more fields. Please verify and try again.",
+      "unauthorized": "You must be logged in to access that content.",
+      "not_found": "Content not found.",
+      "internal_server_error": "Internal server error. Please try again later.",
+      "unknown_error": "Unknown error. Please try again later."
+    }
+  },
   "sogi": {
     "label": "Sexual Orientation & Gender Identity",
     "gender": {

@@ -42,11 +42,11 @@ export function SignUpContainer() {
 
   const renderStep = () => {
     switch (activeStep) {
-      case 0:
+      case 2:
         return <IdentityStepContainer onStepComplete={handleNext} />;
       case 1:
         return <ProfileStepContainer onStepComplete={handleNext} />;
-      case 2:
+      case 0:
         // todo: handleNext when adding friends is ready
         return <ChartStepContainer onStepComplete={() => router.push("/")} />;
       case 3:
