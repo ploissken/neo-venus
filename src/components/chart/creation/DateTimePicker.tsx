@@ -1,4 +1,3 @@
-import * as React from "react";
 import { DateTimePicker as MuiDatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import { useTranslations } from "next-intl";

@@ -1,7 +1,6 @@
 "use client";
-
 import { SignInContainer } from "@/features/user/sign-in/SignInContainer";
 
-export default function SignUp() {
+export default function SignIn() {
   return <SignInContainer />;
 }

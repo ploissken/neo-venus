@@ -32,12 +32,7 @@ export default function HomeContainer() {
             latitude,
             longitude,
           }).then((chartResult) => {
-            if ("error" in chartResult) {
-              showMessage(
-                t(`chart.create.error.${chartResult.error}`),
-                "error"
-              );
-            } else {
+            if (!("error" in chartResult)) {
               setChart(chartResult);
             }
           });
@@ -72,9 +67,7 @@ export default function HomeContainer() {
     createChart({
       referenceDate: new Date().toString(),
     }).then((chartResult) => {
-      if ("error" in chartResult) {
-        showMessage(t(`chart.create.error.${chartResult.error}`), "error");
-      } else {
+      if (!("error" in chartResult)) {
         setChart(chartResult);
       }
     });

@@ -42,21 +42,4 @@ describe("HomeContainer component", () => {
     expect(screen.getByText("ChartController")).toBeInTheDocument();
     expect(screen.getByText("chart.current_sky")).toBeInTheDocument();
   });
-
-  it("display a toast message when fetch fails", async () => {
-    mockCreateChart.mockResolvedValueOnce({
-      error: "error_cause",
-    });
-
-    await act(async () => {
-      renderComponent();
-    });
-
-    await waitFor(() => expect(mockCreateChart).toHaveBeenCalledTimes(1));
-
-    expect(mockedShowMessage).toHaveBeenCalledWith(
-      "chart.create.error.error_cause",
-      "error"
-    );
-  });
 });

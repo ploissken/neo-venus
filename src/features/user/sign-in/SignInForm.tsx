@@ -50,7 +50,7 @@ export function SignInForm({}) {
         direction="column"
         sx={{ gap: 2 }}
       >
-        <Typography variant="h4">Sign in to MercurYou</Typography>
+        <Typography variant="h4">{t("form.identity.sign_in_title")}</Typography>
         <TextField
           id="email"
           label={t("form.identity.email.label")}

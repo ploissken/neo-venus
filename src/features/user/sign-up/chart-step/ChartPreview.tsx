@@ -20,7 +20,6 @@ export function ChartPreview({
   onSave: () => void;
 }) {
   const t = useTranslations();
-  //   todo: revamp chart location
   const chartLocation = locations.find(
     (loc) =>
       loc.latitude === chartData.location.latitude &&

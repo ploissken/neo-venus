@@ -1,5 +1,3 @@
-"use client";
-
 import { SignUpContainer } from "@/features/user/sign-up/SignUpContainer";
 
 export default function SignUp() {

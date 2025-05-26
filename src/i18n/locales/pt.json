@@ -97,6 +97,7 @@
       "my_chart": "Meu Mapa Astral",
       "save": "Salvar",
       "save_success": "\"{name}\" salvo",
+      "step_title": "Crie seu Mapa Astral",
       "location": {
         "required": "Local é necessário"
       }
@@ -125,7 +126,9 @@
         "helper": "A senha precisa ter pelo menos 8 caracteres"
       },
       "sign_up": "Criar Conta",
-      "sign_in": "Entrar"
+      "sign_in": "Entrar",
+      "sign_in_title": "Entrar em MercurYou",
+      "step_title": "Identidade"
     },
     "profile": {
       "avatar": {
@@ -140,6 +143,7 @@
       "orientation": {
         "label": "Orientação Sexual"
       },
+      "step_title": "Crie seu perfil",
       "submit": "Criar perfil",
       "username": {
         "available": "Nome de usuário disponível",

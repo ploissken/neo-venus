@@ -15,20 +15,22 @@ import { ProfileStepContainer } from "./profile-step/ProfileStepContainer";
 import { FriendsFinderStep } from "./FriendsStep";
 import { useRouter } from "next/navigation";
 import { ChartStepContainer } from "./chart-step/ChartStepContainer";
-
-const steps = [
-  "Identity Step",
-  "Create your profile",
-  "Create your Chart",
-  "Add friends",
-];
+import { useTranslations } from "next-intl";
 
 export function SignUpContainer() {
   const TRANSITION_DURATION = 200;
   const router = useRouter();
+  const t = useTranslations();
   const [activeStep, setActiveStep] = useState(0);
   const [show, setShow] = useState(true);
   const [direction, setDirection] = useState<"left" | "right">("left");
+
+  const steps = [
+    t("form.identity.step_title"),
+    t("form.profile.step_title"),
+    t("form.chart.step_title"),
+    // todo: "Add friends",
+  ];
 
   const handleNext = () => {
     setDirection("right");

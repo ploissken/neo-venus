@@ -1,9 +1,14 @@
-import { mapAspects, mapHouses, mapPlanets } from "@/lib/chart";
+import {
+  mapAspects,
+  mapHouses,
+  mapPlanets,
+  Chart,
+  ChartGenerationData,
+} from "@/lib/chart";
 import { NextRequest, NextResponse } from "next/server";
-import { Chart, ChartGenerationData } from "@/lib";
+import { handleServerError, anonProxyFetch } from "@/lib/proxy";
 import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
-import { handleServerError, anonProxyFetch } from "@/lib/proxy";
 dayjs.extend(utc);
 
 export async function POST(req: NextRequest) {

@@ -1,4 +1,3 @@
-import React from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import {
   Controller,
@@ -45,7 +44,7 @@ export function ControlledMultiSelect<T extends FieldValues>({
             getOptionLabel={(option) => option.label}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             value={selectedOptions}
-            onChange={(event, newValue) =>
+            onChange={(_, newValue) =>
               onChange(newValue.map((option) => option.id))
             }
             renderInput={(params) => (

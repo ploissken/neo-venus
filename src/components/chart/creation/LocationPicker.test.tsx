@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { LocationPicker } from "./LocationPicker";
 import React, { act } from "react";
 import { SnackbarContext } from "@/context";
+import { ChartLocation } from "@/lib";
 
 const mockAuthFetch = jest.fn();
 const mockAnonFetch = jest.fn();
@@ -14,11 +15,16 @@ jest.mock("@/hooks/useFetch", () => ({
 
 const mockSetLocation = jest.fn();
 const mockedShowMessage = jest.fn();
-const parisLocation = {
+const parisLocation: ChartLocation = {
   name: "Paris",
   displayName: "France",
   latitude: 48.8566,
   longitude: 2.3522,
+  details: {
+    countryCode: "FR",
+    country: "France",
+    state: "Íle-de-France",
+  },
 };
 
 const renderWithContext = () =>

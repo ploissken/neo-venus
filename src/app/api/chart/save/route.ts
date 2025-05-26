@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ChartGenerationData } from "@/lib";
+import { ChartGenerationData } from "@/lib/chart";
 import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
 import { authProxyFetch, handleServerError } from "@/lib/proxy";

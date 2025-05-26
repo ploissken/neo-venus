@@ -1,5 +1,4 @@
-import { useSnackbar } from "@/hooks";
-import { useFetch } from "@/hooks/useFetch";
+import { useSnackbar, useFetch } from "@/hooks";
 import { ChartLocation } from "@/lib/chart";
 import { Cancel, Search } from "@mui/icons-material";
 import {

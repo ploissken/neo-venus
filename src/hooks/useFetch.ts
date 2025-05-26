@@ -55,19 +55,19 @@ export function useFetch() {
 
           if (response.status === 400) {
             const error = "server.error.bad_request";
-            showMessage(t(error));
+            showMessage(t(error), "error");
             return { ok: false, error };
           }
 
           if (response.status === 404) {
             const error = "server.error.not_found";
-            showMessage(t(error));
+            showMessage(t(error), "error");
             return { ok: false, error };
           }
 
           if (response.status === 500) {
             const error = "server.error.internal_server_error";
-            showMessage(t(error));
+            showMessage(t(error), "error");
             return { ok: false, error };
           }
 
