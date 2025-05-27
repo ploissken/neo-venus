@@ -1,9 +1,6 @@
 import { useUser } from "@/context";
-import {
-  useFetch,
-  useSnackbar,
-} from "@/hooks";
-import { ProfileFormFields } from "@/lib";
+import { useFetch, useSnackbar } from "@/hooks";
+import { ProfileFormFields } from "@/lib/profile.helpers";
 import { Button, Grid, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";

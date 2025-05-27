@@ -1,6 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { ChartFormInputs } from "./ChartForm";
-import { Chart, ChartLocation } from "@/lib";
+import { Chart, ChartLocation } from "@/lib/chart";
 import { useTranslations } from "next-intl";
 import AstralChart from "@/components/chart/drawings/AstralChart";
 
@@ -50,7 +50,6 @@ export function ChartPreview({
         </Grid>
         <Grid container size="grow" direction="column">
           <Button
-            type="submit"
             variant="contained"
             onClick={onSave}
             loading={loading}

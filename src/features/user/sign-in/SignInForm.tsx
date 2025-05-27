@@ -1,6 +1,6 @@
 import { useUser } from "@/context";
 import { useSnackbar } from "@/hooks";
-import { ProfileFormFields } from "@/lib";
+import { ProfileFormFields } from "@/lib/profile.helpers";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";

@@ -1,4 +1,4 @@
-import { Aspect, ASPECT_SIZE, getAspectProperties } from "@/lib";
+import { Aspect, ASPECT_SIZE, getAspectProperties } from "@/lib/chart";
 
 import {
   Conjunction,

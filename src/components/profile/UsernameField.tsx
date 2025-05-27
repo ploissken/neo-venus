@@ -1,11 +1,11 @@
 import { InputAdornment, TextField, Tooltip } from "@mui/material";
 import { useSnackbar, useFetch } from "@/hooks";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FocusEvent, ChangeEvent } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { ProfileFormInputs } from "@/features/user/sign-up/profile-step/ProfileForm";
 import CheckIcon from "@mui/icons-material/Check";
-import { ProfileFormFields } from "@/lib";
+import { ProfileFormFields } from "@/lib/profile.helpers";
 
 export function UsernameField() {
   const t = useTranslations();
@@ -23,7 +23,7 @@ export function UsernameField() {
     formState: { touchedFields, errors },
   } = useFormContext<ProfileFormInputs>();
 
-  const handleUsernameBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  const handleUsernameBlur = (event: FocusEvent<HTMLInputElement>) => {
     const trimmed = event.target.value.trim();
     setValue(ProfileFormFields.Username, trimmed, { shouldValidate: true });
 
@@ -45,7 +45,7 @@ export function UsernameField() {
     }
   };
 
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUsernameStatus(undefined);
     clearErrors(ProfileFormFields.Username);
     setValue(ProfileFormFields.Username, event.target.value.toLowerCase(), {

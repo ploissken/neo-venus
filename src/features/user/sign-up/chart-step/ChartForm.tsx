@@ -1,5 +1,5 @@
 import { DateTimePicker, LocationPicker } from "@/components/chart/creation";
-import { ChartLocation } from "@/lib";
+import { ChartLocation } from "@/lib/chart";
 import { Button, Grid } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";

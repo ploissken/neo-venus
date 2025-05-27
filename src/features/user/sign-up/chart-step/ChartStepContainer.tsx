@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { ChartForm, ChartFormInputs } from "./ChartForm";
-import { Chart, ChartLocation } from "@/lib";
+import { Chart, ChartLocation } from "@/lib/chart";
 import { useCreateChart } from "@/hooks/useCreateChart";
 import { useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
@@ -29,9 +29,9 @@ export function ChartStepContainer({
   }: ChartFormInputs) => {
     setLoading(true);
     const chartData = {
+      ...location,
       name,
       referenceDate: date,
-      ...location,
     };
     setChartData({ location, date, name });
     const chartResult = await createChart(chartData);

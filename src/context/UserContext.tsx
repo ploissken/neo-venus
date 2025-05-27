@@ -1,5 +1,11 @@
 import { FailedFetchResult, SuccessFetchResult, useFetch } from "@/hooks";
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 type UserContextType = {
   isLoggedIn: boolean;
@@ -17,7 +23,7 @@ type Credentials = {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export function UserProvider({ children }: { children: React.ReactNode }) {
+export function UserProvider({ children }: { children: ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { authFetch } = useFetch();
 

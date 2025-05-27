@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { LocationPicker } from "./LocationPicker";
-import React, { act } from "react";
+import { act } from "react";
 import { SnackbarContext } from "@/context";
-import { ChartLocation } from "@/lib";
+import { ChartLocation } from "@/lib/chart";
 
 const mockAuthFetch = jest.fn();
 const mockAnonFetch = jest.fn();

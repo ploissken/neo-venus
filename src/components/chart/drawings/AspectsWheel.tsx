@@ -7,7 +7,7 @@ import {
   ChartPlanet,
   PlanetAspect,
   getAspectProperties,
-} from "@/lib";
+} from "@/lib/chart";
 
 import { motion } from "framer-motion";
 

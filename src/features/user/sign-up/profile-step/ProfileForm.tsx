@@ -6,12 +6,12 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import {
-  ChartLocation,
   ProfileFormFields,
   useGenderOptions,
   useOrientationOptions,
-} from "@/lib";
+} from "@/lib/profile.helpers";
 import { UsernameField, ControlledMultiSelect } from "@/components/profile";
+import { ChartLocation } from "@/lib/chart";
 
 export type ProfileFormInputs = {
   fullName: string;
