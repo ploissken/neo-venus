@@ -5,6 +5,13 @@ jest.mock("../logo", () => ({
   LogoWithTitle: () => <div data-testid="mock-logo">LogoWithTitle</div>,
 }));
 
+jest.mock("@/context", () => ({
+  useUser: () => ({
+    isLoggedIn: true,
+    logout: jest.fn(),
+  }),
+}));
+
 describe("DrawerMenu component", () => {
   it("renders the menu button", () => {
     render(<DrawerMenu />);

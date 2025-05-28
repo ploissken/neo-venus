@@ -1,17 +1,36 @@
 "use client";
 import { CircularProgress, Grid, Theme, Typography } from "@mui/material";
 import { ChartController } from "./ChartController";
-import { ChartCreationMenu } from "@/components/chart-creation";
-import { Chart } from "@/lib/chart.types";
+import { Chart, CHART_LARGE_SIZE } from "@/lib/chart";
 import { useState } from "react";
-import { CHART_LARGE_SIZE } from "@/lib/chart.consts";
 import { useTranslations } from "next-intl";
-import { useChartContext } from "@/hooks";
+import { useSnackbar, useCreateChart } from "@/hooks";
+import {
+  ChartForm,
+  ChartFormInputs,
+} from "../user/sign-up/chart-step/ChartForm";
 
 export default function CreateChartContainer() {
   const [chart, setChart] = useState<Chart | undefined>();
   const t = useTranslations();
-  const { loading } = useChartContext();
+  const [loading, setLoading] = useState(false);
+  const createChart = useCreateChart();
+  const { showMessage } = useSnackbar();
+
+  const handleChartCreation = async ({ location, date }: ChartFormInputs) => {
+    setLoading(true);
+    const chartData = {
+      referenceDate: date,
+      ...location,
+    };
+    const chartResult = await createChart(chartData);
+    if ("error" in chartResult) {
+      showMessage(t(`chart.create.error.${chartResult.error}`), "error");
+    } else {
+      setChart(chartResult);
+    }
+    setLoading(false);
+  };
 
   return (
     <Grid
@@ -33,12 +52,12 @@ export default function CreateChartContainer() {
         sx={{ minHeight: CHART_LARGE_SIZE }}
         justifyContent="center"
       >
-        <ChartCreationMenu onChartCreated={setChart} />
-        {chart && <ChartController chart={chart} />}
-        {!chart && !loading && (
-          <Typography>{t("chart.create.helper")}</Typography>
-        )}
-        {loading && (
+        <ChartForm
+          onChartDataReady={handleChartCreation}
+          disabled={loading}
+          displayStyle="row"
+        />
+        {loading ? (
           <Grid
             container
             justifyContent="center"
@@ -46,6 +65,18 @@ export default function CreateChartContainer() {
             sx={{ minHeight: CHART_LARGE_SIZE }}
           >
             <CircularProgress />
+          </Grid>
+        ) : chart ? (
+          <ChartController chart={chart} />
+        ) : (
+          <Grid
+            container
+            spacing={2}
+            size={{ xs: 12, lg: 11 }}
+            sx={{ minHeight: CHART_LARGE_SIZE }}
+            justifyContent="center"
+          >
+            <Typography>{t("chart.create.helper")}</Typography>
           </Grid>
         )}
       </Grid>

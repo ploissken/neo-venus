@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { ZodiacSignIcon } from ".";
-import { ZodiacSign } from "@/lib/chart.types";
-import { ZODIAC_SIGN_SIZE } from "@/lib/chart.consts";
+import { ZodiacSign, ZODIAC_SIGN_SIZE } from "@/lib/chart";
 
 describe("ZodiacSignIcon component", () => {
   it("renders zodiac sign icon properly", () => {

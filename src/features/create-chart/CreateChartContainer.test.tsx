@@ -1,20 +1,36 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import CreateChartContainer from "./CreateChartContainer";
 import { SnackbarContext } from "@/context";
+import { mockChart } from "@/__mocks__";
 
 jest.mock("./ChartController", () => ({
   ChartController: jest.fn(() => <div>ChartController</div>),
 }));
 
-jest.mock("../../components/chart-creation", () => ({
-  ChartCreationMenu: ({
-    onChartCreated,
+jest.mock("../user/sign-up/chart-step/ChartForm", () => ({
+  ChartForm: ({
+    onChartDataReady,
   }: {
-    onChartCreated: (chart: unknown) => void;
-  }) => <button onClick={() => onChartCreated({})}>ChartCreationMenu</button>,
+    onChartDataReady: (chart: unknown) => void;
+  }) => <button onClick={() => onChartDataReady({})}>ChartForm</button>,
 }));
 
+jest.mock("@/hooks", () => ({
+  useCreateChart: () => mockCreateChart,
+  useSnackbar: () => ({
+    showMessage: mockedShowMessage,
+  }),
+}));
+
+const mockCreateChart = jest.fn();
 const mockedShowMessage = jest.fn();
+
 const renderComponent = () => {
   render(
     <SnackbarContext.Provider value={{ showMessage: mockedShowMessage }}>
@@ -24,16 +40,26 @@ const renderComponent = () => {
 };
 
 describe("CreateChartContainer component", () => {
-  it("renders the CreateChartContainer with ChartCreationMenu", () => {
+  it("renders the CreateChartContainer with ChartForm", () => {
     renderComponent();
     expect(screen.queryByText("ChartController")).not.toBeInTheDocument();
-    expect(screen.getByText("ChartCreationMenu")).toBeInTheDocument();
+    expect(screen.getByText("ChartForm")).toBeInTheDocument();
   });
 
-  it("renders the ChartController when chart is present", () => {
+  it("renders the ChartController when chart is present", async () => {
+    mockCreateChart.mockResolvedValueOnce({
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        data: { chart: mockChart },
+      }),
+    });
     renderComponent();
     expect(screen.queryByText("ChartController")).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText("ChartCreationMenu"));
-    expect(screen.getByText("ChartController")).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.click(screen.getByText("ChartForm"));
+    });
+    await waitFor(() =>
+      expect(screen.getByText("ChartController")).toBeInTheDocument()
+    );
   });
 });

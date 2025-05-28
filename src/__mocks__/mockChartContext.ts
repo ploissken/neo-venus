@@ -1,5 +1,4 @@
-import { ChartContextType } from "@/context/ChartContext";
-import { BaseChartObject, Chart } from "@/lib/chart.types";
+import { BaseChartObject, Chart } from "@/lib/chart";
 
 const baseChartObject: BaseChartObject = {
   signIndex: 0,
@@ -49,13 +48,4 @@ export const mockChart: Chart = {
       value: 2,
     },
   ],
-};
-
-export const mockChartContext: ChartContextType = {
-  loading: false,
-  setChart: () => {},
-  setDateValue: () => {},
-  setLocation: () => {},
-  setLoading: () => {},
-  chart: mockChart,
 };

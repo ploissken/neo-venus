@@ -11,8 +11,10 @@ This folder defines the root application structure using the Next.js **App Route
     /app
       ├── /about           # Static route for the "About" page
       ├── /api             # Route handlers (acts as API endpoints)
-      ├── /user-profile    # User profile page (wip)
+      ├── /create-chart    # Route for creating anonymous Astral Charts
+      ├── /user            # User related pages (wip)
       ├── layout.tsx       # Shared layout across all routes
+      └── providers.tsx    # App wide providers wrapper
       └── page.tsx         # Root '/' page — homepage content
 
 ---

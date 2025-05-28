@@ -1,6 +1,6 @@
 "use client";
 import MenuIcon from "@mui/icons-material/Menu";
-import { AutoAwesome, Home, Info } from "@mui/icons-material";
+import { AutoAwesome, Home, Info, Logout } from "@mui/icons-material";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
@@ -14,9 +14,12 @@ import {
   Grid,
 } from "@mui/material";
 import { LogoWithTitle } from "../logo";
+import NextLink from "next/link";
+import { useUser } from "@/context";
 
 export function DrawerMenu() {
   const t = useTranslations();
+  const { isLoggedIn, logout } = useUser();
 
   const [open, setOpen] = useState(false);
 
@@ -38,16 +41,34 @@ export function DrawerMenu() {
     <Grid container sx={{ width: 250, m: 2 }}>
       <LogoWithTitle size={40} color="white" />
       <List sx={{ mt: 4, width: "100%" }}>
-        {routes.map(({ text, icon, route }) => (
-          <Link href={route} key={text} sx={{ textDecoration: "none" }}>
-            <ListItem key={text} disablePadding>
+        <nav role="navigation" aria-label="main menu">
+          {routes.map(({ text, icon, route }) => (
+            <Link
+              component={NextLink}
+              href={route}
+              key={text}
+              sx={{ textDecoration: "none" }}
+              onClick={toggleDrawer(false)}
+            >
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  {text}
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          ))}
+          {isLoggedIn && (
+            <ListItem disablePadding onClick={logout}>
               <ListItemButton>
-                <ListItemIcon>{icon}</ListItemIcon>
-                {text}
+                <ListItemIcon>
+                  <Logout />
+                </ListItemIcon>
+                {t("menu.logout")}
               </ListItemButton>
             </ListItem>
-          </Link>
-        ))}
+          )}
+        </nav>
       </List>
     </Grid>
   );

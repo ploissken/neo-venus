@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { PlanetIcon } from ".";
-import { Planet } from "@/lib/chart.types";
-import { PLANET_SIZE } from "@/lib/chart.consts";
+import { Planet, PLANET_SIZE } from "@/lib/chart";
 
 describe("PlanetIcon component", () => {
   it("renders planet icon properly", () => {

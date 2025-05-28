@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { AspectIcon } from ".";
-import { Aspect } from "@/lib/chart.types";
-import { ASPECT_SIZE } from "@/lib/chart.consts";
+import { Aspect, ASPECT_SIZE } from "@/lib/chart";
 
 describe("AspectIcon component", () => {
   it("renders aspect icon properly", () => {

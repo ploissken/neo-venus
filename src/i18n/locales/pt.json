@@ -37,9 +37,12 @@
     }
   },
   "menu": {
+    "about": "Sobre",
     "create_chart": "Criar Mapa Astral",
     "home": "Início",
-    "about": "Sobre"
+    "logout": "Sair",
+    "sign_in": "Entrar",
+    "sign_up": "Criar Perfil"
   },
   "planet": {
     "Sun": "Sol",
@@ -52,6 +55,109 @@
     "Uranus": "Urano",
     "Neptune": "Netuno",
     "Pluto": "Plutão"
+  },
+  "server": {
+    "error": {
+      "bad_request": "Existe um erro em um ou mais campos. Verifique e tente novamente.",
+      "unauthorized": "Você precisa estar logado para acessar esse conteúdo.",
+      "not_found": "Conteúdo não encontrado.",
+      "internal_server_error": "Erro interno do servidor. Tente novamente mais tarde.",
+      "unknown_error": "Erro desconhecido. Tente novamente mais tarde."
+    }
+  },
+  "sogi": {
+    "label": "Orientação sexual & Identidade de Gênero",
+    "gender": {
+      "male": "Homem",
+      "female": "Mulher",
+      "nb": "Não Binário",
+      "trans": "Transexual",
+      "neutral": "Neutro",
+      "other": "Outro",
+      "undeclared": "Prefiro não declarar"
+    },
+    "orientation": {
+      "straight": "Heterossexual",
+      "gay": "Gay / Lésbica",
+      "bi": "Bisesxual",
+      "queer": "Queer",
+      "pan": "Pansexual",
+      "asex": "Assexual",
+      "other": "Outro",
+      "undeclared": "Prefiro não declarar"
+    }
+  },
+  "form": {
+    "chart": {
+      "date": {
+        "required": "Data e hora são necessários"
+      },
+      "edit": "Editar",
+      "generate": "Gerar Mapa Astral",
+      "my_chart": "Meu Mapa Astral",
+      "save": "Salvar",
+      "save_success": "\"{name}\" salvo",
+      "step_title": "Crie seu Mapa Astral",
+      "location": {
+        "required": "Local é necessário"
+      }
+    },
+    "identity": {
+      "email": {
+        "label": "E-mail",
+        "required": "E-mail é obrigatório",
+        "helper": "Por favor, digite um endereço de e-mail válido"
+      },
+      "error": {
+        "user_email_unique": "E-mail já cadastrado",
+        "invalid_email": "E-mail inválido",
+        "missing_data": "E-mail ou senha inválido",
+        "password_too_short": "A senha precisa ter pelo menos 8 caracteres",
+        "wrong_credentials": "E-mail ou senha incorretos. Tente novamente."
+      },
+      "confirm_password": {
+        "label": "Confirmar Senha",
+        "required": "Por favor, confirme sua senha",
+        "helper": "Senhas são diferentes"
+      },
+      "password": {
+        "label": "Senha",
+        "required": "Senha é obrigatório",
+        "helper": "A senha precisa ter pelo menos 8 caracteres"
+      },
+      "sign_up": "Criar Conta",
+      "sign_in": "Entrar",
+      "sign_in_title": "Entrar em MercurYou",
+      "step_title": "Identidade"
+    },
+    "profile": {
+      "avatar": {
+        "label": "Avatar do Usuário"
+      },
+      "full_name": {
+        "label": "Nome Completo"
+      },
+      "gender": {
+        "label": "Identidade de Gênero"
+      },
+      "orientation": {
+        "label": "Orientação Sexual"
+      },
+      "step_title": "Crie seu perfil",
+      "submit": "Criar perfil",
+      "username": {
+        "available": "Nome de usuário disponível",
+        "label": "Nome de usuário",
+        "required": "Nome de usuário é obrigatório",
+        "no_spaces": "Nome de usuário não pode conter espaços",
+        "min_length": "Nome de usuário deve ter no mínimo 3 caracteres",
+        "max_length": "Nome de usuário deve ter no máximo 32 caracteres",
+        "unavailable": "Nome de usuário já existe"
+      },
+      "error": {
+        "unknown": "Erro desconhecido. Tente novamente mais tarde."
+      }
+    }
   },
   "zodiac_sign": {
     "Aries": "Áries",
