@@ -12,6 +12,7 @@ import {
   InputAdornment,
   TextField,
   Button,
+  Tooltip,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -50,6 +51,12 @@ export function LocationPicker({
     useState<ChartLocation[]>(startingLocations);
 
   const hasLocationsLoaded = locations.length > 0;
+
+  const trimLocationDisplayName = (locationName: string) => {
+    return locationName.length > 50
+      ? `${locationName.slice(0, 50)}...`
+      : locationName;
+  };
 
   const handleSearchLocation = async () => {
     if (!inputValue) {
@@ -130,7 +137,7 @@ export function LocationPicker({
                 {locations.map((location: ChartLocation, index: number) => (
                   <MenuItem key={index} value={index}>
                     <Typography variant="caption">
-                      {location.displayName}
+                      {trimLocationDisplayName(location.displayName)}
                     </Typography>
                   </MenuItem>
                 ))}
@@ -179,14 +186,16 @@ export function LocationPicker({
 
       {hasLocationsLoaded && (
         <Grid size={2} container justifyContent="center">
-          <Button
-            fullWidth
-            color="info"
-            aria-label={t("chart.create.clear_city")}
-            onClick={handleClearLocation}
-          >
-            <Cancel />
-          </Button>
+          <Tooltip title={t("chart.create.clear_city")}>
+            <Button
+              fullWidth
+              color="info"
+              aria-label={t("chart.create.clear_city")}
+              onClick={handleClearLocation}
+            >
+              <Cancel />
+            </Button>
+          </Tooltip>
         </Grid>
       )}
     </Grid>

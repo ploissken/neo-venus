@@ -12,6 +12,13 @@ export function getEndpoint(serviceUrl: string) {
 }
 
 export async function handleServerError(response: NextResponse) {
-  const errorBody = await response.json();
-  return NextResponse.json(errorBody, { status: response.status });
+  try {
+    const errorBody = await response.json();
+    return NextResponse.json(errorBody, { status: response.status });
+  } catch {
+    return NextResponse.json(
+      { error: "invalid_error_response" },
+      { status: response.status }
+    );
+  }
 }

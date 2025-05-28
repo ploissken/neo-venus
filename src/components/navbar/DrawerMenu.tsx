@@ -41,32 +41,34 @@ export function DrawerMenu() {
     <Grid container sx={{ width: 250, m: 2 }}>
       <LogoWithTitle size={40} color="white" />
       <List sx={{ mt: 4, width: "100%" }}>
-        {routes.map(({ text, icon, route }) => (
-          <Link
-            component={NextLink}
-            href={route}
-            key={text}
-            sx={{ textDecoration: "none" }}
-            onClick={toggleDrawer(false)}
-          >
-            <ListItem key={text} disablePadding>
+        <nav role="navigation" aria-label="main menu">
+          {routes.map(({ text, icon, route }) => (
+            <Link
+              component={NextLink}
+              href={route}
+              key={text}
+              sx={{ textDecoration: "none" }}
+              onClick={toggleDrawer(false)}
+            >
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  {text}
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          ))}
+          {isLoggedIn && (
+            <ListItem disablePadding onClick={logout}>
               <ListItemButton>
-                <ListItemIcon>{icon}</ListItemIcon>
-                {text}
+                <ListItemIcon>
+                  <Logout />
+                </ListItemIcon>
+                {t("menu.logout")}
               </ListItemButton>
             </ListItem>
-          </Link>
-        ))}
-        {isLoggedIn && (
-          <ListItem disablePadding onClick={logout}>
-            <ListItemButton>
-              <ListItemIcon>
-                <Logout />
-              </ListItemIcon>
-              {t("menu.logout")}
-            </ListItemButton>
-          </ListItem>
-        )}
+          )}
+        </nav>
       </List>
     </Grid>
   );

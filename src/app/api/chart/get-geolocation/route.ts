@@ -49,10 +49,7 @@ export async function GET(req: NextRequest) {
           country,
           state,
         },
-        displayName:
-          displayName.length > 50
-            ? `${displayName.slice(0, 50)}...`
-            : displayName,
+        displayName,
       };
     }
   );

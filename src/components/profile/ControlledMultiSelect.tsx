@@ -39,6 +39,7 @@ export function ControlledMultiSelect<T extends FieldValues>({
 
         return (
           <Autocomplete
+            aria-multiselectable="true"
             multiple
             options={options}
             getOptionLabel={(option) => option.label}
