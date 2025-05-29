@@ -1,3 +1,5 @@
+import { ChartLocation } from "./location.types";
+
 export enum Planet {
   Sun,
   Moon,
@@ -41,10 +43,9 @@ export enum Aspect {
 }
 
 export interface ChartGenerationData {
-  referenceDate: string;
+  date: string;
   name?: string;
-  latitude?: number;
-  longitude?: number;
+  location?: ChartLocation;
 }
 
 export interface BaseChartObject {
@@ -65,6 +66,29 @@ export interface ChartHouse extends BaseChartObject {
   houseIndex: number;
 }
 
+export interface ParsedDate {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+  second: number;
+  weekDay?: number;
+}
+
+export interface ChartMetadata {
+  date: string;
+  inputDate: {
+    date: string;
+    naiveDate: ParsedDate;
+  };
+  julDayUT: number;
+  location: ChartLocation;
+  timezone: string;
+  utc: ParsedDate;
+  name?: string;
+}
+
 export interface PlanetAspect {
   aspectIndex: Aspect;
   direction: string;
@@ -78,6 +102,7 @@ export interface Chart {
   planets: ChartPlanet[];
   houses: ChartHouse[];
   aspects: PlanetAspect[];
+  metadata: ChartMetadata;
   asc?: ChartHouse;
 }
 

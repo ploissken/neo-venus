@@ -26,6 +26,39 @@
     "data": {
       "aspects": "Aspectos",
       "title": "Assinatura Celeste"
+    },
+    "metadata": {
+      "date": "Data",
+      "place": "Local",
+      "julian_day": "Dia Juliano",
+      "universal_time": "Tempo Universal",
+      "time": "Hora",
+      "timezone": "Fuso Horário"
+    }
+  },
+  "dates": {
+    "weekdays": {
+      "sunday": "Domingo",
+      "monday": "Segunda",
+      "tuesday": "Terça",
+      "wednesday": "Quarta",
+      "thursday": "Quinta",
+      "friday": "Sexta",
+      "saturday": "Sábado"
+    },
+    "months": {
+      "january": "Janeiro",
+      "february": "Fevereiro",
+      "mars": "Março",
+      "april": "Abril",
+      "may": "Maio",
+      "june": "Junho",
+      "july": "Julho",
+      "august": "Agosto",
+      "september": "Setembro",
+      "october": "Outubro",
+      "november": "Novembro",
+      "december": "Dezembro"
     }
   },
   "location_service": {

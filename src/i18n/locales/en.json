@@ -26,6 +26,39 @@
     "data": {
       "aspects": "Aspects",
       "title": "Celestial Signature"
+    },
+    "metadata": {
+      "date": "Date",
+      "place": "Place",
+      "julian_day": "Julian Day",
+      "universal_time": "Universal Time",
+      "time": "Time",
+      "timezone": "Timezone"
+    }
+  },
+  "dates": {
+    "weekdays": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "mars": "Mars",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
     }
   },
   "location_service": {

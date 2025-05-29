@@ -29,9 +29,9 @@ export function ChartStepContainer({
   }: ChartFormInputs) => {
     setLoading(true);
     const chartData = {
-      ...location,
+      location,
       name,
-      referenceDate: date,
+      date,
     };
     setChartData({ location, date, name });
     const chartResult = await createChart(chartData);
@@ -45,8 +45,7 @@ export function ChartStepContainer({
 
   const handleSaveChart = async () => {
     setLoading(true);
-    // todo: define persisted chart type
-    authFetch<{ persistedChart: unknown }>("/api/chart/save", {
+    authFetch<{ chart: Chart }>("/api/chart/save", {
       method: "POST",
       body: JSON.stringify(chartData),
     })
@@ -57,8 +56,6 @@ export function ChartStepContainer({
             "info"
           );
           onStepComplete();
-        } else {
-          showMessage(t(`form.profile.error.${response.error}`), "error");
         }
       })
       .finally(() => setLoading(false));

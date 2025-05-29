@@ -4,6 +4,7 @@ import { Chart, CHART_LARGE_SIZE } from "@/lib/chart";
 import { ChartDataTable, ChartAspectsTable } from "@/components/chart/data";
 import { useTranslations } from "next-intl";
 import AstralChart from "@/components/chart/drawings/AstralChart";
+import { ChartMetadataTable } from "@/components/chart/data/ChartMetadataTable";
 
 export function ChartController({ chart }: { chart: Chart }) {
   const t = useTranslations();
@@ -22,6 +23,7 @@ export function ChartController({ chart }: { chart: Chart }) {
     >
       {hasChart && (
         <Grid size={{ xs: 12, lg: 4 }} sx={{ p: 2 }} order={{ xs: 2, lg: 1 }}>
+          <ChartMetadataTable metadata={chart.metadata} />
           <ChartDataTable planets={chart.planets} ascendant={chart.asc} />
           <ChartAspectsTable aspects={chart.aspects} />
         </Grid>

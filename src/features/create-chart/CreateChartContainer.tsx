@@ -20,8 +20,8 @@ export default function CreateChartContainer() {
   const handleChartCreation = async ({ location, date }: ChartFormInputs) => {
     setLoading(true);
     const chartData = {
-      referenceDate: date,
-      ...location,
+      date,
+      location,
     };
     const chartResult = await createChart(chartData);
     if ("error" in chartResult) {
