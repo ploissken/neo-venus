@@ -7,21 +7,13 @@ import {
 } from "@/lib/chart";
 import { NextRequest, NextResponse } from "next/server";
 import { handleServerError, anonProxyFetch } from "@/lib/proxy";
-import utc from "dayjs/plugin/utc";
-import dayjs from "dayjs";
-dayjs.extend(utc);
 
 export async function POST(req: NextRequest) {
   const servicePath = "/chart/create";
 
   const requestBody: ChartGenerationData = await req.json();
 
-  const response = await anonProxyFetch(req, servicePath, {
-    ...requestBody,
-    referenceDate: new Date(
-      dayjs(requestBody.referenceDate).utc(true).format()
-    ),
-  });
+  const response = await anonProxyFetch(req, servicePath, requestBody);
 
   if (!response.ok) {
     return await handleServerError(response);
@@ -38,11 +30,11 @@ export async function POST(req: NextRequest) {
       planets: mappedPlanets,
       houses: mappedHouses,
       asc: mappedHouses[0],
+      metadata,
     };
 
     return NextResponse.json({
       chart,
-      metadata,
     });
   } catch {
     return NextResponse.json({

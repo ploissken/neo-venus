@@ -3,9 +3,9 @@ export const LOCATION_SERVICE_TIMEOUT = 15 * 1000;
 export type ChartLocation = {
   latitude: number;
   longitude: number;
-  name: string;
-  displayName: string;
-  details: {
+  name?: string;
+  displayName?: string;
+  details?: {
     countryCode: string;
     country: string;
     state: string;

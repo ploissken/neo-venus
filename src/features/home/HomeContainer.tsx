@@ -13,6 +13,7 @@ import { useCreateChart, useSnackbar } from "@/hooks";
 import { useTranslations } from "next-intl";
 import { Chart, CHART_LARGE_SIZE, LOCATION_SERVICE_TIMEOUT } from "@/lib/chart";
 import { Refresh } from "@mui/icons-material";
+import dayjs from "dayjs";
 
 export default function HomeContainer() {
   const createChart = useCreateChart();
@@ -28,9 +29,11 @@ export default function HomeContainer() {
         ({ coords }) => {
           const { latitude, longitude } = coords;
           createChart({
-            referenceDate: new Date().toString(),
-            latitude,
-            longitude,
+            date: dayjs().format("YYYY-MM-DDTHH:mm"),
+            location: {
+              latitude,
+              longitude,
+            },
           }).then((chartResult) => {
             if (!("error" in chartResult)) {
               setChart(chartResult);

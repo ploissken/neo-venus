@@ -11,16 +11,10 @@ export async function POST(req: NextRequest) {
 
   const requestBody: ChartGenerationData = await req.json();
 
-  const response = await authProxyFetch(req, servicePath, {
-    ...requestBody,
-    referenceDate: new Date(
-      dayjs(requestBody.referenceDate).utc(true).format()
-    ),
-  });
+  const response = await authProxyFetch(req, servicePath, requestBody);
 
   if (!response.ok) {
     return await handleServerError(response);
   }
-
   return NextResponse.json(response);
 }

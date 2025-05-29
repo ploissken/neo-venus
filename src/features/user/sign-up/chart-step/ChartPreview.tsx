@@ -1,14 +1,13 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { ChartFormInputs } from "./ChartForm";
 import { Chart, ChartLocation } from "@/lib/chart";
 import { useTranslations } from "next-intl";
 import AstralChart from "@/components/chart/drawings/AstralChart";
+import { ChartMetadataTable } from "@/components/chart/data/ChartMetadataTable";
 
 export function ChartPreview({
   chart,
-  chartData,
   loading,
-  locations,
   onEdit,
   onSave,
 }: {
@@ -20,11 +19,6 @@ export function ChartPreview({
   onSave: () => void;
 }) {
   const t = useTranslations();
-  const chartLocation = locations.find(
-    (loc) =>
-      loc.latitude === chartData.location.latitude &&
-      loc.longitude === chartData.location.longitude
-  );
 
   return (
     <Grid container size={12} direction="column" alignContent="center">
@@ -35,10 +29,7 @@ export function ChartPreview({
         alignContent="center"
         alignItems="center"
       >
-        {/* todo: improve chart metadata display */}
-        <Typography>{chartData.name}</Typography>
-        <Typography>{chartData.date}</Typography>
-        <Typography>{chartLocation?.displayName}</Typography>
+        <ChartMetadataTable metadata={chart.metadata} />
         <AstralChart chart={chart} />
       </Grid>
 
