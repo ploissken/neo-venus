@@ -1,10 +1,4 @@
-import {
-  mapAspects,
-  mapHouses,
-  mapPlanets,
-  Chart,
-  ChartGenerationData,
-} from "@/lib/chart";
+import { Chart, ChartGenerationData } from "@/lib/chart";
 import { NextRequest, NextResponse } from "next/server";
 import { handleServerError, anonProxyFetch } from "@/lib/proxy";
 
@@ -20,17 +14,16 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { planets, houses, metadata, aspects } = await response.json();
-    const mappedHouses = mapHouses(houses);
-    const mappedPlanets = mapPlanets(planets, mappedHouses[0]?.longitude || 0);
-    const mappedAspects = mapAspects(aspects);
+    const { planets, houses, metadata, aspects, elements } =
+      await response.json();
 
     const chart: Chart = {
-      aspects: mappedAspects,
-      planets: mappedPlanets,
-      houses: mappedHouses,
-      asc: mappedHouses[0],
+      aspects,
+      planets,
+      houses,
+      asc: houses[0],
       metadata,
+      elements,
     };
 
     return NextResponse.json({

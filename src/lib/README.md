@@ -9,10 +9,10 @@ The `/lib` folder contains **non-UI code** that powers the core functionality of
 ## 🧱 File Breakdown
 
     /lib
-      ├── chart.consts.ts         # Static constants for chart generation
-      ├── chart.types.ts          # Shared TypeScript types for astral charts
-      ├── create-chart.helpers.ts # Pure functions used to build charts (math, data formatting, mappers, etc.)
-      └── location.types.ts       # Types for location search results, coordinates, etc.
+      ├── chart            # Chart related helper functions, consts and types
+      ├── proxy            # Helper functions for Next fetch proxying
+      ├── i18n.helpers     # next-intl helpers
+      └── profile.helpers  # profile helpers
 
 ---
 

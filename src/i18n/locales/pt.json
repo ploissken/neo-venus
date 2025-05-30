@@ -27,7 +27,15 @@
       "aspects": "Aspectos",
       "title": "Assinatura Celeste"
     },
+    "elements": {
+      "title": "Distribuição por Elementos",
+      "air": "Ar",
+      "earth": "Terra",
+      "fire": "Fogo",
+      "water": "Água"
+    },
     "metadata": {
+      "title": "Informações do Mapa",
       "date": "Data",
       "place": "Local",
       "julian_day": "Dia Juliano",

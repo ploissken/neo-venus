@@ -1,5 +1,5 @@
 import { Planet, PlanetAspect } from "@/lib/chart";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { AspectIcon, PlanetIcon } from "@/components/icons";
 import { useTranslations } from "next-intl";
 
@@ -10,7 +10,8 @@ const getAspect = (
 ) => {
   const aspect = aspects.find(
     (aspect) =>
-      aspect.planetA === planetAIndex && aspect.planetB === planetBIndex
+      (aspect.planetA === planetAIndex && aspect.planetB === planetBIndex) ||
+      (aspect.planetA === planetBIndex && aspect.planetB === planetAIndex)
   );
   return aspect ? <AspectIcon aspect={aspect.aspectIndex} /> : <></>;
 };
@@ -25,16 +26,15 @@ export function ChartAspectsTable({ aspects }: ChartAspectsTableProps) {
     return;
   }
 
-  // const { aspects } = chart;
   const planets = Object.keys(Planet).filter((key) => isNaN(Number(key)));
 
   return (
-    <>
-      <h4>{t("chart.data.aspects")}</h4>
-      <Grid>
-        {planets.map((_, planetRowIndex) => (
-          <Grid key={planetRowIndex} container>
-            {planets.map((__, planetColumnIndex) => (
+    <Grid size={12}>
+      <Typography variant="h6">{t("chart.data.aspects")}</Typography>
+      {planets.map((_, planetRowIndex) => (
+        <Grid key={planetRowIndex} container>
+          {planets.map((__, planetColumnIndex) =>
+            planetRowIndex < planetColumnIndex ? undefined : (
               <Grid key={planetColumnIndex} container>
                 <Grid
                   container
@@ -56,10 +56,10 @@ export function ChartAspectsTable({ aspects }: ChartAspectsTableProps) {
                   )}
                 </Grid>
               </Grid>
-            ))}
-          </Grid>
-        ))}
-      </Grid>
-    </>
+            )
+          )}
+        </Grid>
+      ))}
+    </Grid>
   );
 }
