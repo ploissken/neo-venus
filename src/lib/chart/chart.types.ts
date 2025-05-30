@@ -98,12 +98,20 @@ export interface PlanetAspect {
   value: number;
 }
 
+export interface ChartElements {
+  earth: number;
+  fire: number;
+  water: number;
+  air: number;
+}
+
 export interface Chart {
   planets: ChartPlanet[];
   houses: ChartHouse[];
   aspects: PlanetAspect[];
   metadata: ChartMetadata;
   asc?: ChartHouse;
+  elements: ChartElements;
 }
 
 export interface DividerColors {

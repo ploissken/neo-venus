@@ -1,29 +1,27 @@
 import React from "react";
-import { Grid, Theme, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { Chart, CHART_LARGE_SIZE } from "@/lib/chart";
 import { ChartDataTable, ChartAspectsTable } from "@/components/chart/data";
 import { useTranslations } from "next-intl";
 import AstralChart from "@/components/chart/drawings/AstralChart";
 import { ChartMetadataTable } from "@/components/chart/data/ChartMetadataTable";
+import { ChartElementsTable } from "@/components/chart/data/ChartElementsTable";
 
 export function ChartController({ chart }: { chart: Chart }) {
   const t = useTranslations();
   const hasChart = chart && chart.planets?.length > 0;
 
   return (
-    <Grid
-      container
-      spacing={2}
-      size={12}
-      sx={(theme: Theme) => ({
-        backgroundColor: theme.palette.background.paper,
-        borderRadius: 2,
-      })}
-      alignContent="start"
-    >
+    <Grid container size={12} alignContent="start">
       {hasChart && (
-        <Grid size={{ xs: 12, lg: 4 }} sx={{ p: 2 }} order={{ xs: 2, lg: 1 }}>
+        <Grid
+          container
+          size={{ xs: 12, lg: 4 }}
+          sx={{ gap: 4 }}
+          order={{ xs: 2, lg: 1 }}
+        >
           <ChartMetadataTable metadata={chart.metadata} />
+          <ChartElementsTable elements={chart.elements} />
           <ChartDataTable planets={chart.planets} ascendant={chart.asc} />
           <ChartAspectsTable aspects={chart.aspects} />
         </Grid>

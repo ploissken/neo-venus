@@ -27,7 +27,15 @@
       "aspects": "Aspects",
       "title": "Celestial Signature"
     },
+    "elements": {
+      "title": "Elemental Distribution",
+      "air": "Air",
+      "earth": "Earth",
+      "fire": "Fire",
+      "water": "Water"
+    },
     "metadata": {
+      "title": "Chart Information",
       "date": "Date",
       "place": "Place",
       "julian_day": "Julian Day",

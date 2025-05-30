@@ -14,7 +14,8 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { planets, houses, metadata, aspects } = await response.json();
+    const { planets, houses, metadata, aspects, elements } =
+      await response.json();
 
     const chart: Chart = {
       aspects,
@@ -22,6 +23,7 @@ export async function POST(req: NextRequest) {
       houses,
       asc: houses[0],
       metadata,
+      elements,
     };
 
     return NextResponse.json({

@@ -1,5 +1,5 @@
 import { Planet, PlanetAspect } from "@/lib/chart";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { AspectIcon, PlanetIcon } from "@/components/icons";
 import { useTranslations } from "next-intl";
 
@@ -29,41 +29,39 @@ export function ChartAspectsTable({ aspects }: ChartAspectsTableProps) {
   const planets = Object.keys(Planet).filter((key) => isNaN(Number(key)));
 
   return (
-    <>
-      <h4>{t("chart.data.aspects")}</h4>
-      <Grid>
-        {planets.map((_, planetRowIndex) => (
-          <Grid key={planetRowIndex} container>
-            {planets.map((__, planetColumnIndex) =>
-              planetRowIndex < planetColumnIndex ? (
-                <></>
-              ) : (
-                <Grid key={planetColumnIndex} container>
-                  <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    sx={{
-                      width: 30,
-                      height: 30,
-                      border:
-                        planetColumnIndex < planetRowIndex
-                          ? "1px solid gray"
-                          : undefined,
-                    }}
-                  >
-                    {planetRowIndex === planetColumnIndex ? (
-                      <PlanetIcon planet={planetColumnIndex} />
-                    ) : (
-                      getAspect(planetRowIndex, planetColumnIndex, aspects)
-                    )}
-                  </Grid>
+    <Grid size={12}>
+      <Typography variant="h6">{t("chart.data.aspects")}</Typography>
+      {planets.map((_, planetRowIndex) => (
+        <Grid key={planetRowIndex} container>
+          {planets.map((__, planetColumnIndex) =>
+            planetRowIndex < planetColumnIndex ? (
+              <></>
+            ) : (
+              <Grid key={planetColumnIndex} container>
+                <Grid
+                  container
+                  justifyContent="center"
+                  alignItems="center"
+                  sx={{
+                    width: 30,
+                    height: 30,
+                    border:
+                      planetColumnIndex < planetRowIndex
+                        ? "1px solid gray"
+                        : undefined,
+                  }}
+                >
+                  {planetRowIndex === planetColumnIndex ? (
+                    <PlanetIcon planet={planetColumnIndex} />
+                  ) : (
+                    getAspect(planetRowIndex, planetColumnIndex, aspects)
+                  )}
                 </Grid>
-              )
-            )}
-          </Grid>
-        ))}
-      </Grid>
-    </>
+              </Grid>
+            )
+          )}
+        </Grid>
+      ))}
+    </Grid>
   );
 }

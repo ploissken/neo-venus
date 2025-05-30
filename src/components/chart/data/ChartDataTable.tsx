@@ -3,6 +3,7 @@ import React from "react";
 import { ChartHouse, ChartPlanet } from "@/lib/chart";
 import { ChartDataItem } from "./ChartDataItem";
 import { useTranslations } from "next-intl";
+import { Grid, Typography } from "@mui/material";
 
 export interface ChartDataTableProps {
   planets: ChartPlanet[];
@@ -12,12 +13,12 @@ export interface ChartDataTableProps {
 export function ChartDataTable({ planets, ascendant }: ChartDataTableProps) {
   const t = useTranslations();
   return planets?.length > 0 ? (
-    <>
-      <h4>{t("chart.data.title")}</h4>
+    <Grid size={12}>
+      <Typography variant="h6">{t(`chart.data.title`)}</Typography>
       {planets?.map((planet: ChartPlanet) => (
         <ChartDataItem key={planet.planetIndex} itemData={planet} />
       ))}
       {ascendant && <ChartDataItem itemData={ascendant} />}
-    </>
+    </Grid>
   ) : undefined;
 }
