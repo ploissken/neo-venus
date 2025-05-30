@@ -10,7 +10,8 @@ const getAspect = (
 ) => {
   const aspect = aspects.find(
     (aspect) =>
-      aspect.planetA === planetAIndex && aspect.planetB === planetBIndex
+      (aspect.planetA === planetAIndex && aspect.planetB === planetBIndex) ||
+      (aspect.planetA === planetBIndex && aspect.planetB === planetAIndex)
   );
   return aspect ? <AspectIcon aspect={aspect.aspectIndex} /> : <></>;
 };
@@ -25,7 +26,6 @@ export function ChartAspectsTable({ aspects }: ChartAspectsTableProps) {
     return;
   }
 
-  // const { aspects } = chart;
   const planets = Object.keys(Planet).filter((key) => isNaN(Number(key)));
 
   return (
@@ -34,29 +34,33 @@ export function ChartAspectsTable({ aspects }: ChartAspectsTableProps) {
       <Grid>
         {planets.map((_, planetRowIndex) => (
           <Grid key={planetRowIndex} container>
-            {planets.map((__, planetColumnIndex) => (
-              <Grid key={planetColumnIndex} container>
-                <Grid
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{
-                    width: 30,
-                    height: 30,
-                    border:
-                      planetColumnIndex < planetRowIndex
-                        ? "1px solid gray"
-                        : undefined,
-                  }}
-                >
-                  {planetRowIndex === planetColumnIndex ? (
-                    <PlanetIcon planet={planetColumnIndex} />
-                  ) : (
-                    getAspect(planetRowIndex, planetColumnIndex, aspects)
-                  )}
+            {planets.map((__, planetColumnIndex) =>
+              planetRowIndex < planetColumnIndex ? (
+                <></>
+              ) : (
+                <Grid key={planetColumnIndex} container>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      border:
+                        planetColumnIndex < planetRowIndex
+                          ? "1px solid gray"
+                          : undefined,
+                    }}
+                  >
+                    {planetRowIndex === planetColumnIndex ? (
+                      <PlanetIcon planet={planetColumnIndex} />
+                    ) : (
+                      getAspect(planetRowIndex, planetColumnIndex, aspects)
+                    )}
+                  </Grid>
                 </Grid>
-              </Grid>
-            ))}
+              )
+            )}
           </Grid>
         ))}
       </Grid>
