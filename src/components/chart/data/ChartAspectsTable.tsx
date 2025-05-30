@@ -34,9 +34,7 @@ export function ChartAspectsTable({ aspects }: ChartAspectsTableProps) {
       {planets.map((_, planetRowIndex) => (
         <Grid key={planetRowIndex} container>
           {planets.map((__, planetColumnIndex) =>
-            planetRowIndex < planetColumnIndex ? (
-              <></>
-            ) : (
+            planetRowIndex < planetColumnIndex ? undefined : (
               <Grid key={planetColumnIndex} container>
                 <Grid
                   container
