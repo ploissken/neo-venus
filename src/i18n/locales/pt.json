@@ -80,6 +80,7 @@
   "menu": {
     "about": "Sobre",
     "create_chart": "Criar Mapa Astral",
+    "my_charts": "Meus Mapas Astrais",
     "home": "Início",
     "logout": "Sair",
     "sign_in": "Entrar",

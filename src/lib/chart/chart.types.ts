@@ -110,8 +110,13 @@ export interface Chart {
   houses: ChartHouse[];
   aspects: PlanetAspect[];
   metadata: ChartMetadata;
-  asc?: ChartHouse;
   elements: ChartElements;
+  id?: string;
+  asc?: ChartHouse;
+  ascSign?: ZodiacSign;
+  moonSign?: ZodiacSign;
+  name?: string;
+  sunSign?: ZodiacSign;
 }
 
 export interface DividerColors {

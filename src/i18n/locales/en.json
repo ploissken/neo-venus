@@ -80,6 +80,7 @@
   "menu": {
     "about": "About",
     "create_chart": "Create Astral Chart",
+    "my_charts": "My Astral Charts",
     "home": "Home",
     "logout": "Logout",
     "sign_in": "Sign In",
