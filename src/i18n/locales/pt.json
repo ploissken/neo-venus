@@ -142,6 +142,10 @@
       "step_title": "Crie seu Mapa Astral",
       "location": {
         "required": "Local é necessário"
+      },
+      "name": {
+        "label": "Nome do Mapa Astral",
+        "required": "Um nome é necessário"
       }
     },
     "identity": {

@@ -142,6 +142,10 @@
       "step_title": "Create your Chart",
       "location": {
         "required": "A location is required"
+      },
+      "name": {
+        "label": "Chart Name",
+        "required": "A name is necessary"
       }
     },
     "identity": {

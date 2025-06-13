@@ -53,6 +53,7 @@ export default function CreateChartContainer() {
         justifyContent="center"
       >
         <ChartForm
+          hideNameField
           onChartDataReady={handleChartCreation}
           disabled={loading}
           displayStyle="row"

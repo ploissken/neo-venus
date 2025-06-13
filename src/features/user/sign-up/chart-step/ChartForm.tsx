@@ -1,6 +1,6 @@
 import { DateTimePicker, LocationPicker } from "@/components/chart/creation";
 import { ChartLocation } from "@/lib/chart";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import dayjs from "dayjs";
@@ -19,6 +19,7 @@ export const ChartFormFields = {
 
 export type ChartFormProps = {
   onChartDataReady: (chartData: ChartFormInputs) => void;
+  hideNameField?: boolean;
   displayStyle?: "row" | "column";
   loading?: boolean;
   disabled?: boolean;
@@ -27,12 +28,14 @@ export type ChartFormProps = {
   chartData?: {
     date: string;
     location: ChartLocation;
+    name?: string;
   };
 };
 
 export function ChartForm({
   onChartDataReady,
   displayStyle = "column",
+  hideNameField = false,
   loading,
   disabled,
   chartData,
@@ -40,10 +43,17 @@ export function ChartForm({
   onLocationsLoaded,
 }: ChartFormProps) {
   const t = useTranslations();
-  const { handleSubmit, control } = useForm<ChartFormInputs>({
+  const {
+    handleSubmit,
+    control,
+    register,
+    formState: { errors },
+  } = useForm<ChartFormInputs>({
     mode: "onChange",
     defaultValues: {
-      [ChartFormFields.Name]: t("form.chart.my_chart"),
+      [ChartFormFields.Name]: hideNameField
+        ? t("form.chart.my_chart")
+        : chartData?.name,
       [ChartFormFields.Date]: chartData?.date,
       [ChartFormFields.Location]: chartData?.location,
     },
@@ -66,6 +76,25 @@ export function ChartForm({
         direction={displayStyle}
         sx={{ gap: 2 }}
       >
+        {!hideNameField && (
+          <Grid
+            container
+            size={displayStyle === "row" ? { xs: 12, lg: 4 } : 12}
+          >
+            <TextField
+              fullWidth
+              error={!!errors.name}
+              helperText={errors.name?.message}
+              id="chartName"
+              label={t("form.chart.name.label")}
+              variant="outlined"
+              {...register(ChartFormFields.Name, {
+                required: t("form.chart.name.required"),
+              })}
+            />
+          </Grid>
+        )}
+
         <Grid container size={displayStyle === "row" ? { xs: 12, lg: 4 } : 12}>
           <Controller
             name={ChartFormFields.Date}

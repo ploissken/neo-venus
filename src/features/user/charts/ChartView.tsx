@@ -1,11 +1,10 @@
 import React from "react";
-import { Fab, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Chart } from "@/lib/chart";
 import { ChartDataTable, ChartAspectsTable } from "@/components/chart/data";
 import AstralChart from "@/components/chart/drawings/AstralChart";
 import { ChartMetadataTable } from "@/components/chart/data/ChartMetadataTable";
 import { ChartElementsTable } from "@/components/chart/data/ChartElementsTable";
-import { Add } from "@mui/icons-material";
 
 export function ChartView({ chart }: { chart: Chart }) {
   return (
@@ -31,13 +30,6 @@ export function ChartView({ chart }: { chart: Chart }) {
           <ChartAspectsTable aspects={chart.aspects} />
         </Grid>
       </Grid>
-      <Fab
-        color="primary"
-        aria-label="add"
-        sx={{ position: "fixed", bottom: "16px", right: "16px" }}
-      >
-        <Add />
-      </Fab>
     </>
   );
 }

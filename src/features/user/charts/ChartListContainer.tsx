@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ChartListItem from "./ChartListItem";
 import { Grid, List } from "@mui/material";
 import { ChartView } from "./ChartView";
+import { AddChartDialog } from "./AddChartDialog";
 
 export default function ChartListContainer() {
   const { authFetch } = useFetch();
@@ -50,6 +51,7 @@ export default function ChartListContainer() {
       <Grid size={8}>
         {currentChart && !reloading && <ChartView chart={currentChart} />}
       </Grid>
+      <AddChartDialog />
     </Grid>
   );
 }

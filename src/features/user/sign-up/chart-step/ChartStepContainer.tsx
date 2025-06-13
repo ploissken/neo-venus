@@ -85,6 +85,7 @@ export function ChartStepContainer({
         <ChartForm
           onChartDataReady={onChartDataReady}
           onLocationsLoaded={setLocations}
+          hideNameField
           chartData={chartData}
           startingLocations={locations}
           loading={loading}
