@@ -131,6 +131,8 @@
   },
   "form": {
     "chart": {
+      "add": "Add a new Astral Chart",
+      "cancel": "Cancel",
       "date": {
         "required": "Date and time are required"
       },

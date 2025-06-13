@@ -131,6 +131,8 @@
   },
   "form": {
     "chart": {
+      "add": "Adicionar novo Mapa Astral",
+      "cancel": "Cancelar",
       "date": {
         "required": "Data e hora são necessários"
       },

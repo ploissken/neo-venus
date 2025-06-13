@@ -6,23 +6,28 @@ import ChartListItem from "./ChartListItem";
 import { Grid, List } from "@mui/material";
 import { ChartView } from "./ChartView";
 import { AddChartDialog } from "./AddChartDialog";
+import { useChartList } from "@/context/ChartListContext";
 
 export default function ChartListContainer() {
   const { authFetch } = useFetch();
-  const [userCharts, setUserCharts] = useState<Chart[]>([]);
-  const [currentChart, setCurrentChart] = useState<Chart | undefined>();
   const [reloading, setReloading] = useState(false);
+  const { chartList, setChartList, currentChart, setCurrentChart } =
+    useChartList();
 
   useEffect(() => {
-    authFetch<Chart[]>(`/api/user/get-charts`).then((response) => {
-      if (!("error" in response)) {
-        const { data } = response;
-        setUserCharts(data);
-        if (data.length > 0) {
-          setCurrentChart(data[0]);
+    if (chartList.length === 0) {
+      authFetch<Chart[]>(`/api/user/get-charts`).then((response) => {
+        if (!("error" in response)) {
+          const { data } = response;
+          setChartList(data);
+          if (data.length > 0) {
+            setCurrentChart(data[0]);
+          }
         }
-      }
-    });
+      });
+    } else {
+      setCurrentChart(chartList[0]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -38,7 +43,7 @@ export default function ChartListContainer() {
     <Grid container>
       <Grid size={4}>
         <List component="nav">
-          {(userCharts || []).map((chart) => (
+          {chartList.map((chart) => (
             <ChartListItem
               key={chart.id}
               selectedId={currentChart?.id}
@@ -51,7 +56,7 @@ export default function ChartListContainer() {
       <Grid size={8}>
         {currentChart && !reloading && <ChartView chart={currentChart} />}
       </Grid>
-      <AddChartDialog />
+      <AddChartDialog onChartAdded={handleChartSelected} />
     </Grid>
   );
 }

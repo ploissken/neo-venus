@@ -9,6 +9,7 @@ import { PropsWithChildren } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { SnackbarProvider } from "@/context/SnackbarContext";
 import { UserProvider } from "@/context/UserContext";
+import { ChartListProvider } from "@/context/ChartListContext";
 
 type ProviderProps = PropsWithChildren & {
   locale: string;
@@ -32,10 +33,12 @@ export default function Providers({
         <AppRouterCacheProvider>
           <SnackbarProvider>
             <UserProvider>
-              <ThemeProvider theme={theme}>
-                <CssBaseline />
-                {children}
-              </ThemeProvider>
+              <ChartListProvider>
+                <ThemeProvider theme={theme}>
+                  <CssBaseline />
+                  {children}
+                </ThemeProvider>
+              </ChartListProvider>
             </UserProvider>
           </SnackbarProvider>
         </AppRouterCacheProvider>
