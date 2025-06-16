@@ -35,6 +35,7 @@ export default function AstralChart({ chart }: { chart: Chart }) {
 
   return (
     <Grid
+      key={chart.id}
       size={12}
       alignContent="center"
       sx={{

@@ -1,5 +1,7 @@
+import { createTranslator, Messages } from "next-intl";
 import { ParsedDate } from "./chart.types";
-import { TFunction } from "next-intl";
+
+export type TFunction = ReturnType<typeof createTranslator<Messages>>;
 
 enum Weekdays {
   Sunday,
@@ -38,4 +40,16 @@ export const getNaiveDate = (naiveDate: ParsedDate, t: TFunction) => {
   const monthString = getMonthName(month, t);
 
   return `${weekDayString} ${day} ${monthString} ${year}`.trim();
+};
+
+export const getNaiveTime = ({
+  hour,
+  minute,
+}: {
+  hour: number;
+  minute: number;
+}) => {
+  return `${hour.toString().padStart(2, "0")}:${minute
+    .toString()
+    .padStart(2, "0")}`;
 };

@@ -17,7 +17,7 @@ export function ChartView({ chart }: { chart: Chart }) {
         gap={2}
       >
         <Grid container size={12} sx={{ gap: 4 }}>
-          <ChartMetadataTable metadata={chart.metadata} />
+          <ChartMetadataTable metadata={chart.metadata} name={chart.name} />
           <ChartElementsTable elements={chart.elements} />
         </Grid>
         <Grid container size={12} justifyContent="center">

@@ -36,6 +36,7 @@
     },
     "metadata": {
       "title": "Chart Information",
+      "name": "Name",
       "date": "Date",
       "place": "Place",
       "julian_day": "Julian Day",

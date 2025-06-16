@@ -36,6 +36,7 @@
     },
     "metadata": {
       "title": "Informações do Mapa",
+      "name": "Nome",
       "date": "Data",
       "place": "Local",
       "julian_day": "Dia Juliano",

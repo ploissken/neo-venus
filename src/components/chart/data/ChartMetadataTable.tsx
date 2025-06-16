@@ -1,16 +1,23 @@
-import { ChartMetadata, getNaiveDate } from "@/lib/chart";
+import { ChartMetadata, getNaiveDate, getNaiveTime } from "@/lib/chart";
 import { Box, Grid, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 
-export function ChartMetadataTable({ metadata }: { metadata: ChartMetadata }) {
+export function ChartMetadataTable({
+  metadata,
+  name,
+}: {
+  metadata: ChartMetadata;
+  name?: string;
+}) {
   const t = useTranslations();
   const {
     inputDate: { naiveDate },
     utc,
   } = metadata;
   const naiveDateString = getNaiveDate(naiveDate, t);
-  const naiveTimeString = `${naiveDate.hour}:${naiveDate.minute}`;
-  const utcTime = `${utc.hour}:${utc.minute}`;
+  const naiveTimeString = getNaiveTime(naiveDate);
+  const utcTime = getNaiveTime(utc);
+
   return (
     <Grid container size={12} direction="column">
       <Typography variant="h6">{t("chart.metadata.title")}</Typography>
@@ -22,7 +29,12 @@ export function ChartMetadataTable({ metadata }: { metadata: ChartMetadata }) {
         alignItems="center"
       >
         <Box>
-          {metadata.name && <Typography>{metadata.name}</Typography>}
+          {name && (
+            <Typography>
+              <strong>{t("chart.metadata.name")}: </strong>
+              {name}
+            </Typography>
+          )}
           <Typography>
             <strong>{t("chart.metadata.date")}: </strong>
             {naiveDateString}

@@ -7,6 +7,7 @@ import {
   Grid,
   Box,
   ListItemButton,
+  Typography,
 } from "@mui/material";
 
 export default function ChartListItem({
@@ -22,17 +23,25 @@ export default function ChartListItem({
     <>
       <Grid container sx={{ gap: 2 }}>
         {chart.name}
-        <Box>
-          <PlanetIcon planet={Planet.Sun} />
-          <ZodiacSignIcon sign={chart.sunSign!} color="silver" />
+        <Box display="flex" alignItems="center">
+          <PlanetIcon planet={Planet.Sun} size={16} />
+          <ZodiacSignIcon sign={chart.sunSign!} color="silver" size={16} />
         </Box>
-        <Box>
-          <PlanetIcon planet={Planet.Moon} />
-          <ZodiacSignIcon sign={chart.moonSign!} color="silver" />
+        <Box display="flex" alignItems="center">
+          <PlanetIcon planet={Planet.Moon} size={16} />
+          <ZodiacSignIcon sign={chart.moonSign!} color="silver" size={16} />
         </Box>
-        <Box>
-          ASC
-          <ZodiacSignIcon sign={chart.ascSign!} color="silver" />
+        <Box
+          display="flex"
+          alignItems="center"
+          alignContent="center"
+          justifyContent="center"
+          justifyItems="center"
+        >
+          <Typography variant="caption" sx={{ mr: 0.5 }}>
+            ASC
+          </Typography>
+          <ZodiacSignIcon sign={chart.ascSign!} color="silver" size={16} />
         </Box>
       </Grid>
     </>
