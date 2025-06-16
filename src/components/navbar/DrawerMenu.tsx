@@ -16,15 +16,22 @@ import {
 import { LogoWithTitle } from "../logo";
 import NextLink from "next/link";
 import { useUser } from "@/context";
+import { useRouter } from "next/navigation";
 
 export function DrawerMenu() {
   const t = useTranslations();
   const { isLoggedIn, logout } = useUser();
-
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+  const toggleDrawer = (state: boolean) => {
+    setOpen(state);
+  };
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+    setOpen(false);
   };
 
   const routes = [
@@ -34,9 +41,14 @@ export function DrawerMenu() {
       icon: <AutoAwesome />,
       route: "/create-chart",
     },
-    { text: t("menu.my_charts"), icon: <ViewList />, route: "user/charts" },
+    {
+      text: t("menu.my_charts"),
+      icon: <ViewList />,
+      route: "user/charts",
+      auth: true,
+    },
     { text: t("menu.about"), icon: <Info />, route: "/about" },
-  ];
+  ].filter((route) => !route.auth || (route.auth && isLoggedIn));
 
   const DrawerList = (
     <Grid container sx={{ width: 250, m: 2 }}>
@@ -49,7 +61,7 @@ export function DrawerMenu() {
               href={route}
               key={text}
               sx={{ textDecoration: "none" }}
-              onClick={toggleDrawer(false)}
+              onClick={() => toggleDrawer(false)}
             >
               <ListItem key={text} disablePadding>
                 <ListItemButton>
@@ -60,7 +72,7 @@ export function DrawerMenu() {
             </Link>
           ))}
           {isLoggedIn && (
-            <ListItem disablePadding onClick={logout}>
+            <ListItem disablePadding onClick={handleLogout}>
               <ListItemButton>
                 <ListItemIcon>
                   <Logout />
@@ -76,7 +88,7 @@ export function DrawerMenu() {
 
   return (
     <>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer open={open} onClose={() => toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
       <IconButton
@@ -85,7 +97,7 @@ export function DrawerMenu() {
         color="inherit"
         aria-label="menu"
         sx={{ mr: 2 }}
-        onClick={toggleDrawer(true)}
+        onClick={() => toggleDrawer(true)}
       >
         <MenuIcon />
       </IconButton>

@@ -1,6 +1,13 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { DrawerMenu } from "./DrawerMenu";
 
+const pushMock = jest.fn();
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
+}));
+
 jest.mock("../logo", () => ({
   LogoWithTitle: () => <div data-testid="mock-logo">LogoWithTitle</div>,
 }));
