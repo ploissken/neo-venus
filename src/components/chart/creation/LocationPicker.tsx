@@ -137,7 +137,7 @@ export function LocationPicker({
                 {locations.map((location: ChartLocation, index: number) => (
                   <MenuItem key={index} value={index}>
                     <Typography variant="caption">
-                      {trimLocationDisplayName(location.displayName)}
+                      {trimLocationDisplayName(location.displayName || "")}
                     </Typography>
                   </MenuItem>
                 ))}
