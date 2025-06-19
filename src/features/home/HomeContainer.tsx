@@ -68,7 +68,7 @@ export default function HomeContainer() {
 
   useEffect(() => {
     createChart({
-      referenceDate: new Date().toString(),
+      date: new Date().toString(),
     }).then((chartResult) => {
       if (!("error" in chartResult)) {
         setChart(chartResult);
