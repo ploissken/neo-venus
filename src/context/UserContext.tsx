@@ -38,7 +38,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
       }
     );
-  }, [authFetch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const logout = async () => {
     await authFetch("/api/user/logout");

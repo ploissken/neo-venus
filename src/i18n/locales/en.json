@@ -36,6 +36,7 @@
     },
     "metadata": {
       "title": "Chart Information",
+      "name": "Name",
       "date": "Date",
       "place": "Place",
       "julian_day": "Julian Day",
@@ -80,6 +81,7 @@
   "menu": {
     "about": "About",
     "create_chart": "Create Astral Chart",
+    "my_charts": "My Astral Charts",
     "home": "Home",
     "logout": "Logout",
     "sign_in": "Sign In",
@@ -130,6 +132,8 @@
   },
   "form": {
     "chart": {
+      "add": "Add a new Astral Chart",
+      "cancel": "Cancel",
       "date": {
         "required": "Date and time are required"
       },
@@ -141,6 +145,10 @@
       "step_title": "Create your Chart",
       "location": {
         "required": "A location is required"
+      },
+      "name": {
+        "label": "Chart Name",
+        "required": "A name is necessary"
       }
     },
     "identity": {

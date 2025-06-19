@@ -36,6 +36,7 @@
     },
     "metadata": {
       "title": "Informações do Mapa",
+      "name": "Nome",
       "date": "Data",
       "place": "Local",
       "julian_day": "Dia Juliano",
@@ -80,6 +81,7 @@
   "menu": {
     "about": "Sobre",
     "create_chart": "Criar Mapa Astral",
+    "my_charts": "Meus Mapas Astrais",
     "home": "Início",
     "logout": "Sair",
     "sign_in": "Entrar",
@@ -130,6 +132,8 @@
   },
   "form": {
     "chart": {
+      "add": "Adicionar novo Mapa Astral",
+      "cancel": "Cancelar",
       "date": {
         "required": "Data e hora são necessários"
       },
@@ -141,6 +145,10 @@
       "step_title": "Crie seu Mapa Astral",
       "location": {
         "required": "Local é necessário"
+      },
+      "name": {
+        "label": "Nome do Mapa Astral",
+        "required": "Um nome é necessário"
       }
     },
     "identity": {

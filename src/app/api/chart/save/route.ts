@@ -16,5 +16,6 @@ export async function POST(req: NextRequest) {
   if (!response.ok) {
     return await handleServerError(response);
   }
-  return NextResponse.json(response);
+
+  return NextResponse.json(await response.json());
 }
